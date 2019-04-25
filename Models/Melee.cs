@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DM_helper.Archetypes;
 
 namespace DM_helper.Models
 {
@@ -23,6 +24,17 @@ namespace DM_helper.Models
 
         [ForeignKey ("CharacterID")]
         public Character Character { get; set; }
+
+        public Melee (MeleeArchetype arch)
+        {
+            this.Name= arch.Name;
+            this.Damage = arch.Damage;
+            this.ShockDamage = arch.Damage;
+            this.Attribute = arch.Attribute;
+            this.Cost = arch.Cost;
+            this.Encumbrance = arch.Encumbrance;
+            this.TechLevel = arch.TechLevel;
+        }
 
     }
 

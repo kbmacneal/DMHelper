@@ -1,8 +1,9 @@
 using System.ComponentModel;
-using Humanizer;
-using DM_helper.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DM_helper.Archetypes;
+using DM_helper.Models;
+using Humanizer;
 
 namespace DM_helper
 {
@@ -12,23 +13,41 @@ namespace DM_helper
         public int ID { get; set; }
         public string Name { get; set; }
         public int CharacterID { get; set; }
-        [ForeignKey("CharacterID")]
-        public Character Character {get;set;}
+
+        [ForeignKey ("CharacterID")]
+        public Character Character { get; set; }
+
+        public CharacterClass (CharacterClassArchetype arch)
+        {
+            this.Name = arch.Name;
+        }
     }
     public class Background
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public int CharacterID { get; set; }
-        [ForeignKey("CharacterID")]
-        public Character Character {get;set;}
+
+        [ForeignKey ("CharacterID")]
+        public Character Character { get; set; }
+
+        public Background (BackgroundArchetype arch)
+        {
+            this.Name = arch.Name;
+        }
     }
     public class Gender
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public int CharacterID { get; set; }
-        [ForeignKey("CharacterID")]
-        public Character Character {get;set;}
+
+        [ForeignKey ("CharacterID")]
+        public Character Character { get; set; }
+
+        public Gender (GenderArchetype arch)
+        {
+            this.Name = arch.Name;
+        }
     }
 }

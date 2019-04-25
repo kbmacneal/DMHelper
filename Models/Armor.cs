@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DM_helper.Archetypes;
 
 namespace DM_helper.Models
 {
@@ -19,6 +20,17 @@ namespace DM_helper.Models
         public int CharacterID {get;set;}
         [ForeignKey("CharacterID")]
         public Character Character {get;set;}
+
+        public Armor (ArmorArchetype arch)
+        {
+            this.Name = arch.Name;
+            this.AC = arch.AC;
+            this.Cost = arch.Cost;
+            this.Encumbrance = arch.Encumbrance;
+            this.TechLevel = arch.Encumbrance;
+            this.TechLevel = arch.TechLevel;
+        }
+        
     }
 
 }

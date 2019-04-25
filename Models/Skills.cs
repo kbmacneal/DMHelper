@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations.Schema;
+using DM_helper.Archetypes;
 
 namespace DM_helper.Models {
     public class Skills
@@ -17,5 +18,12 @@ namespace DM_helper.Models {
         public int CharacterID{get;set;}
         [ForeignKey ("CharacterID")]
         public Character Character {get;set;}
+
+        public Skills (SkillsArchetype arch)
+        {
+            this.Name= arch.Name;
+            this.Level = arch.Level;
+            this.Specialist = arch.Specialist;
+        }
     }
 }
