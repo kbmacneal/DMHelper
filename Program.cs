@@ -12,6 +12,8 @@ namespace DM_helper
 {
     public class Program
     {
+
+        public static Random rand{get;set;} = new Random();
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
