@@ -2,12 +2,10 @@ dotnet aspnet-codegenerator controller -name ArmorController -m Armor -dc Contex
 
 dotnet ef migrations add initial --context Context
 
-dotnet ef database update --context ApplicationUserContext
+dotnet ef database update --context Context
 
-dotnet ef database update --context ApplicationDbContext
+dotnet ef database update --context Context
 
-dotnet aspnet-codegenerator identity -dc ApplicationDbContext -fi Account.ExternalLogin
+dotnet ef migrations remove --context Context
 
-dotnet ef migrations remove --context ApplicationUserContext
-
-dotnet ef database update addingStats --context ApplicationUserContext
+dotnet ef database update addingStats --context Context
