@@ -21,6 +21,8 @@ namespace DM_helper.Models
         [ForeignKey("CharacterID")]
         public Character Character {get;set;}
 
+        public Armor(){}
+
         public Armor (ArmorArchetype arch)
         {
             this.Name = arch.Name;

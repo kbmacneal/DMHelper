@@ -25,6 +25,7 @@ namespace DM_helper.Models
         public int CharacterID {get;set;}
         [ForeignKey ("CharacterID")]
         public Character Character {get;set;}
+        public Weapon(){}
 
         public Weapon (WeaponArchetype arch)
         {

@@ -17,6 +17,8 @@ namespace DM_helper
         [ForeignKey ("CharacterID")]
         public Character Character { get; set; }
 
+        public CharacterClass () { }
+
         public CharacterClass (CharacterClassArchetype arch)
         {
             this.Name = arch.Name;
@@ -30,6 +32,7 @@ namespace DM_helper
 
         [ForeignKey ("CharacterID")]
         public Character Character { get; set; }
+        public Background () { }
 
         public Background (BackgroundArchetype arch)
         {
@@ -44,6 +47,7 @@ namespace DM_helper
 
         [ForeignKey ("CharacterID")]
         public Character Character { get; set; }
+        public Gender () { }
 
         public Gender (GenderArchetype arch)
         {

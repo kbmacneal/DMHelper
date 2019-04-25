@@ -24,6 +24,7 @@ namespace DM_helper.Models
 
         [ForeignKey ("CharacterID")]
         public Character Character { get; set; }
+        public Melee(){}
 
         public Melee (MeleeArchetype arch)
         {

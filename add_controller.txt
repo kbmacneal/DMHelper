@@ -1,4 +1,4 @@
-dotnet aspnet-codegenerator controller -name ArmorController -m Armor -dc Context --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name CharacterController -m Character -dc Context --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
 
 dotnet ef migrations add addingarchetypes --context Context
 

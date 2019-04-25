@@ -31,6 +31,10 @@ namespace DM_helper
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddEntityFrameworkNpgsql()
+            .AddDbContext<Context>()
+            .BuildServiceProvider();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
