@@ -1,3 +1,4 @@
+using DM_helper.Archetypes;
 using DM_helper.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -125,7 +126,7 @@ namespace DM_helper
                     .HasColumnName ("encumbrance");
                 entity.Property (e => e.TechLevel)
                     .HasColumnName ("techlevel");
-                    entity.Property (e => e.CharacterID)
+                entity.Property (e => e.CharacterID)
                     .HasColumnName ("characterid");
             });
 
@@ -223,37 +224,174 @@ namespace DM_helper
                     .HasColumnName ("notes");
             });
 
+            modelBuilder.Entity<ArmorArchetype> (entity =>
+            {
+                entity.HasKey (e => e.ID);
+                entity.Property (e => e.ID)
+                    .HasColumnName ("ID")
+                    .ValueGeneratedOnAdd ();
+                entity.Property (e => e.Name)
+                    .HasColumnName ("name");
+                entity.Property (e => e.AC)
+                    .HasColumnName ("ac");
+                entity.Property (e => e.Cost)
+                    .HasColumnName ("cost");
+                entity.Property (e => e.Encumbrance)
+                    .HasColumnName ("encumbrance");
+                entity.Property (e => e.TechLevel)
+                    .HasColumnName ("techlevel");
+            });
+
+            modelBuilder.Entity<EquipmentArchetype> (entity =>
+            {
+                entity.HasKey (e => e.ID);
+                entity.Property (e => e.ID)
+                    .HasColumnName ("ID")
+                    .ValueGeneratedOnAdd ();
+                entity.Property (e => e.Name)
+                    .HasColumnName ("name");
+                entity.Property (e => e.Cost)
+                    .HasColumnName ("cost");
+                entity.Property (e => e.Encumbrance)
+                    .HasColumnName ("encumbrance");
+                entity.Property (e => e.TechLevel)
+                    .HasColumnName ("techlevel");
+            });
+
+            modelBuilder.Entity<FociArchetype> (entity =>
+            {
+                entity.HasKey (e => e.ID);
+                entity.Property (e => e.ID)
+                    .HasColumnName ("ID")
+                    .ValueGeneratedOnAdd ();
+                entity.Property (e => e.Name)
+                    .HasColumnName ("name");
+                entity.Property (e => e.Level)
+                    .HasColumnName ("level");
+            });
+
+            modelBuilder.Entity<WeaponArchetype> (entity =>
+            {
+                entity.HasKey (e => e.ID);
+                entity.Property (e => e.ID)
+                    .HasColumnName ("ID")
+                    .ValueGeneratedOnAdd ();
+                entity.Property (e => e.Name)
+                    .HasColumnName ("name");
+                entity.Property (e => e.Damage)
+                    .HasColumnName ("damage");
+                entity.Property (e => e.Range)
+                    .HasColumnName ("range");
+                entity.Property (e => e.Cost)
+                    .HasColumnName ("cost");
+                entity.Property (e => e.Magazine)
+                    .HasColumnName ("magazine");
+                entity.Property (e => e.Encumbrance)
+                    .HasColumnName ("encumbrance");
+                entity.Property (e => e.Attribute)
+                    .HasColumnName ("attribute");
+                entity.Property (e => e.TechLevel)
+                    .HasColumnName ("techlevel");
+            });
+
+            modelBuilder.Entity<SkillsArchetype> (entity =>
+            {
+                entity.HasKey (e => e.ID);
+                entity.Property (e => e.ID)
+                    .HasColumnName ("ID")
+                    .ValueGeneratedOnAdd ();
+                entity.Property (e => e.Name)
+                    .HasColumnName ("name");
+                entity.Property (e => e.Level)
+                    .HasColumnName ("level");
+                entity.Property (e => e.Specialist)
+                    .HasColumnName ("specialist");
+            });
+
+            modelBuilder.Entity<MeleeArchetype> (entity =>
+            {
+                entity.HasKey (e => e.ID);
+                entity.Property (e => e.ID)
+                    .HasColumnName ("ID")
+                    .ValueGeneratedOnAdd ();
+                entity.Property (e => e.Name)
+                    .HasColumnName ("name");
+                entity.Property (e => e.Damage)
+                    .HasColumnName ("damage");
+                entity.Property (e => e.ShockDamage)
+                    .HasColumnName ("shockdamage");
+                entity.Property (e => e.Attribute)
+                    .HasColumnName ("attribute");
+                entity.Property (e => e.Cost)
+                    .HasColumnName ("cost");
+                entity.Property (e => e.Encumbrance)
+                    .HasColumnName ("encumbrance");
+                entity.Property (e => e.TechLevel)
+                    .HasColumnName ("techlevel");
+            });
+
+            modelBuilder.Entity<CharacterClassArchetype> (entity =>
+            {
+                entity.HasKey (e => e.ID);
+                entity.Property (e => e.ID)
+                    .HasColumnName ("ID")
+                    .ValueGeneratedOnAdd ();
+                entity.Property (e => e.Name)
+                    .HasColumnName ("name");
+            });
+
+            modelBuilder.Entity<BackgroundArchetype> (entity =>
+            {
+                entity.HasKey (e => e.ID);
+                entity.Property (e => e.ID)
+                    .HasColumnName ("ID")
+                    .ValueGeneratedOnAdd ();
+                entity.Property (e => e.Name)
+                    .HasColumnName ("name");
+            });
+
+            modelBuilder.Entity<GenderArchetype> (entity =>
+            {
+                entity.HasKey (e => e.ID);
+                entity.Property (e => e.ID)
+                    .HasColumnName ("ID")
+                    .ValueGeneratedOnAdd ();
+                entity.Property (e => e.Name)
+                    .HasColumnName ("name");
+            });
+
+
             modelBuilder.Entity<CharacterClass> ()
                 .HasOne<Character> (x => x.Character)
-                .WithMany();
+                .WithMany ();
 
             modelBuilder.Entity<Background> ()
                 .HasOne<Character> (x => x.Character)
-                .WithOne();
+                .WithOne ();
 
             modelBuilder.Entity<Gender> ()
                 .HasOne<Character> (x => x.Character)
-                .WithOne();
+                .WithOne ();
 
             modelBuilder.Entity<Skills> ()
                 .HasOne<Character> (x => x.Character)
-                .WithMany();
+                .WithMany ();
 
             modelBuilder.Entity<Foci> ()
                 .HasOne<Character> (x => x.Character)
-                .WithMany();
+                .WithMany ();
 
             modelBuilder.Entity<Armor> ()
                 .HasOne<Character> (x => x.Character)
-                .WithOne();
+                .WithOne ();
 
             modelBuilder.Entity<Weapon> ()
                 .HasOne<Character> (x => x.Character)
-                .WithMany();
+                .WithMany ();
 
             modelBuilder.Entity<Equipment> ()
                 .HasOne<Character> (x => x.Character)
-                .WithMany();
+                .WithMany ();
 
         }
 
@@ -270,6 +408,16 @@ namespace DM_helper
         public DbSet<DM_helper.Models.Skills> Skills { get; set; }
 
         public DbSet<DM_helper.Models.Weapon> Weapons { get; set; }
+
+        public DbSet<DM_helper.Archetypes.ArmorArchetype> ArmorArchetype { get; set; }
+        public DbSet<DM_helper.Archetypes.EquipmentArchetype> EquipmentArchetype { get; set; }
+        public DbSet<DM_helper.Archetypes.FociArchetype> FociArchetype { get; set; }
+        public DbSet<DM_helper.Archetypes.MeleeArchetype> MeleeArchetype { get; set; }
+        public DbSet<DM_helper.Archetypes.SkillsArchetype> SkillsArchetype { get; set; }
+        public DbSet<DM_helper.Archetypes.WeaponArchetype> WeaponArchetype { get; set; }
+        public DbSet<DM_helper.Archetypes.CharacterClassArchetype> CharacterClassArchetype { get; set; }
+        public DbSet<DM_helper.Archetypes.BackgroundArchetype> BackgroundArchetype { get; set; }
+        public DbSet<DM_helper.Archetypes.GenderArchetype> GenderArchetype { get; set; }
     }
 
 }
