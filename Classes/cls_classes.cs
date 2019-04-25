@@ -1,72 +1,34 @@
 using System.ComponentModel;
 using Humanizer;
+using DM_helper.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DM_helper
 {
 
-    public enum CharacterClass
+    public class CharacterClass
     {
-        [Description("Expert")]
-        Expert,
-        [Description("Warrior")]
-        Warrior,
-        [Description("Psychic")]
-        Psychic,
-        [Description("Adventurer")]
-        Adventurer
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int CharacterID { get; set; }
+        [ForeignKey("CharacterID")]
+        public Character Character {get;set;}
     }
-
-    public enum Backgrounds
+    public class Background
     {
-        [Description("Barbarian")]
-        Barbarian,
-        [Description("Clergy")]
-        Clergy,
-        [Description("Courtesan")]
-        Courtesan,
-        [Description("Criminal")]
-        Criminal,
-        [Description("Dilettante")]
-        Dilettante,
-        [Description("Entertainer")]
-        Entertainer,
-        [Description("Merchant")]
-        Merchant,
-        [Description("Noble")]
-        Noble,
-        [Description("Official")]
-        Official,
-        [Description("Peasant")]
-        Peasant,
-        [Description("Physician")]
-        Physician,
-        [Description("Pilot")]
-        Pilot,
-        [Description("Politician")]
-        Politician,
-        [Description("Scholar")]
-        Scholar,
-        [Description("Soldier")]
-        Soldier,
-        [Description("Spacer")]
-        Spacer,
-        [Description("Technician")]
-        Technician,
-        [Description("Thug")]
-        Thug,
-        [Description("Vagabond")]
-        Vagabond,
-        [Description("Worker")]
-        Worker
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int CharacterID { get; set; }
+        [ForeignKey("CharacterID")]
+        public Character Character {get;set;}
     }
-
-    public enum Gender
+    public class Gender
     {
-        [Description("Male")]
-        Male,
-        [Description("Female")]
-        Female,
-        [Description("Other")]
-        Other
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int CharacterID { get; set; }
+        [ForeignKey("CharacterID")]
+        public Character Character {get;set;}
     }
 }

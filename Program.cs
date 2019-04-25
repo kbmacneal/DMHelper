@@ -14,6 +14,9 @@ namespace DM_helper
     {
 
         public static Random rand{get;set;} = new Random();
+
+        public static string conn {get;set;} = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string,string>>(File.ReadAllText("dm_helper.json"))["connection_string"];
+        
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();

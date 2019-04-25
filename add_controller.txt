@@ -1,6 +1,6 @@
-dotnet aspnet-codegenerator controller -name BlameCalController -m BlameCal -dc ApplicationUserContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name ArmorController -m Armor -dc Context --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
 
-dotnet ef migrations add removingPointlessStuff --context ApplicationUserContext
+dotnet ef migrations add initial --context Context
 
 dotnet ef database update --context ApplicationUserContext
 
