@@ -9,9 +9,10 @@ namespace DM_helper.Models
 
     public partial class Foci
     {
+        public int ID { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
-        public int Id { get; set; }
+        
     }
 
 }

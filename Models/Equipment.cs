@@ -9,7 +9,7 @@ namespace DM_helper.Models
 
     public partial class Equipment
     {
-        public long Id { get; set; }
+        public long ID { get; set; }
         public string Name { get; set; }
         public string Cost { get; set; }
         public string Encumbrance { get; set; }

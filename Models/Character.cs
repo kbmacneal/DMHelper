@@ -36,12 +36,13 @@ namespace DM_helper.Models
         public int Dexterity { get; set; }
         public int Constitution { get; set; }
         public int Intelligence { get; set; }
-        public int wisdom { get; set; }
-        public int charisma { get; set; }
-        public int creds { get; set; }
-        public Armor armor { get; set; }
-        public List<Weapon> weapons { get; set; }
-
+        public int Wisdom { get; set; }
+        public int Charisma { get; set; }
+        public int Credits { get; set; }
+        public Armor Armor { get; set; }
+        public List<Weapon> Weapons { get; set; }
+        public List<string> Goals {get;set;}
+        public List<string> Notes {get;set;}
     }
 
 }
