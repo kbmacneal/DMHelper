@@ -1,6 +1,6 @@
 dotnet aspnet-codegenerator controller -name CharacterController -m Character -dc Context --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
 
-dotnet ef migrations add addingarchetypes --context Context
+dotnet ef migrations add fixingcircularity --context Context
 
 dotnet ef database update --context Context
 
@@ -9,3 +9,39 @@ dotnet ef database update --context Context
 dotnet ef migrations remove --context Context
 
 dotnet ef database update addingStats --context Context
+
+
+// var background_id = character.BackgroundID;
+                // var gender_id = character.GenderID;
+                // var armor_id = character.ArmorID;
+
+                // character.BackgroundID = null;
+                // character.GenderID = null;
+                // character.ArmorID = null;
+
+                // _context.Add (character);
+
+                // await _context.SaveChangesAsync ();
+
+                // Background bg = new Background (await _context.BackgroundArchetype.FirstOrDefaultAsync (e => e.ID == background_id));
+                // bg.CharacterID = character.ID;
+
+                // Gender gen = new Gender (await _context.GenderArchetype.FirstOrDefaultAsync (e => e.ID == gender_id));
+                // gen.CharacterID = character.ID;
+
+                // Armor arm = new Armor (await _context.ArmorArchetype.FirstOrDefaultAsync (e => e.ID == armor_id));
+                // arm.CharacterID = character.ID;
+
+                // _context.Add (bg);
+                // _context.Add (gen);
+                // _context.Add (arm);
+
+                // await _context.SaveChangesAsync ();
+
+                // character.BackgroundID = bg.ID;
+                // character.GenderID = gen.ID;
+                // character.ArmorID = Convert.ToInt32 (arm.ID);
+
+                // await _context.SaveChangesAsync ();
+
+                return RedirectToAction (nameof (Index));

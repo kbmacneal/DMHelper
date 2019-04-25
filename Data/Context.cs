@@ -174,10 +174,6 @@ namespace DM_helper
                     .ValueGeneratedOnAdd ();
                 entity.Property (e => e.Name)
                     .HasColumnName ("name");
-                entity.Property (e => e.BackgroundID)
-                    .HasColumnName ("backgroundid");
-                entity.Property (e => e.GenderID)
-                    .HasColumnName ("genderid");
                 entity.Property (e => e.Faction)
                     .HasColumnName ("faction");
                 entity.Property (e => e.Homeworld)
@@ -216,8 +212,6 @@ namespace DM_helper
                     .HasColumnName ("charisma");
                 entity.Property (e => e.Credits)
                     .HasColumnName ("credits");
-                entity.Property (e => e.ArmorID)
-                    .HasColumnName ("armorid");
                 entity.Property (e => e.Goals)
                     .HasColumnName ("goals");
                 entity.Property (e => e.Notes)

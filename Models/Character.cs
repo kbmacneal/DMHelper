@@ -17,9 +17,7 @@ namespace DM_helper.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public List<CharacterClass> Class { get; set; }
-        public int BackgroundID{get;set;}
         public Background Background { get; set; }
-        public int GenderID{get;set;}
         public Gender Gender { get; set; }
         public List<Skills> Skills { get; set; }
         public List<Foci> Foci { get; set; }
@@ -41,7 +39,6 @@ namespace DM_helper.Models
         public int Wisdom { get; set; }
         public int Charisma { get; set; }
         public int Credits { get; set; }
-        public int ArmorID{get;set;}
         public Armor Armor { get; set; }
         public List<Weapon> Weapons { get; set; }
         public string Goals {get;set;}
