@@ -1,0 +1,78 @@
+INSERT INTO public."EquipmentArchetype" ("name","cost",encumbrance,techlevel) VALUES 
+('Atmofilter','100','1','4')
+,('Backpack','50','1','0')
+,('Backpack','50','0','4')
+,('Binoculars','20','1','3')
+,('Binoculars','200','1','4')
+,('Climbing harness','50','1','3')
+,('Glowbug','5','0','3')
+,('Grapnel launcher','200','1','3')
+,('Grav chute','300','1','4')
+,('Grav chute','1,000','1','5')
+;
+INSERT INTO public."EquipmentArchetype" ("name","cost",encumbrance,techlevel) VALUES 
+('Grav harness','5000','3','5')
+,('Instapanel','50','1','4')
+,('Low-light goggles','200','1','3')
+,('Navcomp','500','1','4')
+,('Portabox','50','1','4')
+,('Pressure tent','100','4','3')
+,('Rations, 1 day','5','1','1')
+,('Rope, 20 meters','4','2','0')
+,('Rope, 20 meters','40','1','4')
+,('Scout report','200','0','4')
+;
+INSERT INTO public."EquipmentArchetype" ("name","cost",encumbrance,techlevel) VALUES 
+('Survey scanner','250','1','4')
+,('Survival kit','60','1','4')
+,('Telescoping pole','10','0','4')
+,('Thermal flare','5','0','3')
+,('Trade goods','50','1','4')
+,('Trade metals','10','1','4')
+,('Vacc fresher','400','1','4')
+,('Vacc skin','1000','1','5')
+,('Vacc suit','100','2','4')
+,('Bezoar','200','0','4')
+;
+INSERT INTO public."EquipmentArchetype" ("name","cost",encumbrance,techlevel) VALUES 
+('Brainwave','1000','0','5')
+,('Hush','200','0','4')
+,('Lift','50','0','4')
+,('Psych','25','0','4')
+,('Pretech Cosmetic','1000','0','5')
+,('Reverie','100','0','4')
+,('Squeal','300','0','4')
+,('Tsunami','50','0','4')
+,('Bioscanner','300','1','4')
+,('Lazarus patch','30','1','4')
+;
+INSERT INTO public."EquipmentArchetype" ("name","cost",encumbrance,techlevel) VALUES 
+('Medkit','100','2','4')
+,('Metatool','200','1','4')
+,('Spare parts','50','1','4')
+,('Tailored antiallergens','5','0','4')
+,('Toolkit/Postech','300','3','4')
+,('Ammo, 20 rounds','10','1','2')
+,('Ammo, missile','50','1','3')
+,('Power cell, type A','10','1','4')
+,('Power cell, type B','100','1','4')
+,('Solar recharger','500','3','4')
+;
+INSERT INTO public."EquipmentArchetype" ("name","cost",encumbrance,techlevel) VALUES 
+('Telekinetic generator','250','2','4')
+,('Comm server','1000','3','4')
+,('Compad','100','0','4')
+,('Field radio','200','1','4')
+,('Translator torc','200','0','4')
+,('Black slab','10000','1','4')
+,('Data phase tap','5000','1','4')
+,('Data protocol','1000','0','4')
+,('Dataslab','300','1','4')
+,('Line shunt','100','0','4')
+;
+INSERT INTO public."EquipmentArchetype" ("name","cost",encumbrance,techlevel) VALUES 
+('Remote link unit','250','1','4')
+,('Stiletto charge',NULL,'1','5')
+,('Storage unit','500','3','4')
+,('Tightbeam link unit','1000','1','4')
+;
