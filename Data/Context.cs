@@ -20,6 +20,9 @@ namespace DM_helper
             {
                 optionsBuilder.UseNpgsql(Program.conn);
             }
+
+            //DEBUG: Turn on higher degree of logging
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

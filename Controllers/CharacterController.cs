@@ -33,7 +33,7 @@ namespace DM_helper.Controllers
                 return NotFound ();
             }
 
-            var character = await _context.Character.Include (e => e.Armor).Include (e => e.Equipment).Include (e => e.Weapon).Include (e => e.Melee)
+            var character = await _context.Character.Include (e => e.Equipment).Include (e => e.Weapon).Include (e => e.Melee).Include (e => e.Armor).ThenInclude(e=>e.Archetype)
                 .FirstOrDefaultAsync (m => m.ID == id);
             if (character == null)
             {
@@ -50,7 +50,9 @@ namespace DM_helper.Controllers
                 await archarmor.Where(e=>e.ID == armor.Archetype.ID).ForEachAsync(e=>e.Name = armor.Name);
             }
 
-            var armors = new MultiSelectList (_context.ArmorArchetype, "ID", "Name", character.Armor.Select(e=>e.ID));
+            var selected = character.Armor.Select(e=>e.Archetype.ID);
+
+            var armors = new MultiSelectList (_context.ArmorArchetype, "ID", "Name", selected);
 
             ViewBag.Armors = armors;
             return View (characterInterop);
@@ -214,7 +216,8 @@ namespace DM_helper.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed (int id)
         {
-            var character = await _context.Character.FindAsync (id);
+            var character = await _context.Character.Include(e=>e.Armor).FirstOrDefaultAsync(e=>e.ID ==id);
+            // _context.Armor.RemoveRange(_context.Armor.Include(e=>e.Character).Where(e=>e.Character==character).ToArray());
             _context.Character.Remove (character);
             await _context.SaveChangesAsync ();
             return RedirectToAction (nameof (Index));
