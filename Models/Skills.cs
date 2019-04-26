@@ -17,6 +17,7 @@ namespace DM_helper.Models
         public int Level { get; set; }
         public int Specialist { get; set; }
         public Character Character { get; set; }
+        public ArmorArchetype Archetype { get; set; }
 
         public Skills()
         {

@@ -23,6 +23,7 @@ namespace DM_helper.Models
         public string Attribute { get; set; }
         public int TechLevel { get; set; }
         public Character Character { get; set; }
+        public ArmorArchetype Archetype { get; set; }
 
         public Weapon()
         {

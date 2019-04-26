@@ -17,6 +17,7 @@ namespace DM_helper.Models
         public string Encumbrance { get; set; }
         public string TechLevel { get; set; }
         public Character Character { get; set; }
+        public ArmorArchetype Archetype { get; set; }
 
         public Equipment()
         {
