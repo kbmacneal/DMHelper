@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using DM_helper.Controllers;
+using DM_helper.InterOp;
 using Newtonsoft.Json;
 
 namespace DM_helper.Models
@@ -50,6 +51,7 @@ namespace DM_helper.Models
 
         public Character()
         {
+            
         }
 
         public Character(CharacterInterOp character)

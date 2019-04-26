@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 using DM_helper.Archetypes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace DM_helper.Models
 {
@@ -18,12 +18,12 @@ namespace DM_helper.Models
         public long Encumbrance { get; set; }
         public long TechLevel { get; set; }
         public Character Character { get; set; }
+        public ArmorArchetype ArchetypeID { get; set; }
 
-        public Armor()
-        {
-        }
+        public Armor ()
+        { }
 
-        public Armor(ArmorArchetype arch)
+        public Armor (ArmorArchetype arch)
         {
             this.Name = arch.Name;
             this.AC = arch.AC;

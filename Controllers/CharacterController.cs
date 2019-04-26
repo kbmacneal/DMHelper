@@ -1,3 +1,4 @@
+using DM_helper.InterOp;
 using DM_helper.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,14 +9,6 @@ using System.Threading.Tasks;
 
 namespace DM_helper.Controllers
 {
-    public class CharacterInterOp : Character
-    {
-        public int BackgroundID { get; set; }
-        public int ClassID { get; set; }
-        public int GenderID { get; set; }
-        public int ArmorID { get; set; }
-    }
-
     public class CharacterController : Controller
     {
         private readonly Context _context;
@@ -63,7 +56,6 @@ namespace DM_helper.Controllers
             ViewBag.Backgrounds = bgs;
             ViewBag.Class = cls;
             ViewBag.Genders = genders;
-            ViewBag.Armors = armor;
 
             return View();
         }
@@ -73,7 +65,7 @@ namespace DM_helper.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Faction,Homeworld,CurrentHP,MaxHP,CurrentSystemStrain,MaxSystemStrain,PermanentStrain,CurrentXP,XPTilNextLevel,AC,AtkBonus,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,Credits,Goals,Notes,BackgroundID,ClassID,GenderID,ArmorID")] CharacterInterOp character)
+        public async Task<IActionResult> Create([Bind("ID,Name,Faction,Homeworld,CurrentHP,MaxHP,CurrentSystemStrain,MaxSystemStrain,PermanentStrain,CurrentXP,XPTilNextLevel,AC,AtkBonus,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,Credits,Goals,Notes,BackgroundID,ClassID,GenderID")] CharacterInterOp character)
         {
             if (ModelState.IsValid)
             {
@@ -85,20 +77,15 @@ namespace DM_helper.Controllers
 
                 var gender = new Gender(_context.GenderArchetype.FirstOrDefault(e => e.ID == character.GenderID));
 
-                var armor = new Armor(_context.ArmorArchetype.FirstOrDefault(e => e.ID == character.ArmorID));
-
                 _context.Attach(charac);
-                _context.Armor.Add(armor);
 
                 charac.Gender = gender;
                 charac.Class = cls;
                 charac.Background = background;
-                charac.Armor = new List<Armor>();
-                charac.Armor.Add(armor);
 
-                //_context.Add(charac);
+                _context.Add(charac);
 
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 //var book = new Book { Title = "As You Like It" };
                 //var author = new Author { AuthorId = 1 };
