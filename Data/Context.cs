@@ -22,7 +22,7 @@ namespace DM_helper
             }
 
             //DEBUG: Turn on higher degree of logging
-            optionsBuilder.EnableSensitiveDataLogging();
+            // optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

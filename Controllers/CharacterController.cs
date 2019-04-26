@@ -61,7 +61,7 @@ namespace DM_helper.Controllers
         public async Task<IActionResult> BindArmor ([Bind ("ID,SelectedArmor")] CharacterInterOp character)
         {
 
-            var charac = _context.Character.FirstOrDefault (e => e.ID == character.ID);
+            var charac = _context.Character.Include(e=>e.Armor).FirstOrDefault (e => e.ID == character.ID);
 
             charac.Armor = new List<Armor> ();
 
