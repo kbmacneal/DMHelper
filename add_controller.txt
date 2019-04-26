@@ -1,6 +1,6 @@
 dotnet aspnet-codegenerator controller -name CharacterController -m Character -dc Context --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
 
-dotnet ef migrations add fixingcircularity --context Context
+dotnet ef migrations add initial --context Context
 
 dotnet ef database update --context Context
 

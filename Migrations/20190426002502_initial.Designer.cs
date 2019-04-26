@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DM_helper.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190425185141_addingarchetypes")]
-    partial class addingarchetypes
+    [Migration("20190426002502_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -233,7 +233,7 @@ namespace DM_helper.Migrations
                     b.HasIndex("CharacterID")
                         .IsUnique();
 
-                    b.ToTable("Background");
+                    b.ToTable("Backgrounds");
                 });
 
             modelBuilder.Entity("DM_helper.CharacterClass", b =>
@@ -256,7 +256,7 @@ namespace DM_helper.Migrations
 
                     b.HasIndex("CharacterID1");
 
-                    b.ToTable("CharacterClass");
+                    b.ToTable("CharacterClasses");
                 });
 
             modelBuilder.Entity("DM_helper.Gender", b =>
@@ -276,7 +276,7 @@ namespace DM_helper.Migrations
                     b.HasIndex("CharacterID")
                         .IsUnique();
 
-                    b.ToTable("Gender");
+                    b.ToTable("Genders");
                 });
 
             modelBuilder.Entity("DM_helper.Models.Armor", b =>
@@ -319,16 +319,12 @@ namespace DM_helper.Migrations
                     b.Property<int>("AC")
                         .HasColumnName("ac");
 
-                    b.Property<int>("ArmorID")
-                        .HasColumnName("armorid");
-
-                    b.Property<long?>("ArmorID1");
+                    b.Property<long?>("ArmorID");
 
                     b.Property<int>("AtkBonus")
                         .HasColumnName("atkbonus");
 
-                    b.Property<int>("BackgroundID")
-                        .HasColumnName("backgroundid");
+                    b.Property<int?>("BackgroundID");
 
                     b.Property<int>("Charisma")
                         .HasColumnName("charisma");
@@ -354,8 +350,7 @@ namespace DM_helper.Migrations
                     b.Property<string>("Faction")
                         .HasColumnName("faction");
 
-                    b.Property<int>("GenderID")
-                        .HasColumnName("genderid");
+                    b.Property<int?>("GenderID");
 
                     b.Property<string>("Goals")
                         .HasColumnName("goals");
@@ -392,7 +387,7 @@ namespace DM_helper.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ArmorID1");
+                    b.HasIndex("ArmorID");
 
                     b.HasIndex("BackgroundID");
 
@@ -605,17 +600,15 @@ namespace DM_helper.Migrations
                 {
                     b.HasOne("DM_helper.Models.Armor", "Armor")
                         .WithMany()
-                        .HasForeignKey("ArmorID1");
+                        .HasForeignKey("ArmorID");
 
                     b.HasOne("DM_helper.Background", "Background")
                         .WithMany()
-                        .HasForeignKey("BackgroundID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BackgroundID");
 
                     b.HasOne("DM_helper.Gender", "Gender")
                         .WithMany()
-                        .HasForeignKey("GenderID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("GenderID");
                 });
 
             modelBuilder.Entity("DM_helper.Models.Equipment", b =>

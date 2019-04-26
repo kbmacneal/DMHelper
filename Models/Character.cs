@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using DM_helper.Controllers;
 using Newtonsoft.Json;
 
 namespace DM_helper.Models
@@ -41,9 +42,37 @@ namespace DM_helper.Models
         public int Credits { get; set; }
         public Armor Armor { get; set; }
         public List<Weapon> Weapons { get; set; }
-        public string Goals {get;set;}
-        public string Notes {get;set;}
-        public List<Equipment> Equipment {get;set;}
-    }
+        public string Goals { get; set; }
+        public string Notes { get; set; }
+        public List<Equipment> Equipment { get; set; }
 
+        public Character()
+        {
+        }
+
+        public Character(CharacterInterOp character)
+        {
+            this.Name = character.Name;
+            this.Faction = character.Faction;
+            this.Homeworld = character.Homeworld;
+            this.CurrentHP = character.CurrentHP;
+            this.MaxHP = character.MaxHP;
+            this.CurrentSystemStrain = character.CurrentSystemStrain;
+            this.MaxSystemStrain = character.MaxSystemStrain;
+            this.PermanentStrain = character.PermanentStrain;
+            this.CurrentXP = character.CurrentXP;
+            this.XPTilNextLevel = character.XPTilNextLevel;
+            this.AC = character.AC;
+            this.AtkBonus = character.AtkBonus;
+            this.Strength = character.Strength;
+            this.Dexterity = character.Dexterity;
+            this.Constitution = character.Constitution;
+            this.Intelligence = character.Intelligence;
+            this.Wisdom = character.Wisdom;
+            this.Charisma = character.Charisma;
+            this.Credits = character.Credits;
+            this.Goals = character.Goals;
+            this.Notes = character.Notes;
+        }
+    }
 }

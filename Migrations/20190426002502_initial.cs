@@ -8,14 +8,154 @@ namespace DM_helper.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ArmorArchetype",
+                columns: table => new
+                {
+                    ID = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    name = table.Column<string>(nullable: true),
+                    ac = table.Column<int>(nullable: false),
+                    cost = table.Column<long>(nullable: false),
+                    encumbrance = table.Column<long>(nullable: false),
+                    techlevel = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArmorArchetype", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BackgroundArchetype",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BackgroundArchetype", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CharacterClassArchetype",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CharacterClassArchetype", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EquipmentArchetype",
+                columns: table => new
+                {
+                    ID = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    name = table.Column<string>(nullable: true),
+                    cost = table.Column<string>(nullable: true),
+                    encumbrance = table.Column<string>(nullable: true),
+                    techlevel = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EquipmentArchetype", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FociArchetype",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    name = table.Column<string>(nullable: true),
+                    level = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FociArchetype", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GenderArchetype",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GenderArchetype", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MeleeArchetype",
+                columns: table => new
+                {
+                    ID = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    name = table.Column<string>(nullable: true),
+                    damage = table.Column<string>(nullable: true),
+                    shockdamage = table.Column<string>(nullable: true),
+                    attribute = table.Column<string>(nullable: true),
+                    cost = table.Column<long>(nullable: false),
+                    encumbrance = table.Column<long>(nullable: false),
+                    techlevel = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MeleeArchetype", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SkillsArchetype",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    name = table.Column<string>(nullable: true),
+                    level = table.Column<int>(nullable: false),
+                    specialist = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SkillsArchetype", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WeaponArchetype",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    name = table.Column<string>(nullable: true),
+                    damage = table.Column<string>(nullable: true),
+                    range = table.Column<string>(nullable: true),
+                    cost = table.Column<string>(nullable: true),
+                    magazine = table.Column<string>(nullable: true),
+                    encumbrance = table.Column<string>(nullable: true),
+                    attribute = table.Column<string>(nullable: true),
+                    techlevel = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WeaponArchetype", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Character",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     name = table.Column<string>(nullable: true),
-                    backgroundid = table.Column<int>(nullable: false),
-                    genderid = table.Column<int>(nullable: false),
+                    BackgroundID = table.Column<int>(nullable: true),
+                    GenderID = table.Column<int>(nullable: true),
                     faction = table.Column<string>(nullable: true),
                     homeworld = table.Column<string>(nullable: true),
                     currenthp = table.Column<int>(nullable: false),
@@ -34,8 +174,7 @@ namespace DM_helper.Migrations
                     wisdom = table.Column<int>(nullable: false),
                     charisma = table.Column<int>(nullable: false),
                     credits = table.Column<int>(nullable: false),
-                    armorid = table.Column<int>(nullable: false),
-                    ArmorID1 = table.Column<long>(nullable: true),
+                    ArmorID = table.Column<long>(nullable: true),
                     goals = table.Column<string>(nullable: true),
                     notes = table.Column<string>(nullable: true)
                 },
@@ -69,7 +208,7 @@ namespace DM_helper.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Background",
+                name: "Backgrounds",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -79,9 +218,9 @@ namespace DM_helper.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Background", x => x.ID);
+                    table.PrimaryKey("PK_Backgrounds", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Background_Character_characterid",
+                        name: "FK_Backgrounds_Character_characterid",
                         column: x => x.characterid,
                         principalTable: "Character",
                         principalColumn: "ID",
@@ -89,7 +228,7 @@ namespace DM_helper.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CharacterClass",
+                name: "CharacterClasses",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -100,15 +239,15 @@ namespace DM_helper.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CharacterClass", x => x.ID);
+                    table.PrimaryKey("PK_CharacterClasses", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_CharacterClass_Character_characterid",
+                        name: "FK_CharacterClasses_Character_characterid",
                         column: x => x.characterid,
                         principalTable: "Character",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CharacterClass_Character_CharacterID1",
+                        name: "FK_CharacterClasses_Character_CharacterID1",
                         column: x => x.CharacterID1,
                         principalTable: "Character",
                         principalColumn: "ID",
@@ -174,7 +313,7 @@ namespace DM_helper.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Gender",
+                name: "Genders",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -184,9 +323,9 @@ namespace DM_helper.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Gender", x => x.ID);
+                    table.PrimaryKey("PK_Genders", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Gender_Character_characterid",
+                        name: "FK_Genders_Character_characterid",
                         column: x => x.characterid,
                         principalTable: "Character",
                         principalColumn: "ID",
@@ -289,34 +428,34 @@ namespace DM_helper.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Background_characterid",
-                table: "Background",
+                name: "IX_Backgrounds_characterid",
+                table: "Backgrounds",
                 column: "characterid",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Character_ArmorID1",
+                name: "IX_Character_ArmorID",
                 table: "Character",
-                column: "ArmorID1");
+                column: "ArmorID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Character_backgroundid",
+                name: "IX_Character_BackgroundID",
                 table: "Character",
-                column: "backgroundid");
+                column: "BackgroundID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Character_genderid",
+                name: "IX_Character_GenderID",
                 table: "Character",
-                column: "genderid");
+                column: "GenderID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CharacterClass_characterid",
-                table: "CharacterClass",
+                name: "IX_CharacterClasses_characterid",
+                table: "CharacterClasses",
                 column: "characterid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CharacterClass_CharacterID1",
-                table: "CharacterClass",
+                name: "IX_CharacterClasses_CharacterID1",
+                table: "CharacterClasses",
                 column: "CharacterID1");
 
             migrationBuilder.CreateIndex(
@@ -340,8 +479,8 @@ namespace DM_helper.Migrations
                 column: "CharacterID1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Gender_characterid",
-                table: "Gender",
+                name: "IX_Genders_characterid",
+                table: "Genders",
                 column: "characterid",
                 unique: true);
 
@@ -371,28 +510,28 @@ namespace DM_helper.Migrations
                 column: "CharacterID1");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Character_Armor_ArmorID1",
+                name: "FK_Character_Armor_ArmorID",
                 table: "Character",
-                column: "ArmorID1",
+                column: "ArmorID",
                 principalTable: "Armor",
                 principalColumn: "ID",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Character_Background_backgroundid",
+                name: "FK_Character_Backgrounds_BackgroundID",
                 table: "Character",
-                column: "backgroundid",
-                principalTable: "Background",
+                column: "BackgroundID",
+                principalTable: "Backgrounds",
                 principalColumn: "ID",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Character_Gender_genderid",
+                name: "FK_Character_Genders_GenderID",
                 table: "Character",
-                column: "genderid",
-                principalTable: "Gender",
+                column: "GenderID",
+                principalTable: "Genders",
                 principalColumn: "ID",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -402,27 +541,54 @@ namespace DM_helper.Migrations
                 table: "Armor");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Background_Character_characterid",
-                table: "Background");
+                name: "FK_Backgrounds_Character_characterid",
+                table: "Backgrounds");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Gender_Character_characterid",
-                table: "Gender");
+                name: "FK_Genders_Character_characterid",
+                table: "Genders");
 
             migrationBuilder.DropTable(
-                name: "CharacterClass");
+                name: "ArmorArchetype");
+
+            migrationBuilder.DropTable(
+                name: "BackgroundArchetype");
+
+            migrationBuilder.DropTable(
+                name: "CharacterClassArchetype");
+
+            migrationBuilder.DropTable(
+                name: "CharacterClasses");
 
             migrationBuilder.DropTable(
                 name: "Equipment");
 
             migrationBuilder.DropTable(
+                name: "EquipmentArchetype");
+
+            migrationBuilder.DropTable(
                 name: "Foci");
+
+            migrationBuilder.DropTable(
+                name: "FociArchetype");
+
+            migrationBuilder.DropTable(
+                name: "GenderArchetype");
 
             migrationBuilder.DropTable(
                 name: "Melee");
 
             migrationBuilder.DropTable(
+                name: "MeleeArchetype");
+
+            migrationBuilder.DropTable(
                 name: "Skills");
+
+            migrationBuilder.DropTable(
+                name: "SkillsArchetype");
+
+            migrationBuilder.DropTable(
+                name: "WeaponArchetype");
 
             migrationBuilder.DropTable(
                 name: "Weapons");
@@ -434,10 +600,10 @@ namespace DM_helper.Migrations
                 name: "Armor");
 
             migrationBuilder.DropTable(
-                name: "Background");
+                name: "Backgrounds");
 
             migrationBuilder.DropTable(
-                name: "Gender");
+                name: "Genders");
         }
     }
 }

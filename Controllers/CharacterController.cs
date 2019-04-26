@@ -1,0 +1,191 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using DM_helper;
+using DM_helper.Models;
+using DM_helper.Archetypes;
+
+namespace DM_helper.Controllers
+{
+    public class CharacterInterOp : Character
+    {
+        public int BackgroundID { get; set; }
+        public int ClassID { get; set; }
+        public int GenderID { get; set; }
+    }
+
+    public class CharacterController : Controller
+    {
+        private readonly Context _context;
+
+        public CharacterController(Context context)
+        {
+            _context = context;
+        }
+
+        // GET: Character
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Character.ToListAsync());
+        }
+
+        // GET: Character/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var character = await _context.Character
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (character == null)
+            {
+                return NotFound();
+            }
+
+            return View(character);
+        }
+
+        // GET: Character/Create
+        public IActionResult Create()
+        {
+            var bgs = new SelectList(_context.BackgroundArchetype, "ID", "Name");
+
+            var cls = new SelectList(_context.CharacterClassArchetype, "ID", "Name");
+
+            var genders = new SelectList(_context.GenderArchetype, "ID", "Name");
+
+            ViewBag.Backgrounds = bgs;
+            ViewBag.Class = cls;
+            ViewBag.Genders = genders;
+
+            return View();
+        }
+
+        // POST: Character/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ID,Name,Faction,Homeworld,CurrentHP,MaxHP,CurrentSystemStrain,MaxSystemStrain,PermanentStrain,CurrentXP,XPTilNextLevel,AC,AtkBonus,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,Credits,Goals,Notes,BackgroundID,ClassID,GenderID")] CharacterInterOp character)
+        {
+            if (ModelState.IsValid)
+            {
+                var charac = new Character(character);
+
+                var background = new Background(await _context.BackgroundArchetype.FirstOrDefaultAsync(e => e.ID == character.BackgroundID));
+
+                var cls = new CharacterClass(await _context.CharacterClassArchetype.FirstOrDefaultAsync(e => e.ID == character.ClassID));
+
+                var gender = new Gender(await _context.GenderArchetype.FirstOrDefaultAsync(e => e.ID == character.GenderID));
+
+                background.Character = charac;
+                cls.Character = charac;
+                gender.Character = charac;
+
+                _context.Backgrounds.Add(background);
+
+                _context.CharacterClasses.Add(cls);
+
+                _context.Genders.Add(gender);
+
+                _context.Add(character);
+
+                _context.SaveChanges();
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(character);
+        }
+
+        // GET: Character/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var character = await _context.Character.FindAsync(id);
+            if (character == null)
+            {
+                return NotFound();
+            }
+            return View(character);
+        }
+
+        // POST: Character/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Faction,Homeworld,CurrentHP,MaxHP,CurrentSystemStrain,MaxSystemStrain,PermanentStrain,CurrentXP,XPTilNextLevel,AC,AtkBonus,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,Credits,Goals,Notes")] Character character)
+        {
+            if (id != character.ID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(character);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CharacterExists(character.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(character);
+        }
+
+        // GET: Character/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var character = await _context.Character
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (character == null)
+            {
+                return NotFound();
+            }
+
+            return View(character);
+        }
+
+        // POST: Character/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var character = await _context.Character.FindAsync(id);
+            _context.Character.Remove(character);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool CharacterExists(int id)
+        {
+            return _context.Character.Any(e => e.ID == id);
+        }
+    }
+}
