@@ -2,6 +2,7 @@ using DM_helper.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ namespace DM_helper.Controllers
         public int BackgroundID { get; set; }
         public int ClassID { get; set; }
         public int GenderID { get; set; }
+        public int ArmorID { get; set; }
     }
 
     public class CharacterController : Controller
@@ -56,9 +58,12 @@ namespace DM_helper.Controllers
 
             var genders = new SelectList(_context.GenderArchetype, "ID", "Name");
 
+            var armor = new SelectList(_context.ArmorArchetype, "ID", "Name");
+
             ViewBag.Backgrounds = bgs;
             ViewBag.Class = cls;
             ViewBag.Genders = genders;
+            ViewBag.Armors = armor;
 
             return View();
         }
@@ -68,7 +73,7 @@ namespace DM_helper.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Faction,Homeworld,CurrentHP,MaxHP,CurrentSystemStrain,MaxSystemStrain,PermanentStrain,CurrentXP,XPTilNextLevel,AC,AtkBonus,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,Credits,Goals,Notes,BackgroundID,ClassID,GenderID")] CharacterInterOp character)
+        public async Task<IActionResult> Create([Bind("ID,Name,Faction,Homeworld,CurrentHP,MaxHP,CurrentSystemStrain,MaxSystemStrain,PermanentStrain,CurrentXP,XPTilNextLevel,AC,AtkBonus,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,Credits,Goals,Notes,BackgroundID,ClassID,GenderID,ArmorID")] CharacterInterOp character)
         {
             if (ModelState.IsValid)
             {
@@ -80,11 +85,18 @@ namespace DM_helper.Controllers
 
                 var gender = new Gender(_context.GenderArchetype.FirstOrDefault(e => e.ID == character.GenderID));
 
+                var armor = new Armor(_context.ArmorArchetype.FirstOrDefault(e => e.ID == character.ArmorID));
+
+                _context.Attach(charac);
+                _context.Armor.Add(armor);
+
                 charac.Gender = gender;
                 charac.Class = cls;
                 charac.Background = background;
+                charac.Armor = new List<Armor>();
+                charac.Armor.Add(armor);
 
-                _context.Add(charac);
+                //_context.Add(charac);
 
                 _context.SaveChanges();
 
