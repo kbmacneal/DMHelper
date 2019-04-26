@@ -220,8 +220,7 @@ namespace DM_helper.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID");
 
-                    b.Property<int>("CharacterID")
-                        .HasColumnName("characterid");
+                    b.Property<int>("CharacterID");
 
                     b.Property<string>("Name")
                         .HasColumnName("name");
@@ -240,19 +239,15 @@ namespace DM_helper.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID");
 
-                    b.Property<int>("CharacterID")
-                        .HasColumnName("characterid");
-
-                    b.Property<int?>("CharacterID1");
+                    b.Property<int>("CharacterID");
 
                     b.Property<string>("Name")
                         .HasColumnName("name");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CharacterID");
-
-                    b.HasIndex("CharacterID1");
+                    b.HasIndex("CharacterID")
+                        .IsUnique();
 
                     b.ToTable("CharacterClasses");
                 });
@@ -263,8 +258,7 @@ namespace DM_helper.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID");
 
-                    b.Property<int>("CharacterID")
-                        .HasColumnName("characterid");
+                    b.Property<int>("CharacterID");
 
                     b.Property<string>("Name")
                         .HasColumnName("name");
@@ -286,7 +280,7 @@ namespace DM_helper.Migrations
                     b.Property<int>("AC")
                         .HasColumnName("ac");
 
-                    b.Property<int>("CharacterID");
+                    b.Property<int?>("CharacterID");
 
                     b.Property<long>("Cost")
                         .HasColumnName("cost");
@@ -302,8 +296,7 @@ namespace DM_helper.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CharacterID")
-                        .IsUnique();
+                    b.HasIndex("CharacterID");
 
                     b.ToTable("Armor");
                 });
@@ -317,12 +310,8 @@ namespace DM_helper.Migrations
                     b.Property<int>("AC")
                         .HasColumnName("ac");
 
-                    b.Property<long?>("ArmorID");
-
                     b.Property<int>("AtkBonus")
                         .HasColumnName("atkbonus");
-
-                    b.Property<int?>("BackgroundID");
 
                     b.Property<int>("Charisma")
                         .HasColumnName("charisma");
@@ -347,8 +336,6 @@ namespace DM_helper.Migrations
 
                     b.Property<string>("Faction")
                         .HasColumnName("faction");
-
-                    b.Property<int?>("GenderID");
 
                     b.Property<string>("Goals")
                         .HasColumnName("goals");
@@ -385,12 +372,6 @@ namespace DM_helper.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ArmorID");
-
-                    b.HasIndex("BackgroundID");
-
-                    b.HasIndex("GenderID");
-
                     b.ToTable("Character");
                 });
 
@@ -400,9 +381,7 @@ namespace DM_helper.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID");
 
-                    b.Property<int>("CharacterID");
-
-                    b.Property<int?>("CharacterID1");
+                    b.Property<int?>("CharacterID");
 
                     b.Property<string>("Cost")
                         .HasColumnName("cost");
@@ -420,8 +399,6 @@ namespace DM_helper.Migrations
 
                     b.HasIndex("CharacterID");
 
-                    b.HasIndex("CharacterID1");
-
                     b.ToTable("Equipment");
                 });
 
@@ -431,9 +408,7 @@ namespace DM_helper.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID");
 
-                    b.Property<int>("CharacterID");
-
-                    b.Property<int?>("CharacterID1");
+                    b.Property<int?>("CharacterID");
 
                     b.Property<int>("Level")
                         .HasColumnName("level");
@@ -444,8 +419,6 @@ namespace DM_helper.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("CharacterID");
-
-                    b.HasIndex("CharacterID1");
 
                     b.ToTable("Foci");
                 });
@@ -459,8 +432,7 @@ namespace DM_helper.Migrations
                     b.Property<string>("Attribute")
                         .HasColumnName("attribute");
 
-                    b.Property<int>("CharacterID")
-                        .HasColumnName("characterid");
+                    b.Property<int?>("CharacterID");
 
                     b.Property<long>("Cost")
                         .HasColumnName("cost");
@@ -493,9 +465,7 @@ namespace DM_helper.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID");
 
-                    b.Property<int>("CharacterID");
-
-                    b.Property<int?>("CharacterID1");
+                    b.Property<int?>("CharacterID");
 
                     b.Property<int>("Level")
                         .HasColumnName("level");
@@ -510,8 +480,6 @@ namespace DM_helper.Migrations
 
                     b.HasIndex("CharacterID");
 
-                    b.HasIndex("CharacterID1");
-
                     b.ToTable("Skills");
                 });
 
@@ -524,9 +492,7 @@ namespace DM_helper.Migrations
                     b.Property<string>("Attribute")
                         .HasColumnName("attribute");
 
-                    b.Property<int>("CharacterID");
-
-                    b.Property<int?>("CharacterID1");
+                    b.Property<int?>("CharacterID");
 
                     b.Property<string>("Cost")
                         .HasColumnName("cost");
@@ -553,15 +519,13 @@ namespace DM_helper.Migrations
 
                     b.HasIndex("CharacterID");
 
-                    b.HasIndex("CharacterID1");
-
                     b.ToTable("Weapons");
                 });
 
             modelBuilder.Entity("DM_helper.Background", b =>
                 {
                     b.HasOne("DM_helper.Models.Character", "Character")
-                        .WithOne()
+                        .WithOne("Background")
                         .HasForeignKey("DM_helper.Background", "CharacterID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -569,19 +533,15 @@ namespace DM_helper.Migrations
             modelBuilder.Entity("DM_helper.CharacterClass", b =>
                 {
                     b.HasOne("DM_helper.Models.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterID")
+                        .WithOne("Class")
+                        .HasForeignKey("DM_helper.CharacterClass", "CharacterID")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DM_helper.Models.Character")
-                        .WithMany("Class")
-                        .HasForeignKey("CharacterID1");
                 });
 
             modelBuilder.Entity("DM_helper.Gender", b =>
                 {
                     b.HasOne("DM_helper.Models.Character", "Character")
-                        .WithOne()
+                        .WithOne("Gender")
                         .HasForeignKey("DM_helper.Gender", "CharacterID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -589,80 +549,43 @@ namespace DM_helper.Migrations
             modelBuilder.Entity("DM_helper.Models.Armor", b =>
                 {
                     b.HasOne("DM_helper.Models.Character", "Character")
-                        .WithOne()
-                        .HasForeignKey("DM_helper.Models.Armor", "CharacterID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("DM_helper.Models.Character", b =>
-                {
-                    b.HasOne("DM_helper.Models.Armor", "Armor")
-                        .WithMany()
-                        .HasForeignKey("ArmorID");
-
-                    b.HasOne("DM_helper.Background", "Background")
-                        .WithMany()
-                        .HasForeignKey("BackgroundID");
-
-                    b.HasOne("DM_helper.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderID");
+                        .WithMany("Armor")
+                        .HasForeignKey("CharacterID");
                 });
 
             modelBuilder.Entity("DM_helper.Models.Equipment", b =>
                 {
                     b.HasOne("DM_helper.Models.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DM_helper.Models.Character")
                         .WithMany("Equipment")
-                        .HasForeignKey("CharacterID1");
+                        .HasForeignKey("CharacterID");
                 });
 
             modelBuilder.Entity("DM_helper.Models.Foci", b =>
                 {
                     b.HasOne("DM_helper.Models.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DM_helper.Models.Character")
                         .WithMany("Foci")
-                        .HasForeignKey("CharacterID1");
+                        .HasForeignKey("CharacterID");
                 });
 
             modelBuilder.Entity("DM_helper.Models.Melee", b =>
                 {
                     b.HasOne("DM_helper.Models.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("Melee")
+                        .HasForeignKey("CharacterID");
                 });
 
             modelBuilder.Entity("DM_helper.Models.Skills", b =>
                 {
                     b.HasOne("DM_helper.Models.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DM_helper.Models.Character")
                         .WithMany("Skills")
-                        .HasForeignKey("CharacterID1");
+                        .HasForeignKey("CharacterID");
                 });
 
             modelBuilder.Entity("DM_helper.Models.Weapon", b =>
                 {
                     b.HasOne("DM_helper.Models.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DM_helper.Models.Character")
-                        .WithMany("Weapons")
-                        .HasForeignKey("CharacterID1");
+                        .WithMany("Weapon")
+                        .HasForeignKey("CharacterID");
                 });
 #pragma warning restore 612, 618
         }

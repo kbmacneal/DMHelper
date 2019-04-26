@@ -17,11 +17,6 @@ namespace DM_helper.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public List<CharacterClass> Class { get; set; }
-        public Background Background { get; set; }
-        public Gender Gender { get; set; }
-        public List<Skills> Skills { get; set; }
-        public List<Foci> Foci { get; set; }
         public string Faction { get; set; }
         public string Homeworld { get; set; }
         public int CurrentHP { get; set; }
@@ -40,11 +35,18 @@ namespace DM_helper.Models
         public int Wisdom { get; set; }
         public int Charisma { get; set; }
         public int Credits { get; set; }
-        public Armor Armor { get; set; }
-        public List<Weapon> Weapons { get; set; }
         public string Goals { get; set; }
         public string Notes { get; set; }
+
+        public Gender Gender { get; set; }
+        public CharacterClass Class { get; set; }
+        public Background Background { get; set; }
+        public List<Armor> Armor { get; set; }
         public List<Equipment> Equipment { get; set; }
+        public List<Foci> Foci { get; set; }
+        public List<Melee> Melee { get; set; }
+        public List<Skills> Skills { get; set; }
+        public List<Weapon> Weapon { get; set; }
 
         public Character()
         {

@@ -9,7 +9,6 @@ using DM_helper.Archetypes;
 
 namespace DM_helper.Models
 {
-
     public partial class Melee
     {
         public long ID { get; set; }
@@ -20,15 +19,16 @@ namespace DM_helper.Models
         public long Cost { get; set; }
         public long Encumbrance { get; set; }
         public long TechLevel { get; set; }
-        public int CharacterID { get; set; }
 
-        [ForeignKey ("CharacterID")]
         public Character Character { get; set; }
-        public Melee(){}
 
-        public Melee (MeleeArchetype arch)
+        public Melee()
         {
-            this.Name= arch.Name;
+        }
+
+        public Melee(MeleeArchetype arch)
+        {
+            this.Name = arch.Name;
             this.Damage = arch.Damage;
             this.ShockDamage = arch.Damage;
             this.Attribute = arch.Attribute;
@@ -36,7 +36,5 @@ namespace DM_helper.Models
             this.Encumbrance = arch.Encumbrance;
             this.TechLevel = arch.TechLevel;
         }
-
     }
-
 }

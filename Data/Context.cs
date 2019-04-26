@@ -130,8 +130,6 @@ namespace DM_helper
                    .HasColumnName("encumbrance");
                entity.Property(e => e.TechLevel)
                    .HasColumnName("techlevel");
-               entity.Property(e => e.CharacterID)
-                   .HasColumnName("characterid");
            });
 
             modelBuilder.Entity<CharacterClass>(entity =>
@@ -142,8 +140,6 @@ namespace DM_helper
                    .ValueGeneratedOnAdd();
                entity.Property(e => e.Name)
                    .HasColumnName("name");
-               entity.Property(e => e.CharacterID)
-                   .HasColumnName("characterid");
            });
 
             modelBuilder.Entity<Background>(entity =>
@@ -154,8 +150,6 @@ namespace DM_helper
                    .ValueGeneratedOnAdd();
                entity.Property(e => e.Name)
                    .HasColumnName("name");
-               entity.Property(e => e.CharacterID)
-                   .HasColumnName("characterid");
            });
 
             modelBuilder.Entity<Gender>(entity =>
@@ -166,8 +160,6 @@ namespace DM_helper
                    .ValueGeneratedOnAdd();
                entity.Property(e => e.Name)
                    .HasColumnName("name");
-               entity.Property(e => e.CharacterID)
-                   .HasColumnName("characterid");
            });
 
             modelBuilder.Entity<Character>(entity =>
@@ -357,38 +349,6 @@ namespace DM_helper
                entity.Property(e => e.Name)
                    .HasColumnName("name");
            });
-
-            modelBuilder.Entity<CharacterClass>()
-                .HasOne<Character>(x => x.Character)
-                .WithMany();
-
-            modelBuilder.Entity<Background>()
-                .HasOne<Character>(x => x.Character)
-                .WithOne();
-
-            modelBuilder.Entity<Gender>()
-                .HasOne<Character>(x => x.Character)
-                .WithOne();
-
-            modelBuilder.Entity<Skills>()
-                .HasOne<Character>(x => x.Character)
-                .WithMany();
-
-            modelBuilder.Entity<Foci>()
-                .HasOne<Character>(x => x.Character)
-                .WithMany();
-
-            modelBuilder.Entity<Armor>()
-                .HasOne<Character>(x => x.Character)
-                .WithOne();
-
-            modelBuilder.Entity<Weapon>()
-                .HasOne<Character>(x => x.Character)
-                .WithMany();
-
-            modelBuilder.Entity<Equipment>()
-                .HasOne<Character>(x => x.Character)
-                .WithMany();
         }
 
         public DbSet<DM_helper.Models.Armor> Armor { get; set; }

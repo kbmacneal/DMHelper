@@ -17,13 +17,13 @@ namespace DM_helper.Models
         public long Cost { get; set; }
         public long Encumbrance { get; set; }
         public long TechLevel { get; set; }
-        public int CharacterID {get;set;}
-        [ForeignKey("CharacterID")]
-        public Character Character {get;set;}
+        public Character Character { get; set; }
 
-        public Armor(){}
+        public Armor()
+        {
+        }
 
-        public Armor (ArmorArchetype arch)
+        public Armor(ArmorArchetype arch)
         {
             this.Name = arch.Name;
             this.AC = arch.AC;
@@ -32,7 +32,5 @@ namespace DM_helper.Models
             this.TechLevel = arch.Encumbrance;
             this.TechLevel = arch.TechLevel;
         }
-        
     }
-
 }

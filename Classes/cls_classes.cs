@@ -7,49 +7,52 @@ using Humanizer;
 
 namespace DM_helper
 {
-
     public class CharacterClass
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public int CharacterID { get; set; }
-
-        [ForeignKey ("CharacterID")]
         public Character Character { get; set; }
 
-        public CharacterClass () { }
+        public CharacterClass()
+        {
+        }
 
-        public CharacterClass (CharacterClassArchetype arch)
+        public CharacterClass(CharacterClassArchetype arch)
         {
             this.Name = arch.Name;
         }
     }
+
     public class Background
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public int CharacterID { get; set; }
-
-        [ForeignKey ("CharacterID")]
         public Character Character { get; set; }
-        public Background () { }
 
-        public Background (BackgroundArchetype arch)
+        public Background()
+        {
+        }
+
+        public Background(BackgroundArchetype arch)
         {
             this.Name = arch.Name;
         }
     }
+
     public class Gender
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public int CharacterID { get; set; }
-
-        [ForeignKey ("CharacterID")]
         public Character Character { get; set; }
-        public Gender () { }
 
-        public Gender (GenderArchetype arch)
+        public Gender()
+        {
+        }
+
+        public Gender(GenderArchetype arch)
         {
             this.Name = arch.Name;
         }

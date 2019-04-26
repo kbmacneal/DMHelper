@@ -13,7 +13,7 @@ namespace DM_helper.Models
 {
     public partial class Weapon
     {
-        public int ID {get;set;}
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Damage { get; set; }
         public string Range { get; set; }
@@ -22,14 +22,15 @@ namespace DM_helper.Models
         public string Encumbrance { get; set; }
         public string Attribute { get; set; }
         public int TechLevel { get; set; }
-        public int CharacterID {get;set;}
-        [ForeignKey ("CharacterID")]
-        public Character Character {get;set;}
-        public Weapon(){}
+        public Character Character { get; set; }
 
-        public Weapon (WeaponArchetype arch)
+        public Weapon()
         {
-            this.Name= arch.Name;
+        }
+
+        public Weapon(WeaponArchetype arch)
+        {
+            this.Name = arch.Name;
             this.Damage = arch.Damage;
             this.Range = arch.Range;
             this.Cost = arch.Cost;
@@ -38,6 +39,5 @@ namespace DM_helper.Models
             this.Attribute = arch.Attribute;
             this.TechLevel = arch.TechLevel;
         }
-
     }
 }

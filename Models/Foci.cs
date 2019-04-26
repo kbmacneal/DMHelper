@@ -9,23 +9,21 @@ using DM_helper.Archetypes;
 
 namespace DM_helper.Models
 {
-
     public partial class Foci
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
-        public int CharacterID {get;set;}
-        [ForeignKey("CharacterID")]
-        public Character Character {get;set;}
-        public Foci(){}
+        public Character Character { get; set; }
 
-        public Foci (FociArchetype arch)
+        public Foci()
+        {
+        }
+
+        public Foci(FociArchetype arch)
         {
             this.Name = arch.Name;
             this.Level = arch.Level;
         }
-        
     }
-
 }

@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using DM_helper.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DM_helper;
-using DM_helper.Models;
-using DM_helper.Archetypes;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DM_helper.Controllers
 {
@@ -78,25 +74,25 @@ namespace DM_helper.Controllers
             {
                 var charac = new Character(character);
 
-                var background = new Background(await _context.BackgroundArchetype.FirstOrDefaultAsync(e => e.ID == character.BackgroundID));
+                var background = new Background(_context.BackgroundArchetype.FirstOrDefault(e => e.ID == character.BackgroundID));
 
-                var cls = new CharacterClass(await _context.CharacterClassArchetype.FirstOrDefaultAsync(e => e.ID == character.ClassID));
+                var cls = new CharacterClass(_context.CharacterClassArchetype.FirstOrDefault(e => e.ID == character.ClassID));
 
-                var gender = new Gender(await _context.GenderArchetype.FirstOrDefaultAsync(e => e.ID == character.GenderID));
+                var gender = new Gender(_context.GenderArchetype.FirstOrDefault(e => e.ID == character.GenderID));
 
-                background.Character = charac;
-                cls.Character = charac;
-                gender.Character = charac;
+                charac.Gender = gender;
+                charac.Class = cls;
+                charac.Background = background;
 
-                _context.Backgrounds.Add(background);
-
-                _context.CharacterClasses.Add(cls);
-
-                _context.Genders.Add(gender);
-
-                _context.Add(character);
+                _context.Add(charac);
 
                 _context.SaveChanges();
+
+                //var book = new Book { Title = "As You Like It" };
+                //var author = new Author { AuthorId = 1 };
+                //db.Attach(author);
+                //author.Books.Add(book);
+                //db.SaveChanges();
 
                 return RedirectToAction(nameof(Index));
             }

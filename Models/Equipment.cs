@@ -9,7 +9,6 @@ using DM_helper.Archetypes;
 
 namespace DM_helper.Models
 {
-
     public partial class Equipment
     {
         public long ID { get; set; }
@@ -17,12 +16,13 @@ namespace DM_helper.Models
         public string Cost { get; set; }
         public string Encumbrance { get; set; }
         public string TechLevel { get; set; }
-        public int CharacterID {get;set;}
-        [ForeignKey("CharacterID")]
-        public Character Character {get;set;}
-        public Equipment(){}
+        public Character Character { get; set; }
 
-        public Equipment (EquipmentArchetype arch)
+        public Equipment()
+        {
+        }
+
+        public Equipment(EquipmentArchetype arch)
         {
             this.Name = arch.Name;
             this.Cost = arch.Cost;
@@ -30,5 +30,4 @@ namespace DM_helper.Models
             this.TechLevel = arch.Encumbrance;
         }
     }
-
 }
