@@ -177,6 +177,8 @@ namespace DM_helper
                    .HasColumnName("faction");
                entity.Property(e => e.Homeworld)
                    .HasColumnName("homeworld");
+               entity.Property(e => e.Level)
+                   .HasColumnName("level");
                entity.Property(e => e.CurrentHP)
                    .HasColumnName("currenthp");
                entity.Property(e => e.MaxHP)
@@ -193,8 +195,8 @@ namespace DM_helper
                    .HasColumnName("currentxp");
                entity.Property(e => e.XPTilNextLevel)
                    .HasColumnName("xptilnextlevel");
-               entity.Property(e => e.AC)
-                   .HasColumnName("ac");
+               entity.Property(e => e.BaseAC)
+                   .HasColumnName("baseac");
                entity.Property(e => e.AtkBonus)
                    .HasColumnName("atkbonus");
                entity.Property(e => e.Strength)

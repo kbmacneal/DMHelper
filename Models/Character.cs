@@ -20,6 +20,7 @@ namespace DM_helper.Models
         public string Name { get; set; }
         public string Faction { get; set; }
         public string Homeworld { get; set; }
+        public int Level { get; set; }
         public int CurrentHP { get; set; }
         public int MaxHP { get; set; }
         public int CurrentSystemStrain { get; set; }
@@ -27,7 +28,7 @@ namespace DM_helper.Models
         public int PermanentStrain { get; set; }
         public int CurrentXP { get; set; }
         public int XPTilNextLevel { get; set; }
-        public int AC { get; set; }
+        public int BaseAC { get; set; }
         public int AtkBonus { get; set; }
         public int Strength { get; set; }
         public int Dexterity { get; set; }
@@ -51,7 +52,6 @@ namespace DM_helper.Models
 
         public Character()
         {
-            
         }
 
         public Character(CharacterInterOp character)
@@ -66,7 +66,7 @@ namespace DM_helper.Models
             this.PermanentStrain = character.PermanentStrain;
             this.CurrentXP = character.CurrentXP;
             this.XPTilNextLevel = character.XPTilNextLevel;
-            this.AC = character.AC;
+            this.BaseAC = character.BaseAC;
             this.AtkBonus = character.AtkBonus;
             this.Strength = character.Strength;
             this.Dexterity = character.Dexterity;
