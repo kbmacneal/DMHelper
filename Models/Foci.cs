@@ -15,7 +15,7 @@ namespace DM_helper.Models
         public string Name { get; set; }
         public int Level { get; set; }
         public Character Character { get; set; }
-        public ArmorArchetype Archetype { get; set; }
+        public FociArchetype Archetype { get; set; }
 
         public Foci()
         {

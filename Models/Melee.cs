@@ -20,7 +20,7 @@ namespace DM_helper.Models
         public long Encumbrance { get; set; }
         public long TechLevel { get; set; }
         public Character Character { get; set; }
-        public ArmorArchetype Archetype { get; set; }
+        public MeleeArchetype Archetype { get; set; }
 
         public Melee()
         {

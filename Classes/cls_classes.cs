@@ -13,6 +13,7 @@ namespace DM_helper
         public string Name { get; set; }
         public int CharacterID { get; set; }
         public Character Character { get; set; }
+        public CharacterClass Archetype { get; set; }
 
         public CharacterClass()
         {
@@ -30,6 +31,7 @@ namespace DM_helper
         public string Name { get; set; }
         public int CharacterID { get; set; }
         public Character Character { get; set; }
+        public BackgroundArchetype Archetype { get; set; }
 
         public Background()
         {
@@ -47,6 +49,7 @@ namespace DM_helper
         public string Name { get; set; }
         public int CharacterID { get; set; }
         public Character Character { get; set; }
+        public GenderArchetype Archetype { get; set; }
 
         public Gender()
         {

@@ -17,7 +17,7 @@ namespace DM_helper.Models
         public string Encumbrance { get; set; }
         public string TechLevel { get; set; }
         public Character Character { get; set; }
-        public ArmorArchetype Archetype { get; set; }
+        public EquipmentArchetype Archetype { get; set; }
 
         public Equipment()
         {
@@ -29,6 +29,23 @@ namespace DM_helper.Models
             this.Cost = arch.Cost;
             this.Encumbrance = arch.Encumbrance;
             this.TechLevel = arch.Encumbrance;
+            this.Archetype = arch;
+        }
+    }
+
+    public class PresentationEquipment
+    {
+        public long ID { get; set; }
+        public string DropDownString { get; set; }
+
+        public PresentationEquipment()
+        {
+        }
+
+        public PresentationEquipment(EquipmentArchetype eq)
+        {
+            this.ID = eq.ID;
+            this.DropDownString = eq.Name + " | " + eq.TechLevel;
         }
     }
 }

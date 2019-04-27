@@ -118,16 +118,32 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <form asp-action="BindArmor">
-                    <input id="ID" type="hidden" asp-for="ID">
-                    <div class="form-group">
-                        <label>Armor</label>
-                        <select id="SelectedArmor" class="form-control" multiple="multiple" asp-items="ViewBag.Armors" asp-for="SelectedArmor"></select>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Bind Armor" class="btn btn-primary" />
-                    </div>
-                </form>
+                <div class="d-flex flex-row w-100">
+                    <form asp-action="BindArmor">
+                        <input id="ID" type="hidden" asp-for="ID">
+                        <div class="form-group">
+                            <label>Armor</label>
+                            <select id="SelectedArmor" class="form-control" multiple="multiple" asp-items="ViewBag.Armors" asp-for="SelectedArmor"></select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Bind Armor" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+                <div class="d-flex flex-row w-100">
+                    <form asp-action="BindEquipment">
+                        <input id="ID" type="hidden" asp-for="ID">
+                        <div class="form-group">
+                            <label>Equipment | Tech Level</label>
+                            <select id="SelectedEquipment" class="form-control" multiple="multiple" asp-items="ViewBag.Equipment" asp-for="SelectedEquipment"></select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Bind Equipment" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+                <div class="d-flex flex-row w-100">
+                </div>
             </div>
         </div>
     </div>

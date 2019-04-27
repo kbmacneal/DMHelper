@@ -10,6 +10,7 @@ namespace DM_helper.InterOp
         public int ClassID { get; set; }
         public int GenderID { get; set; }
         public List<int> SelectedArmor { get; set; }
+        public List<int> SelectedEquipment { get; set; }
 
         public CharacterInterOp()
         {
