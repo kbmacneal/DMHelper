@@ -19,6 +19,12 @@ namespace DM_helper
         {
         }
 
+        public CharacterClass(CharacterClass charclass)
+        {
+            this.Name = charclass.Name;
+            this.Archetype = charclass.Archetype;
+        }
+
         public CharacterClass(CharacterClassArchetype arch)
         {
             this.Name = arch.Name;
@@ -37,6 +43,12 @@ namespace DM_helper
         {
         }
 
+        public Background(Background bg)
+        {
+            this.Name = bg.Name;
+            this.Archetype = bg.Archetype;
+        }
+
         public Background(BackgroundArchetype arch)
         {
             this.Name = arch.Name;
@@ -53,6 +65,12 @@ namespace DM_helper
 
         public Gender()
         {
+        }
+
+        public Gender(Gender gender)
+        {
+            this.Name = gender.Name;
+            this.Archetype = gender.Archetype;
         }
 
         public Gender(GenderArchetype arch)

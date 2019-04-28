@@ -26,6 +26,18 @@ namespace DM_helper.Models
         {
         }
 
+        public Melee(Melee arch)
+        {
+            this.Name = arch.Name;
+            this.Damage = arch.Damage;
+            this.ShockDamage = arch.Damage;
+            this.Attribute = arch.Attribute;
+            this.Cost = arch.Cost;
+            this.Encumbrance = arch.Encumbrance;
+            this.TechLevel = arch.TechLevel;
+            this.Archetype = arch.Archetype;
+        }
+
         public Melee(MeleeArchetype arch)
         {
             this.Name = arch.Name;

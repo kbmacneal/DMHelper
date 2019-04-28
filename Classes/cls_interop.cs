@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DM_helper.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DM_helper.InterOp
 {
@@ -16,6 +17,34 @@ namespace DM_helper.InterOp
 
         public CharacterInterOp()
         {
+        }
+
+        public static CharacterInterOp NoIDClone(Character character)
+        {
+            var interop = new CharacterInterOp();
+            interop.Name = character.Name;
+            interop.Faction = character.Faction;
+            interop.Homeworld = character.Homeworld;
+            interop.CurrentHP = character.CurrentHP;
+            interop.MaxHP = character.MaxHP;
+            interop.CurrentSystemStrain = character.CurrentSystemStrain;
+            interop.MaxSystemStrain = character.MaxSystemStrain;
+            interop.PermanentStrain = character.PermanentStrain;
+            interop.CurrentXP = character.CurrentXP;
+            interop.XPTilNextLevel = character.XPTilNextLevel;
+            interop.BaseAC = character.BaseAC;
+            interop.AtkBonus = character.AtkBonus;
+            interop.Strength = character.Strength;
+            interop.Dexterity = character.Dexterity;
+            interop.Constitution = character.Constitution;
+            interop.Intelligence = character.Intelligence;
+            interop.Wisdom = character.Wisdom;
+            interop.Charisma = character.Charisma;
+            interop.Credits = character.Credits;
+            interop.Goals = character.Goals;
+            interop.Notes = character.Notes;
+
+            return interop;
         }
 
         public CharacterInterOp(Character character)
@@ -71,17 +100,17 @@ namespace DM_helper.InterOp
 
             //new stuff
 
-            this.BackgroundID = _context.Backgrounds.FirstOrDefault(e => e.CharacterID == this.ID).ID;
-            this.GenderID = _context.Genders.FirstOrDefault(e => e.CharacterID == this.ID).ID;
-            this.ClassID = _context.CharacterClasses.FirstOrDefault(e => e.CharacterID == this.ID).ID;
+            this.BackgroundID = _context.Backgrounds.Include(e => e.Archetype).FirstOrDefault(e => e.CharacterID == this.ID).ID;
+            this.GenderID = _context.Genders.Include(e => e.Archetype).FirstOrDefault(e => e.CharacterID == this.ID).ID;
+            this.ClassID = _context.CharacterClasses.Include(e => e.Archetype).FirstOrDefault(e => e.CharacterID == this.ID).ID;
 
             //lists
-            this.Armor = _context.Armor.Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
-            this.Equipment = _context.Equipment.Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
-            this.Foci = _context.Foci.Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
-            this.Melee = _context.Melee.Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
-            this.Skills = _context.Skills.Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
-            this.Weapon = _context.Weapons.Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
+            this.Armor = _context.Armor.Include(e => e.Archetype).Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
+            this.Equipment = _context.Equipment.Include(e => e.Archetype).Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
+            this.Foci = _context.Foci.Include(e => e.Archetype).Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
+            this.Melee = _context.Melee.Include(e => e.Archetype).Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
+            this.Skills = _context.Skills.Include(e => e.Archetype).Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
+            this.Weapon = _context.Weapons.Include(e => e.Archetype).Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
         }
     }
 }

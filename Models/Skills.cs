@@ -23,6 +23,14 @@ namespace DM_helper.Models
         {
         }
 
+        public Skills(Skills arch)
+        {
+            this.Name = arch.Name;
+            this.Level = arch.Level;
+            this.Specialist = arch.Specialist;
+            this.Archetype = arch.Archetype;
+        }
+
         public Skills(SkillsArchetype arch)
         {
             this.Name = arch.Name;

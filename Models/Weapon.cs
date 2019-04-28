@@ -29,6 +29,19 @@ namespace DM_helper.Models
         {
         }
 
+        public Weapon(Weapon arch)
+        {
+            this.Name = arch.Name;
+            this.Damage = arch.Damage;
+            this.Range = arch.Range;
+            this.Cost = arch.Cost;
+            this.Magazine = arch.Magazine;
+            this.Encumbrance = arch.Encumbrance;
+            this.Attribute = arch.Attribute;
+            this.TechLevel = arch.TechLevel;
+            this.Archetype = arch.Archetype;
+        }
+
         public Weapon(WeaponArchetype arch)
         {
             this.Name = arch.Name;

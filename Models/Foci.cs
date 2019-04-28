@@ -21,6 +21,13 @@ namespace DM_helper.Models
         {
         }
 
+        public Foci(Foci arch)
+        {
+            this.Name = arch.Name;
+            this.Level = arch.Level;
+            this.Archetype = arch.Archetype;
+        }
+
         public Foci(FociArchetype arch)
         {
             this.Name = arch.Name;

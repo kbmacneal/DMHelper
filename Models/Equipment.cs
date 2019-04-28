@@ -23,6 +23,15 @@ namespace DM_helper.Models
         {
         }
 
+        public Equipment(Equipment arch)
+        {
+            this.Name = arch.Name;
+            this.Cost = arch.Cost;
+            this.Encumbrance = arch.Encumbrance;
+            this.TechLevel = arch.Encumbrance;
+            this.Archetype = arch.Archetype;
+        }
+
         public Equipment(EquipmentArchetype arch)
         {
             this.Name = arch.Name;
