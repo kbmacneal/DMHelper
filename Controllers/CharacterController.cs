@@ -3,6 +3,7 @@ using DM_helper.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -110,9 +111,7 @@ namespace DM_helper.Controllers
 
         public async Task<IActionResult> BindArmor([Bind("ID,SelectedArmor")] CharacterInterOp character)
         {
-            var charac = _context.Character.Include(e => e.Armor).FirstOrDefault(e => e.ID == character.ID);
-
-            charac.Armor = new List<Armor>();
+            var charac = _context.Character.Include(e => e.Armor).ThenInclude(e => e.Archetype).FirstOrDefault(e => e.ID == character.ID);
 
             if (charac == null) return NotFound();
 
@@ -120,15 +119,20 @@ namespace DM_helper.Controllers
             {
                 foreach (var item in character.SelectedArmor)
                 {
-                    var armor = await _context.ArmorArchetype.FirstOrDefaultAsync(e => e.ID == item);
-
-                    var adder = new Armor(armor);
-
-                    charac.Armor.Add(adder);
+                    //apply all the new armor
+                    if (!charac.Armor.Select(e => e.Archetype.ID).Contains(item))
+                    {
+                        charac.Armor.Add(new Armor(await _context.ArmorArchetype.FirstOrDefaultAsync(e => e.ID == item)));
+                    }
                 }
+
+                //remove all the unselected armor
+                charac.Armor.Where(e => !character.SelectedArmor.Contains(Convert.ToInt32(e.Archetype.ID))).ToList().ForEach(e => charac.Armor.Remove(e));
             }
 
-            // _context.Armor.RemoveRange(_context.Armor.Where(e=>e.Character == null));
+            await _context.SaveChangesAsync();
+
+            await _context.Armor.Include(e => e.Character).Where(e => e.Character == null).ForEachAsync(e => _context.Armor.Remove(e));
 
             await _context.SaveChangesAsync();
 
@@ -137,25 +141,26 @@ namespace DM_helper.Controllers
 
         public async Task<IActionResult> BindEquipment([Bind("ID,SelectedEquipment")] CharacterInterOp character)
         {
-            var charac = _context.Character.Include(e => e.Equipment).FirstOrDefault(e => e.ID == character.ID);
-
-            charac.Equipment = new List<Equipment>();
-
-            if (charac == null) return NotFound();
+            var charac = _context.Character.Include(e => e.Equipment).ThenInclude(e => e.Archetype).FirstOrDefault(e => e.ID == character.ID);
 
             if (character.SelectedEquipment != null)
             {
                 foreach (var item in character.SelectedEquipment)
                 {
-                    var eq = await _context.EquipmentArchetype.FirstOrDefaultAsync(e => e.ID == item);
-
-                    var adder = new Equipment(eq);
-
-                    charac.Equipment.Add(adder);
+                    //apply all the new armor
+                    if (!charac.Equipment.Select(e => e.Archetype.ID).Contains(item))
+                    {
+                        charac.Equipment.Add(new Equipment(await _context.EquipmentArchetype.FirstOrDefaultAsync(e => e.ID == item)));
+                    }
                 }
+
+                //remove all the unselected armor
+                charac.Equipment.Where(e => !character.SelectedEquipment.Contains(Convert.ToInt32(e.Archetype.ID))).ToList().ForEach(e => charac.Equipment.Remove(e));
             }
 
-            // _context.Armor.RemoveRange(_context.Armor.Where(e=>e.Character == null));
+            await _context.SaveChangesAsync();
+
+            await _context.Equipment.Include(e => e.Character).Where(e => e.Character == null).ForEachAsync(e => _context.Equipment.Remove(e));
 
             await _context.SaveChangesAsync();
 
@@ -192,25 +197,26 @@ namespace DM_helper.Controllers
 
         public async Task<IActionResult> BindWeapon([Bind("ID,SelectedWeapon")] CharacterInterOp character)
         {
-            var charac = _context.Character.Include(e => e.Weapon).FirstOrDefault(e => e.ID == character.ID);
-
-            charac.Weapon = new List<Weapon>();
-
-            if (charac == null) return NotFound();
+            var charac = _context.Character.Include(e => e.Weapon).ThenInclude(e => e.Archetype).FirstOrDefault(e => e.ID == character.ID);
 
             if (character.SelectedWeapon != null)
             {
                 foreach (var item in character.SelectedWeapon)
                 {
-                    var eq = await _context.WeaponArchetype.FirstOrDefaultAsync(e => e.ID == item);
-
-                    var adder = new Weapon(eq);
-
-                    charac.Weapon.Add(adder);
+                    //apply all the new armor
+                    if (!charac.Weapon.Select(e => e.Archetype.ID).Contains(item))
+                    {
+                        charac.Weapon.Add(new Weapon(await _context.WeaponArchetype.FirstOrDefaultAsync(e => e.ID == item)));
+                    }
                 }
+
+                //remove all the unselected armor
+                charac.Weapon.Where(e => !character.SelectedWeapon.Contains(Convert.ToInt32(e.Archetype.ID))).ToList().ForEach(e => charac.Weapon.Remove(e));
             }
 
-            // _context.Armor.RemoveRange(_context.Armor.Where(e=>e.Character == null));
+            await _context.SaveChangesAsync();
+
+            await _context.Weapons.Include(e => e.Character).Where(e => e.Character == null).ForEachAsync(e => _context.Weapons.Remove(e));
 
             await _context.SaveChangesAsync();
 
@@ -219,25 +225,26 @@ namespace DM_helper.Controllers
 
         public async Task<IActionResult> BindMelee([Bind("ID,SelectedMelee")] CharacterInterOp character)
         {
-            var charac = _context.Character.Include(e => e.Melee).FirstOrDefault(e => e.ID == character.ID);
-
-            charac.Melee = new List<Melee>();
-
-            if (charac == null) return NotFound();
+            var charac = _context.Character.Include(e => e.Melee).ThenInclude(e => e.Archetype).FirstOrDefault(e => e.ID == character.ID);
 
             if (character.SelectedMelee != null)
             {
                 foreach (var item in character.SelectedMelee)
                 {
-                    var eq = await _context.MeleeArchetype.FirstOrDefaultAsync(e => e.ID == item);
-
-                    var adder = new Melee(eq);
-
-                    charac.Melee.Add(adder);
+                    //apply all the new armor
+                    if (!charac.Melee.Select(e => e.Archetype.ID).Contains(item))
+                    {
+                        charac.Melee.Add(new Melee(await _context.MeleeArchetype.FirstOrDefaultAsync(e => e.ID == item)));
+                    }
                 }
+
+                //remove all the unselected armor
+                charac.Melee.Where(e => !character.SelectedMelee.Contains(Convert.ToInt32(e.Archetype.ID))).ToList().ForEach(e => charac.Melee.Remove(e));
             }
 
-            // _context.Armor.RemoveRange(_context.Armor.Where(e=>e.Character == null));
+            await _context.SaveChangesAsync();
+
+            await _context.Melee.Include(e => e.Character).Where(e => e.Character == null).ForEachAsync(e => _context.Melee.Remove(e));
 
             await _context.SaveChangesAsync();
 
