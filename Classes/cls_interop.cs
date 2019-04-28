@@ -74,12 +74,12 @@ namespace DM_helper.InterOp
             this.ClassID = _context.CharacterClasses.FirstOrDefault(e => e.CharacterID == this.ID).ID;
 
             //lists
-            this.Armor = _context.Armor.Where(e => e.Character.ID == this.ID).ToList();
-            this.Equipment = _context.Equipment.Where(e => e.Character.ID == this.ID).ToList();
-            this.Foci = _context.Foci.Where(e => e.Character.ID == this.ID).ToList();
-            this.Melee = _context.Melee.Where(e => e.Character.ID == this.ID).ToList();
-            this.Skills = _context.Skills.Where(e => e.Character.ID == this.ID).ToList();
-            this.Weapon = _context.Weapons.Where(e => e.Character.ID == this.ID).ToList();
+            this.Armor = _context.Armor.Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
+            this.Equipment = _context.Equipment.Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
+            this.Foci = _context.Foci.Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
+            this.Melee = _context.Melee.Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
+            this.Skills = _context.Skills.Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
+            this.Weapon = _context.Weapons.Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
         }
     }
 }

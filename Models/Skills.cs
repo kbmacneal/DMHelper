@@ -28,6 +28,7 @@ namespace DM_helper.Models
             this.Name = arch.Name;
             this.Level = arch.Level;
             this.Specialist = arch.Specialist;
+            this.Archetype = arch;
         }
     }
 }

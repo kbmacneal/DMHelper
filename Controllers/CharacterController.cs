@@ -32,8 +32,9 @@ namespace DM_helper.Controllers
                 return NotFound();
             }
 
-            var character = await _context.Character.Include(e => e.Equipment).ThenInclude(e => e.Archetype).Include(e => e.Weapon).Include(e => e.Melee).Include(e => e.Armor).ThenInclude(e => e.Archetype)
+            var character = await _context.Character.Include(e => e.Equipment).ThenInclude(e => e.Archetype).Include(e => e.Weapon).Include(e => e.Melee).Include(e => e.Armor).ThenInclude(e => e.Archetype).Include(e => e.Skills)
                 .FirstOrDefaultAsync(m => m.ID == id);
+
             if (character == null)
             {
                 return NotFound();
@@ -132,6 +133,20 @@ namespace DM_helper.Controllers
             return RedirectToAction("Details", new { ID = charac.ID });
         }
 
+        public async Task<IActionResult> BindSkills([Bind("ID,Skills,Name")] CharacterInterOp character)
+        {
+            var charac = _context.Character.Include(e => e.Skills).ThenInclude(e => e.Archetype).FirstOrDefault(e => e.ID == character.ID);
+
+            foreach (var item in character.Skills)
+            {
+                charac.Skills.FirstOrDefault(e => e.ID == item.ID).Level = item.Level;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { ID = charac.ID });
+        }
+
         // GET: Character/Create
         public IActionResult Create()
         {
@@ -167,11 +182,15 @@ namespace DM_helper.Controllers
 
                 var gender = new Gender(_context.GenderArchetype.FirstOrDefault(e => e.ID == character.GenderID));
 
+                var skills = new List<Skills>();
+
                 _context.Attach(charac);
 
                 charac.Gender = gender;
                 charac.Class = cls;
                 charac.Background = background;
+                charac.Skills = new List<Skills>();
+                (await _context.SkillsArchetype.ToListAsync()).ForEach(e => charac.Skills.Add(new Skills(e)));
 
                 _context.Add(charac);
 
@@ -262,7 +281,7 @@ namespace DM_helper.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var character = await _context.Character.Include(e => e.Equipment).Include(e => e.Weapon).Include(e => e.Melee).Include(e => e.Armor).FirstOrDefaultAsync(e => e.ID == id);
+            var character = await _context.Character.Include(e => e.Equipment).Include(e => e.Weapon).Include(e => e.Melee).Include(e => e.Armor).Include(e => e.Skills).FirstOrDefaultAsync(e => e.ID == id);
             // _context.Armor.RemoveRange(_context.Armor.Include(e=>e.Character).Where(e=>e.Character==character).ToArray());
             _context.Character.Remove(character);
             await _context.SaveChangesAsync();

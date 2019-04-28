@@ -5,8 +5,9 @@
     <h4>@Html.DisplayFor(model => model.Name)</h4>
     <hr>
     <div class="container-fluid">
-        <div class="d-flex flex-row">
-            <div class="col-lg-6">
+
+        <div class="d-flex flex-wrap">
+            <div class="d-flex flex-column p-2">
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-row ">
                         <div class="d-flex flex-column col-6">
@@ -117,7 +118,31 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="d-flex flex-column p-2">
+                <div class="d-flex flex-row w-100">
+                    <form asp-action="BindSkills">
+                        <input id="ID" type="hidden" asp-for="ID">
+
+                        @for (int i = 0; i < Model.Skills.Count; i++)
+                        {
+                            <input id="Name" type="hidden" asp-for="Skills[i].Name">
+                            <input id="ID" type="hidden" asp-for="Skills[i].ID">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-4 bold">
+                                        @Html.Label(Model.Skills[i].Name)
+                                    </div>
+                                    <div class="col-3 w-25">
+                                        @Html.TextBoxFor(e => e.Skills[i].Level, new { Class = "w-50" })
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="form-group">
+                            <input type="submit" value="Bind Skills" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
                 <div class="d-flex flex-row w-100">
                     <form asp-action="BindArmor">
                         <input id="ID" type="hidden" asp-for="ID">
@@ -146,6 +171,7 @@
                 </div>
             </div>
         </div>
+            
     </div>
     <div><a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> | <a asp-action="Index">Back to List</a></div>
 </div>
