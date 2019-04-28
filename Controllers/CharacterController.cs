@@ -32,7 +32,7 @@ namespace DM_helper.Controllers
                 return NotFound();
             }
 
-            var character = await _context.Character.Include(e => e.Equipment).ThenInclude(e => e.Archetype).Include(e => e.Weapon).Include(e => e.Melee).Include(e => e.Armor).ThenInclude(e => e.Archetype).Include(e => e.Skills)
+            var character = await _context.Character.Include(e => e.Equipment).ThenInclude(e => e.Archetype).Include(e => e.Weapon).Include(e => e.Melee).Include(e => e.Armor).ThenInclude(e => e.Archetype).Include(e => e.Skills).Include(e => e.Foci)
                 .FirstOrDefaultAsync(m => m.ID == id);
 
             if (character == null)
@@ -147,6 +147,20 @@ namespace DM_helper.Controllers
             return RedirectToAction("Details", new { ID = charac.ID });
         }
 
+        public async Task<IActionResult> BindFoci([Bind("ID,Foci,Name")] CharacterInterOp character)
+        {
+            var charac = _context.Character.Include(e => e.Foci).ThenInclude(e => e.Archetype).FirstOrDefault(e => e.ID == character.ID);
+
+            foreach (var item in character.Foci)
+            {
+                charac.Foci.FirstOrDefault(e => e.ID == item.ID).Level = item.Level;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { ID = charac.ID });
+        }
+
         // GET: Character/Create
         public IActionResult Create()
         {
@@ -182,8 +196,6 @@ namespace DM_helper.Controllers
 
                 var gender = new Gender(_context.GenderArchetype.FirstOrDefault(e => e.ID == character.GenderID));
 
-                var skills = new List<Skills>();
-
                 _context.Attach(charac);
 
                 charac.Gender = gender;
@@ -191,6 +203,9 @@ namespace DM_helper.Controllers
                 charac.Background = background;
                 charac.Skills = new List<Skills>();
                 (await _context.SkillsArchetype.ToListAsync()).ForEach(e => charac.Skills.Add(new Skills(e)));
+
+                charac.Foci = new List<Foci>();
+                (await _context.FociArchetype.ToListAsync()).ForEach(e => charac.Foci.Add(new Foci(e)));
 
                 _context.Add(charac);
 
