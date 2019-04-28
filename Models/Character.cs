@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DM_helper.Controllers;
 using DM_helper.InterOp;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace DM_helper.Models
@@ -77,6 +78,46 @@ namespace DM_helper.Models
             this.Credits = character.Credits;
             this.Goals = character.Goals;
             this.Notes = character.Notes;
+        }
+
+        public static async Task CloneCharacterAsync(int ID, Context _context)
+        {
+            var character = await _context.Character.AsNoTracking().Include(e => e.Equipment).ThenInclude(e => e.Archetype).Include(e => e.Weapon).ThenInclude(e => e.Archetype).Include(e => e.Melee).ThenInclude(e => e.Archetype).Include(e => e.Armor).ThenInclude(e => e.Archetype).Include(e => e.Skills).ThenInclude(e => e.Archetype).Include(e => e.Foci).ThenInclude(e => e.Archetype).Include(e => e.Class).ThenInclude(e => e.Archetype).Include(e => e.Background).ThenInclude(e => e.Archetype).Include(e => e.Gender).ThenInclude(e => e.Archetype)
+                .FirstOrDefaultAsync(m => m.ID == ID);
+
+            var adder = new Character(CharacterInterOp.NoIDClone(character));
+
+            adder.Class = new CharacterClass(character.Class);
+            adder.Background = new Background(character.Background);
+            adder.Gender = new Gender(character.Gender);
+
+            adder.Armor = new List<Armor>();
+            character.Armor.ForEach(e => adder.Armor.Add(new Armor(e.Archetype)));
+            adder.Armor.ForEach(e => _context.Entry(e).State = EntityState.Added);
+
+            adder.Equipment = new List<Equipment>();
+            character.Equipment.ForEach(e => adder.Equipment.Add(new Equipment(e.Archetype)));
+            adder.Equipment.ForEach(e => _context.Entry(e).State = EntityState.Added);
+
+            adder.Weapon = new List<Weapon>();
+            character.Weapon.ForEach(e => adder.Weapon.Add(new Weapon(e.Archetype)));
+            adder.Weapon.ForEach(e => _context.Entry(e).State = EntityState.Added);
+
+            adder.Melee = new List<Melee>();
+            character.Melee.ForEach(e => adder.Melee.Add(new Melee(e.Archetype)));
+            adder.Melee.ForEach(e => _context.Entry(e).State = EntityState.Added);
+
+            adder.Skills = new List<Skills>();
+            character.Skills.ForEach(e => adder.Skills.Add(new Skills(e.Archetype)));
+            adder.Skills.ForEach(e => _context.Entry(e).State = EntityState.Added);
+
+            adder.Foci = new List<Foci>();
+            character.Foci.ForEach(e => adder.Foci.Add(new Foci(e.Archetype)));
+            adder.Foci.ForEach(e => _context.Entry(e).State = EntityState.Added);
+
+            await _context.Character.AddAsync(adder);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

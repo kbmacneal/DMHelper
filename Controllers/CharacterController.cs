@@ -404,36 +404,7 @@ namespace DM_helper.Controllers
         [HttpPost]
         public async Task<IActionResult> CloneCharacter([Bind("ID")] Character c)
         {
-            var character = await _context.Character.AsNoTracking().Include(e => e.Equipment).ThenInclude(e => e.Archetype).Include(e => e.Weapon).ThenInclude(e => e.Archetype).Include(e => e.Melee).ThenInclude(e => e.Archetype).Include(e => e.Armor).ThenInclude(e => e.Archetype).Include(e => e.Skills).ThenInclude(e => e.Archetype).Include(e => e.Foci).ThenInclude(e => e.Archetype).Include(e => e.Class).ThenInclude(e => e.Archetype).Include(e => e.Background).ThenInclude(e => e.Archetype).Include(e => e.Gender).ThenInclude(e => e.Archetype)
-                .FirstOrDefaultAsync(m => m.ID == c.ID);
-
-            var adder = new Character(CharacterInterOp.NoIDClone(character));
-
-            adder.Class = new CharacterClass(character.Class);
-            adder.Background = new Background(character.Background);
-            adder.Gender = new Gender(character.Gender);
-
-            adder.Armor = new List<Armor>();
-            character.Armor.ForEach(e => adder.Armor.Add(new Armor(e.Archetype)));
-
-            adder.Equipment = new List<Equipment>();
-            character.Equipment.ForEach(e => adder.Equipment.Add(new Equipment(e.Archetype)));
-
-            adder.Weapon = new List<Weapon>();
-            character.Weapon.ForEach(e => adder.Weapon.Add(new Weapon(e.Archetype)));
-
-            adder.Melee = new List<Melee>();
-            character.Melee.ForEach(e => adder.Melee.Add(new Melee(e.Archetype)));
-
-            adder.Skills = new List<Skills>();
-            character.Skills.ForEach(e => adder.Skills.Add(new Skills(e.Archetype)));
-
-            adder.Foci = new List<Foci>();
-            character.Foci.ForEach(e => adder.Foci.Add(new Foci(e.Archetype)));
-
-            await _context.Character.AddAsync(adder);
-
-            await _context.SaveChangesAsync();
+            await Character.CloneCharacterAsync(c.ID, _context);
 
             return RedirectToAction("Index");
         }
