@@ -176,7 +176,6 @@
         <div class="d-flex flex-row flex-wrap">
             <div class="d-flex flex-column">
                 <div class="d-flex flex-column p-2">
-
                     <div class="d-flex flex-row w-100">
                         <form asp-action="BindArmor">
                             <input id="ID" type="hidden" asp-for="ID">
@@ -202,6 +201,34 @@
                         </form>
                     </div>
                     <div class="d-flex flex-row w-100">
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-column p-2">
+                    <div class="d-flex flex-row w-100">
+                        <form asp-action="BindWeapon">
+                            <input id="ID" type="hidden" asp-for="ID">
+                            <div class="form-group">
+                                <label>Ranged Weapons</label>
+                                <select id="SelectedWeapon" class="form-control" multiple="multiple" asp-items="ViewBag.Weapons" asp-for="SelectedWeapon"></select>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Bind Ranged Weapons" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="d-flex flex-row w-100">
+                        <form asp-action="BindMelee">
+                            <input id="ID" type="hidden" asp-for="ID">
+                            <div class="form-group">
+                                <label>Melee Weapons</label>
+                                <select id="SelectedMelee" class="form-control" multiple="multiple" asp-items="ViewBag.Melee" asp-for="SelectedMelee"></select>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Bind Melee Weapons" class="btn btn-primary" />
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

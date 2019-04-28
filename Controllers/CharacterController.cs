@@ -32,7 +32,7 @@ namespace DM_helper.Controllers
                 return NotFound();
             }
 
-            var character = await _context.Character.Include(e => e.Equipment).ThenInclude(e => e.Archetype).Include(e => e.Weapon).Include(e => e.Melee).Include(e => e.Armor).ThenInclude(e => e.Archetype).Include(e => e.Skills).Include(e => e.Foci)
+            var character = await _context.Character.Include(e => e.Equipment).ThenInclude(e => e.Archetype).Include(e => e.Weapon).ThenInclude(e => e.Archetype).Include(e => e.Melee).ThenInclude(e => e.Archetype).Include(e => e.Armor).ThenInclude(e => e.Archetype).Include(e => e.Skills).Include(e => e.Foci)
                 .FirstOrDefaultAsync(m => m.ID == id);
 
             if (character == null)
@@ -75,6 +75,35 @@ namespace DM_helper.Controllers
             var eqs = new MultiSelectList(pressy, "ID", "DropDownString", selectedeq);
 
             ViewBag.Equipment = eqs;
+
+            //ranged
+            var archranged = _context.WeaponArchetype;
+
+            //apply the personalized armor override
+            foreach (var ranged in character.Weapon)
+            {
+                await archranged.Where(e => e.ID == ranged.Archetype.ID).ForEachAsync(e => e.Name = ranged.Name);
+            }
+
+            var selectedweap = character.Weapon.Select(e => e.Archetype.ID);
+
+            var weapons = new MultiSelectList(_context.WeaponArchetype, "ID", "Name", selectedweap);
+
+            ViewBag.Weapons = weapons;
+            //melee
+            var archmelee = _context.MeleeArchetype;
+
+            //apply the personalized armor override
+            foreach (var melee in character.Melee)
+            {
+                await archmelee.Where(e => e.ID == melee.Archetype.ID).ForEachAsync(e => e.Name = melee.Name);
+            }
+
+            var selectedmelee = character.Melee.Select(e => e.Archetype.ID);
+
+            var melees = new MultiSelectList(_context.MeleeArchetype, "ID", "Name", selectedmelee);
+
+            ViewBag.Melee = melees;
 
             return View(characterInterop);
         }
@@ -155,6 +184,60 @@ namespace DM_helper.Controllers
             {
                 charac.Foci.FirstOrDefault(e => e.ID == item.ID).Level = item.Level;
             }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { ID = charac.ID });
+        }
+
+        public async Task<IActionResult> BindWeapon([Bind("ID,SelectedWeapon")] CharacterInterOp character)
+        {
+            var charac = _context.Character.Include(e => e.Weapon).FirstOrDefault(e => e.ID == character.ID);
+
+            charac.Weapon = new List<Weapon>();
+
+            if (charac == null) return NotFound();
+
+            if (character.SelectedWeapon != null)
+            {
+                foreach (var item in character.SelectedWeapon)
+                {
+                    var eq = await _context.WeaponArchetype.FirstOrDefaultAsync(e => e.ID == item);
+
+                    var adder = new Weapon(eq);
+
+                    charac.Weapon.Add(adder);
+                }
+            }
+
+            // _context.Armor.RemoveRange(_context.Armor.Where(e=>e.Character == null));
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { ID = charac.ID });
+        }
+
+        public async Task<IActionResult> BindMelee([Bind("ID,SelectedMelee")] CharacterInterOp character)
+        {
+            var charac = _context.Character.Include(e => e.Melee).FirstOrDefault(e => e.ID == character.ID);
+
+            charac.Melee = new List<Melee>();
+
+            if (charac == null) return NotFound();
+
+            if (character.SelectedMelee != null)
+            {
+                foreach (var item in character.SelectedMelee)
+                {
+                    var eq = await _context.MeleeArchetype.FirstOrDefaultAsync(e => e.ID == item);
+
+                    var adder = new Melee(eq);
+
+                    charac.Melee.Add(adder);
+                }
+            }
+
+            // _context.Armor.RemoveRange(_context.Armor.Where(e=>e.Character == null));
 
             await _context.SaveChangesAsync();
 
@@ -296,7 +379,7 @@ namespace DM_helper.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var character = await _context.Character.Include(e => e.Equipment).Include(e => e.Weapon).Include(e => e.Melee).Include(e => e.Armor).Include(e => e.Skills).FirstOrDefaultAsync(e => e.ID == id);
+            var character = await _context.Character.Include(e => e.Equipment).Include(e => e.Weapon).Include(e => e.Melee).Include(e => e.Armor).Include(e => e.Skills).Include(e => e.Foci).FirstOrDefaultAsync(e => e.ID == id);
             // _context.Armor.RemoveRange(_context.Armor.Include(e=>e.Character).Where(e=>e.Character==character).ToArray());
             _context.Character.Remove(character);
             await _context.SaveChangesAsync();

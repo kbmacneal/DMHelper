@@ -11,6 +11,8 @@ namespace DM_helper.InterOp
         public int GenderID { get; set; }
         public List<int> SelectedArmor { get; set; }
         public List<int> SelectedEquipment { get; set; }
+        public List<int> SelectedWeapon { get; set; }
+        public List<int> SelectedMelee { get; set; }
 
         public CharacterInterOp()
         {

@@ -39,6 +39,7 @@ namespace DM_helper.Models
             this.Encumbrance = arch.Encumbrance;
             this.Attribute = arch.Attribute;
             this.TechLevel = arch.TechLevel;
+            this.Archetype = arch;
         }
     }
 }
