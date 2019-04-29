@@ -50,6 +50,7 @@ namespace DM_helper.Models
         public List<Melee> Melee { get; set; }
         public List<Skills> Skills { get; set; }
         public List<Weapon> Weapon { get; set; }
+        public List<CharacterEncounter> CharacterEncounter {get;set;}
 
         public Character()
         {
