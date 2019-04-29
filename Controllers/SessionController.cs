@@ -34,7 +34,11 @@ namespace DM_helper.Controllers
             }
 
             var session = await _context.Session
-                .FirstOrDefaultAsync(m => m.ID == id);
+            .Include(e=>e.Encounters)
+                .ThenInclude(e=>e.CharacterEncounter)
+                .ThenInclude(e=>e.Character)
+                .ThenInclude(e=>e.Weapon)
+            .FirstOrDefaultAsync(m => m.ID == id);
             if (session == null)
             {
                 return NotFound();
