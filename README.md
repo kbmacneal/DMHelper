@@ -6,4 +6,4 @@ To use the project, either get a binary version by running ```dotnet publish --s
 
 In either case, you will need to download and install the SDK, as it is required to scaffold out the database tables.
 
-Before using the application for the first time, you will need to install Postgres on your local machine, noting the dbname and credentials in dm_helper.json. Then run ```dotnet ef database update`` to scaffold out the data structures in the database.
+Before using the application for the first time, you will need to install Postgres on your local machine, noting the dbname and credentials in dm_helper.json. Then run ```dotnet ef database update``` to scaffold out the data structures in the database.
