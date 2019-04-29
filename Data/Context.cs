@@ -6,11 +6,9 @@ namespace DM_helper
 {
     public partial class Context : DbContext
     {
-        public Context ()
-        { }
+        public Context () { }
 
-        public Context (DbContextOptions<Context> options) : base (options)
-        { }
+        public Context (DbContextOptions<Context> options) : base (options) { }
 
         protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
         {
@@ -363,13 +361,15 @@ namespace DM_helper
                     .HasColumnName ("name");
                 entity.Property (e => e.Notes)
                     .HasColumnName ("notes");
+                entity.Property (e => e.Session)
+                    .HasColumnName ("session");
             });
 
             modelBuilder.Entity<CharacterEncounter> ()
-                .HasKey (e=>e.ID);
+                .HasKey (e => e.ID);
             modelBuilder.Entity<CharacterEncounter> ()
                 .HasOne (e => e.Character)
-                .WithMany (e=> e.CharacterEncounter)
+                .WithMany (e => e.CharacterEncounter)
                 .HasForeignKey (e => e.ID);
             modelBuilder.Entity<CharacterEncounter> ()
                 .HasOne (e => e.Encounter)

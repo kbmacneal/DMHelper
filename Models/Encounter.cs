@@ -21,6 +21,7 @@ namespace DM_helper.Models
        public string Name {get;set;}
        public List<CharacterEncounter> CharacterEncounter {get;set;}
        public string Notes {get;set;}
+       public int Session {get;set;}
 
     }
 

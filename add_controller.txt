@@ -1,6 +1,6 @@
-dotnet aspnet-codegenerator controller -name CharacterController -m Character -dc Context --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name EncounterController -m Encounter -dc Context --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
 
-dotnet ef migrations add scaffolding_out_encounters --context Context
+dotnet ef migrations add adding_session_num --context Context
 
 dotnet ef database update --context Context
 
