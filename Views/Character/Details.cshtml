@@ -132,18 +132,32 @@
                     <div class="d-flex flex-column p-2">
                         <form asp-action="BindSkills">
                             <input id="ID" type="hidden" asp-for="ID">
-
+                            <div class="d-flex flex-row">
+                                <div class="col-6 bold text-center">
+                                    <u>Name</u>
+                                </div>
+                                <div class="col-3 bold text-center">
+                                    <u>Level</u>
+                                </div>
+                                <div class="col-3 bold text-center">
+                                    <u>Specialist</u>
+                                </div>
+                            </div>
                             @for (int i = 0; i < Model.Skills.Count; i++)
                             {
                                 <input id="Name" type="hidden" asp-for="Skills[i].Name">
                                 <input id="ID" type="hidden" asp-for="Skills[i].ID">
                                 <div class="container-fluid">
+
                                     <div class="d-flex flex-row">
                                         <div class="col-6 bold">
                                             @Html.Label(Model.Skills[i].Name)
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-3">
                                             @Html.TextBoxFor(e => e.Skills[i].Level, new { Style = "width:20px;" })
+                                        </div>
+                                        <div class="col-3">
+                                            @Html.TextBoxFor(e => e.Skills[i].Specialist, new { Style = "width:20px;" })
                                         </div>
                                     </div>
                                 </div>
