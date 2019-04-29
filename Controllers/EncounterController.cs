@@ -48,7 +48,7 @@ namespace DM_helper.Controllers
         // GET: Encounter/Create
         public IActionResult Create()
         {
-            ViewData["SessionID"] = new SelectList(_context.Set<Session>(), "ID", "ID");
+            ViewData["SessionID"] = new SelectList(_context.Set<Session>(), "ID", "Name");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace DM_helper.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SessionID"] = new SelectList(_context.Set<Session>(), "ID", "ID", encounter.SessionID);
+            ViewData["SessionID"] = new SelectList(_context.Set<Session>(), "ID", "Name", encounter.SessionID);
             return View(encounter);
         }
 
