@@ -1,4 +1,4 @@
-dotnet aspnet-codegenerator controller -name EncounterController -m Encounter -dc Context --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name SessionController -m Session -dc Context --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
 
 dotnet ef migrations add adding_sessions --context Context
 

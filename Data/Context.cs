@@ -414,5 +414,7 @@ namespace DM_helper
         public DbSet<DM_helper.Archetypes.CharacterClassArchetype> CharacterClassArchetype { get; set; }
         public DbSet<DM_helper.Archetypes.BackgroundArchetype> BackgroundArchetype { get; set; }
         public DbSet<DM_helper.Archetypes.GenderArchetype> GenderArchetype { get; set; }
+        public DbSet<DM_helper.Models.Encounter> Encounter { get; set; }
+        public DbSet<DM_helper.Models.Session> Session { get; set; }
     }
 }
