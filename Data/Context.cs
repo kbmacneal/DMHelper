@@ -18,7 +18,7 @@ namespace DM_helper
             }
 
             //DEBUG: Turn on higher degree of logging
-            optionsBuilder.EnableSensitiveDataLogging ();
+            // optionsBuilder.EnableSensitiveDataLogging ();
         }
 
         protected override void OnModelCreating (ModelBuilder modelBuilder)
@@ -361,8 +361,18 @@ namespace DM_helper
                     .HasColumnName ("name");
                 entity.Property (e => e.Notes)
                     .HasColumnName ("notes");
-                entity.Property (e => e.Session)
-                    .HasColumnName ("session");
+            });
+
+            modelBuilder.Entity<Session> (entity =>
+            {
+                entity.HasKey (e => e.ID);
+                entity.Property (e => e.ID)
+                    .HasColumnName ("ID")
+                    .ValueGeneratedOnAdd ();
+                entity.Property (e => e.Name)
+                    .HasColumnName ("name");
+                entity.Property (e => e.Notes)
+                    .HasColumnName ("notes");
             });
 
             modelBuilder.Entity<CharacterEncounter> ()

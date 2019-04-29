@@ -15,25 +15,12 @@ using Newtonsoft.Json;
 
 namespace DM_helper.Models
 {
-    public class Encounter
+    public class Session
     {
        public int ID {get;set;}
        public string Name {get;set;}
-       public List<CharacterEncounter> CharacterEncounter {get;set;}
+       public List<Encounter> Encounters {get;set;}
        public string Notes {get;set;}
-       public int SessionID {get;set;}
-       public Session Session {get;set;}
 
-    }
-
-    //join model
-
-    public class CharacterEncounter
-    {
-        public int ID {get;set;}
-        public int EncounterID{get;set;}
-        public Encounter Encounter {get;set;}
-        public int CharacterID {get;set;}
-        public Character Character{get;set;}
     }
 }
