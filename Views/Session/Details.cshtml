@@ -1,7 +1,7 @@
 @model DM_helper.Models.Session
 
 @{
-ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details";
 }
 
 <h1>@Html.DisplayFor(model => model.Name)</h1>
@@ -25,23 +25,18 @@ ViewData["Title"] = "Details";
                 <div class="container-fluid">
                     <div class="d-flex flex-row">
                         <div class="d-flex flex-column">
-                        <a asp-action="Create" asp-controller="Encounter">Create Encounter</a>
-                            @foreach(var e in Model.Encounters)
+                            <a asp-action="Create" asp-controller="Encounter">Create Encounter</a>
+                            @foreach (var e in Model.Encounters)
                             {
-                            <div class="d-flex flex-row">
-                                <div class="d-flex flex-column">
-                                    <u>Names</u>
-                                    @Html.DisplayFor(modelItem => modelItem.Name)
+                                <div class="d-flex flex-row">
+                                    <div class="d-flex flex-column">
+                                        <u>Names</u>
+                                        @Html.DisplayFor(modelItem => modelItem.Name)
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <u>Characters</u>
+                                    </div>
                                 </div>
-                                <div class="d-flex flex-column">
-                                    <u>Characters</u>
-                                @foreach(var c in e.CharacterEncounter.Character)
-                                {
-                                    @c.Character.Name
-                                }
-                                </div>
-                                
-                            </div>
                             }
                         </div>
                     </div>
