@@ -30,11 +30,11 @@
                             {
                                 <div class="d-flex flex-row w-100">
                                     <div class="d-flex flex-column flex-fill">
-                                        Encounters 
+                                        <u>Encounters</u>
                                         <br />
-                                        @Html.DisplayFor(modelItem => modelItem.Name) 
+                                        @Html.DisplayFor(modelItem => modelItem.Name)
                                         <br />
-                                        @Html.ActionLink("Bind Char", "Create", "CharacterEncounter", new { EncounterID = e.ID }, new { Class = "d-flex flex-fill a" })
+                                        @Html.ActionLink("Bind Character", "Create", "CharacterEncounter", new { EncounterID = e.ID }, new { Class = "d-flex flex-fill a" })
                                     </div>
                                     <div class="d-flex flex-column flex-fill">
                                         <u>Characters</u>
@@ -43,8 +43,9 @@
                                             <div class="d-flex flex-row">
                                                 <div class="d-flex flex-column">
                                                     @encounter.Character.Name
+                                                    @Html.ActionLink("Unbind", "Delete", "CharacterEncounter", new { SessionID = Model.ID, EncounterID = encounter.Encounter.ID, CharacterID = encounter.Character.ID }, new { Class = "a" })
                                                 </div>
-                                                <div class="d-flex flex-column">
+                                                <div class="d-flex flex-column p-3">
                                                     @foreach (var w in encounter.Character.Weapon)
                                                     {
                                                         <div class="d-flex flex-row">

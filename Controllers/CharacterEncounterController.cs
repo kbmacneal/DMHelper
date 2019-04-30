@@ -69,9 +69,20 @@ namespace DM_helper.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EncounterID,CharacterID")] CharacterEncounter characterEncounter, int SessionID)
         {
+            var alreadyExist = _context.CharacterEncounter.FirstOrDefault(e => e.CharacterID == characterEncounter.CharacterID && e.EncounterID == characterEncounter.EncounterID);
+
+            if (alreadyExist != null) return Unauthorized();
+
             if (ModelState.IsValid)
             {
-                _context.Add(characterEncounter);
+                var ce = new CharacterEncounter()
+                {
+                    Character = await _context.Character.FindAsync(characterEncounter.CharacterID),
+                    Encounter = await _context.Encounter.FindAsync(characterEncounter.EncounterID)
+                };
+
+                _context.CharacterEncounter.Add(ce);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -135,9 +146,9 @@ namespace DM_helper.Controllers
         }
 
         // GET: CharacterEncounter/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? SessionID, int EncounterID, int CharacterID)
         {
-            if (id == null)
+            if (SessionID == null)
             {
                 return NotFound();
             }
@@ -145,11 +156,13 @@ namespace DM_helper.Controllers
             var characterEncounter = await _context.CharacterEncounter
                 .Include(c => c.Character)
                 .Include(c => c.Encounter)
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.CharacterID == CharacterID && m.EncounterID == EncounterID);
             if (characterEncounter == null)
             {
                 return NotFound();
             }
+
+            ViewBag.SessionID = SessionID;
 
             return View(characterEncounter);
         }
@@ -157,12 +170,12 @@ namespace DM_helper.Controllers
         // POST: CharacterEncounter/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int CharacterEncounterID, int SessionID)
         {
-            var characterEncounter = await _context.CharacterEncounter.FindAsync(id);
+            var characterEncounter = await _context.CharacterEncounter.FindAsync(CharacterEncounterID);
             _context.CharacterEncounter.Remove(characterEncounter);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", "Session", new { id = SessionID });
         }
 
         private bool CharacterEncounterExists(int id)

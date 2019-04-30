@@ -379,20 +379,13 @@ namespace DM_helper
                    .HasColumnName("notes");
            });
 
-            modelBuilder.Entity<CharacterEncounter>()
-                .HasKey(e => e.ID);
-            modelBuilder.Entity<CharacterEncounter>()
-                .Property(e => e.ID)
-                .HasColumnName("ID")
-                .ValueGeneratedOnAdd();
-            modelBuilder.Entity<CharacterEncounter>()
-                .HasOne(e => e.Character)
-                .WithMany(e => e.CharacterEncounter)
-                .HasForeignKey(e => e.ID);
-            modelBuilder.Entity<CharacterEncounter>()
-                .HasOne(e => e.Encounter)
-                .WithMany(e => e.CharacterEncounter)
-                .HasForeignKey(e => e.ID);
+            modelBuilder.Entity<CharacterEncounter>(entity =>
+            {
+                entity.HasKey(e => e.ID);
+                entity.Property(e => e.ID)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+            });
         }
 
         public DbSet<DM_helper.Models.Armor> Armor { get; set; }
