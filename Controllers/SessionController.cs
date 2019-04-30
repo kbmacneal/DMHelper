@@ -27,30 +27,6 @@ namespace DM_helper.Controllers
         }
 
         // GET: Session/Details/5
-        public async Task<IActionResult> Details (int? id)
-        {
-            if (id == null)
-            {
-                return NotFound ();
-            }
-
-            var session = await _context.Session
-                .Include (e => e.Encounters)
-                .ThenInclude (e => e.CharacterEncounter).ThenInclude (e => e.Character).ThenInclude (e => e.Weapon)
-                .Include (e => e.Encounters)
-                .ThenInclude (e => e.CharacterEncounter).ThenInclude (e => e.Character).ThenInclude (e => e.Melee)
-                //.ThenInclude(e => e.Character)
-                //.ThenInclude(e => e.Weapon)
-                .FirstOrDefaultAsync (m => m.ID == id);
-
-            if (session == null)
-            {
-                return NotFound ();
-            }
-
-            return View (session);
-        }
-
         public async Task<IActionResult> Details (int? id, int Result)
         {
             if (id == null)
@@ -71,8 +47,6 @@ namespace DM_helper.Controllers
             {
                 return NotFound ();
             }
-
-            ViewBag.Result = Result;
 
             return View (session);
         }
@@ -179,15 +153,18 @@ namespace DM_helper.Controllers
             return RedirectToAction (nameof (Index));
         }
 
-        public async Task RollDice (int SessionID, int CharacterID, string Roll, string Attribute)
+        public async Task RollDice (int SessionID, int CharacterID, int WeaponID)
         {
             var Session = await _context.Session.FindAsync (SessionID);
             var Character = await _context.Character.FindAsync (CharacterID);
+            var Weapon = await _context.Weapons.FindAsync (WeaponID);
 
-            int stat_bonus = StatMod.mod_from_stat_val ((int) Helpers.GetPropValue (Character, Attribute));
+            if(Weapon.Attribute==null)return;
+
+            int stat_bonus = StatMod.mod_from_stat_val ((int) Helpers.GetPropValue (Character, Weapon.Attribute));
             int atk_bonus = (int) Helpers.GetPropValue (Character, nameof (Character.AtkBonus));
 
-            var baseroll = Classes.RollDice.Roll (Roll);
+            var baseroll = Classes.RollDice.Roll (Weapon.Damage);
 
             await Details (SessionID, baseroll.Sum () + stat_bonus + atk_bonus);
         }
