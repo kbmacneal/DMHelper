@@ -1,6 +1,6 @@
-dotnet aspnet-codegenerator controller -name SessionController -m Session -dc Context --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name CharacterEncounterController -m CharacterEncounter -dc Context --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
 
-dotnet ef migrations add adding_sessions --context Context
+dotnet ef migrations add fixing_val_gen --context Context
 
 dotnet ef database update --context Context
 
