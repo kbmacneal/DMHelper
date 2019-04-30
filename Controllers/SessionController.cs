@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DM_helper;
+using DM_helper.Classes;
+using DM_helper.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DM_helper;
-using DM_helper.Models;
 
 namespace DM_helper.Controllers
 {
@@ -14,46 +15,72 @@ namespace DM_helper.Controllers
     {
         private readonly Context _context;
 
-        public SessionController(Context context)
+        public SessionController (Context context)
         {
             _context = context;
         }
 
         // GET: Session
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index ()
         {
-            return View(await _context.Session.ToListAsync());
+            return View (await _context.Session.ToListAsync ());
         }
 
         // GET: Session/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details (int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound ();
             }
 
             var session = await _context.Session
-            .Include(e => e.Encounters)
-            .ThenInclude(e => e.CharacterEncounter).ThenInclude(e => e.Character).ThenInclude(e => e.Weapon)
-            .Include(e => e.Encounters)
-            .ThenInclude(e => e.CharacterEncounter).ThenInclude(e => e.Character).ThenInclude(e => e.Melee)
-            //.ThenInclude(e => e.Character)
-            //.ThenInclude(e => e.Weapon)
-            .FirstOrDefaultAsync(m => m.ID == id);
+                .Include (e => e.Encounters)
+                .ThenInclude (e => e.CharacterEncounter).ThenInclude (e => e.Character).ThenInclude (e => e.Weapon)
+                .Include (e => e.Encounters)
+                .ThenInclude (e => e.CharacterEncounter).ThenInclude (e => e.Character).ThenInclude (e => e.Melee)
+                //.ThenInclude(e => e.Character)
+                //.ThenInclude(e => e.Weapon)
+                .FirstOrDefaultAsync (m => m.ID == id);
 
             if (session == null)
             {
-                return NotFound();
+                return NotFound ();
             }
 
-            return View(session);
+            return View (session);
+        }
+
+        public async Task<IActionResult> Details (int? id, int Result)
+        {
+            if (id == null)
+            {
+                return NotFound ();
+            }
+
+            var session = await _context.Session
+                .Include (e => e.Encounters)
+                .ThenInclude (e => e.CharacterEncounter).ThenInclude (e => e.Character).ThenInclude (e => e.Weapon)
+                .Include (e => e.Encounters)
+                .ThenInclude (e => e.CharacterEncounter).ThenInclude (e => e.Character).ThenInclude (e => e.Melee)
+                //.ThenInclude(e => e.Character)
+                //.ThenInclude(e => e.Weapon)
+                .FirstOrDefaultAsync (m => m.ID == id);
+
+            if (session == null)
+            {
+                return NotFound ();
+            }
+
+            ViewBag.Result = Result;
+
+            return View (session);
         }
 
         // GET: Session/Create
-        public IActionResult Create()
+        public IActionResult Create ()
         {
-            return View();
+            return View ();
         }
 
         // POST: Session/Create
@@ -61,31 +88,31 @@ namespace DM_helper.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Notes")] Session session)
+        public async Task<IActionResult> Create ([Bind ("ID,Name,Notes")] Session session)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(session);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _context.Add (session);
+                await _context.SaveChangesAsync ();
+                return RedirectToAction (nameof (Index));
             }
-            return View(session);
+            return View (session);
         }
 
         // GET: Session/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit (int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound ();
             }
 
-            var session = await _context.Session.FindAsync(id);
+            var session = await _context.Session.FindAsync (id);
             if (session == null)
             {
-                return NotFound();
+                return NotFound ();
             }
-            return View(session);
+            return View (session);
         }
 
         // POST: Session/Edit/5
@@ -93,68 +120,81 @@ namespace DM_helper.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Notes")] Session session)
+        public async Task<IActionResult> Edit (int id, [Bind ("ID,Name,Notes")] Session session)
         {
             if (id != session.ID)
             {
-                return NotFound();
+                return NotFound ();
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(session);
-                    await _context.SaveChangesAsync();
+                    _context.Update (session);
+                    await _context.SaveChangesAsync ();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SessionExists(session.ID))
+                    if (!SessionExists (session.ID))
                     {
-                        return NotFound();
+                        return NotFound ();
                     }
                     else
                     {
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction (nameof (Index));
             }
-            return View(session);
+            return View (session);
         }
 
         // GET: Session/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete (int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound ();
             }
 
             var session = await _context.Session
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync (m => m.ID == id);
             if (session == null)
             {
-                return NotFound();
+                return NotFound ();
             }
 
-            return View(session);
+            return View (session);
         }
 
         // POST: Session/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName ("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed (int id)
         {
-            var session = await _context.Session.FindAsync(id);
-            _context.Session.Remove(session);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var session = await _context.Session.FindAsync (id);
+            _context.Session.Remove (session);
+            await _context.SaveChangesAsync ();
+            return RedirectToAction (nameof (Index));
         }
 
-        private bool SessionExists(int id)
+        public async Task RollDice (int SessionID, int CharacterID, string Roll, string Attribute)
         {
-            return _context.Session.Any(e => e.ID == id);
+            var Session = await _context.Session.FindAsync (SessionID);
+            var Character = await _context.Character.FindAsync (CharacterID);
+
+            int stat_bonus = StatMod.mod_from_stat_val ((int) Helpers.GetPropValue (Character, Attribute));
+            int atk_bonus = (int) Helpers.GetPropValue (Character, nameof (Character.AtkBonus));
+
+            var baseroll = Classes.RollDice.Roll (Roll);
+
+            await Details (SessionID, baseroll.Sum () + stat_bonus + atk_bonus);
+        }
+
+        private bool SessionExists (int id)
+        {
+            return _context.Session.Any (e => e.ID == id);
         }
     }
 }
