@@ -67,27 +67,36 @@ namespace DM_helper.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EncounterID,CharacterID")] CharacterEncounter characterEncounter, int SessionID)
+        public async Task<IActionResult> Create([Bind("EncounterID,CharacterID")] CharacterEncounter characterEncounter)
         {
             var alreadyExist = _context.CharacterEncounter.FirstOrDefault(e => e.CharacterID == characterEncounter.CharacterID && e.EncounterID == characterEncounter.EncounterID);
 
             if (alreadyExist != null) return Unauthorized();
+
+            int ID;
 
             if (ModelState.IsValid)
             {
                 var ce = new CharacterEncounter()
                 {
                     Character = await _context.Character.FindAsync(characterEncounter.CharacterID),
-                    Encounter = await _context.Encounter.FindAsync(characterEncounter.EncounterID)
+                    Encounter = await _context.Encounter.Include(e=>e.Session).FirstOrDefaultAsync(e=>e.ID == characterEncounter.EncounterID)
                 };
+
+                ID = ce.Encounter.Session.ID;
 
                 _context.CharacterEncounter.Add(ce);
 
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Session", new { id = ID });
+            }
+            else
+            {
+                ID = 0;
+                return NotFound();
             }
 
-            return RedirectToAction("Details", "Session", new { id = SessionID });
+            
         }
 
         // GET: CharacterEncounter/Edit/5

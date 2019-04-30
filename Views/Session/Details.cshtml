@@ -30,11 +30,22 @@
                             {
                                 <div class="d-flex flex-row w-100">
                                     <div class="d-flex flex-column flex-fill">
-                                        <u>Encounters</u>
+                                        <u>Encounters</u> 
                                         <br />
-                                        @Html.DisplayFor(modelItem => modelItem.Name)
-                                        <br />
-                                        @Html.ActionLink("Bind Character", "Create", "CharacterEncounter", new { EncounterID = e.ID }, new { Class = "d-flex flex-fill a" })
+                                        <div class="d-flex flex-row flex-fill">
+                                            @Html.DisplayFor(modelItem => modelItem.Name) | 
+                                        @Html.ActionLink("Bind Character", "Create", "CharacterEncounter", new { EncounterID = e.ID, SessionID=Model.ID }, new { Class = "a" }) |
+                                        @Html.ActionLink("Edit", "Edit", "Encounter", new { id = e.ID }, new { Class = "a" })
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="d-flex flex-column flex-fill">
+                                        <div class="d-flex flex-row">
+                                            <u>Notes</u>
+                                        </div>
+                                        <div class="d-flex flex-row">
+                                            @e.Notes
+                                        </div>
                                     </div>
                                     <div class="d-flex flex-column flex-fill">
                                         <u>Characters</u>

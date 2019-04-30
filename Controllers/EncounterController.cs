@@ -63,7 +63,7 @@ namespace DM_helper.Controllers
             {
                 _context.Add(encounter);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details","Session",new{id = encounter.SessionID});
             }
             ViewData["SessionID"] = new SelectList(_context.Set<Session>(), "ID", "Name", encounter.SessionID);
             return View(encounter);
@@ -77,12 +77,12 @@ namespace DM_helper.Controllers
                 return NotFound();
             }
 
-            var encounter = await _context.Encounter.FindAsync(id);
+            var encounter = await _context.Encounter.Include(e=>e.Session).FirstOrDefaultAsync(e=>e.ID == id);
             if (encounter == null)
             {
                 return NotFound();
             }
-            ViewData["SessionID"] = new SelectList(_context.Set<Session>(), "ID", "ID", encounter.SessionID);
+            ViewData["SessionID"] = new SelectList(_context.Set<Session>(), "ID", "Name", encounter.SessionID);
             return View(encounter);
         }
 
@@ -116,7 +116,7 @@ namespace DM_helper.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details","Session",new{id = encounter.SessionID});
             }
             ViewData["SessionID"] = new SelectList(_context.Set<Session>(), "ID", "ID", encounter.SessionID);
             return View(encounter);
