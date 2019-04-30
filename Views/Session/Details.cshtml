@@ -55,6 +55,14 @@
                                                             @Html.ActionLink("Roll Damage", "RollDamage", "Encounter", new { damage = w.Damage, CharacterID = w.Character.ID, EncounterID = encounter.ID, Attribute = w.Attribute }, new { Class = "btn btn primary" })
                                                         </div>
                                                     }
+                                                    @foreach (var w in encounter.Character.Melee)
+                                                    {
+                                                        <div class="d-flex flex-row">
+                                                            @w.Name |
+                                                            @w.Damage
+                                                            @Html.ActionLink("Roll Damage", "RollDamage", "Encounter", new { damage = w.Damage, CharacterID = w.Character.ID, EncounterID = encounter.ID, Attribute = w.Attribute }, new { Class = "btn btn primary" })
+                                                        </div>
+                                                    }
                                                 </div>
                                             </div>
                                         }

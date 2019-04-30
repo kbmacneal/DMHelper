@@ -34,11 +34,14 @@ namespace DM_helper.Controllers
             }
 
             var session = await _context.Session
-            .Include(e=>e.Encounters)
-                .ThenInclude(e=>e.CharacterEncounter)
-                .ThenInclude(e=>e.Character)
-                .ThenInclude(e=>e.Weapon)
+            .Include(e => e.Encounters)
+            .ThenInclude(e => e.CharacterEncounter).ThenInclude(e => e.Character).ThenInclude(e => e.Weapon)
+            .Include(e => e.Encounters)
+            .ThenInclude(e => e.CharacterEncounter).ThenInclude(e => e.Character).ThenInclude(e => e.Melee)
+            //.ThenInclude(e => e.Character)
+            //.ThenInclude(e => e.Weapon)
             .FirstOrDefaultAsync(m => m.ID == id);
+
             if (session == null)
             {
                 return NotFound();
@@ -54,7 +57,7 @@ namespace DM_helper.Controllers
         }
 
         // POST: Session/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -86,7 +89,7 @@ namespace DM_helper.Controllers
         }
 
         // POST: Session/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
