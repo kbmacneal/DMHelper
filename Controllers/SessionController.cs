@@ -27,7 +27,7 @@ namespace DM_helper.Controllers
         }
 
         // GET: Session/Details/5
-        public async Task<IActionResult> Details (int? id, int Result)
+        public async Task<IActionResult> Details (int? id, List<int> Result)
         {
             if (id == null)
             {
@@ -46,6 +46,17 @@ namespace DM_helper.Controllers
             if (session == null)
             {
                 return NotFound ();
+            }
+
+            if (Result.Count == 0)
+            {
+                ViewBag.Result = 0;
+                ViewBag.ResultDetail = "";
+            }
+            else
+            {
+                ViewBag.Result = Result.Sum ();
+                ViewBag.ResultDetail = String.Join ("+", Result);
             }
 
             return View (session);
@@ -153,25 +164,122 @@ namespace DM_helper.Controllers
             return RedirectToAction (nameof (Index));
         }
 
-        public async Task RollDice (int SessionID, int CharacterID, int WeaponID)
+        public async Task<IActionResult> RollDice (int SessionID, int CharacterID, int WeaponID)
         {
             var Session = await _context.Session.FindAsync (SessionID);
             var Character = await _context.Character.FindAsync (CharacterID);
             var Weapon = await _context.Weapons.FindAsync (WeaponID);
 
-            if(Weapon.Attribute==null)return;
+            if (Weapon == null)
+            {
+                var Melee = await _context.Melee.FindAsync (Convert.ToInt64(WeaponID));
+                if (Melee == null)
+                {
+                    return RedirectToAction ("Details", new { id = SessionID, Result = new List<int> () });
+                }
+                else
+                {
+                    if (Melee.Attribute == null)
+                    {
+                        return RedirectToAction ("Details", new { id = SessionID, Result = new List<int> () });
+                    }
 
-            int stat_bonus = StatMod.mod_from_stat_val ((int) Helpers.GetPropValue (Character, Weapon.Attribute));
-            int atk_bonus = (int) Helpers.GetPropValue (Character, nameof (Character.AtkBonus));
+                    int stat_bonus = StatMod.mod_from_stat_val ((int) Helpers.GetPropValue (Character, Melee.Attribute));
+                    int atk_bonus = (int) Helpers.GetPropValue (Character, nameof (Character.AtkBonus));
 
-            var baseroll = Classes.RollDice.Roll (Weapon.Damage);
+                    var baseroll = Classes.RollDice.Roll (Melee.Damage);
 
-            await Details (SessionID, baseroll.Sum () + stat_bonus + atk_bonus);
+                    List<int> passer = new List<int> ();
+
+                    baseroll.ForEach (e => passer.Add (e));
+                    passer.Add (stat_bonus);
+                    passer.Add (atk_bonus);
+
+                    return RedirectToAction ("Details", new { id = SessionID, Result = passer });
+                }
+            }
+            else
+            {
+                if (Weapon.Attribute == null)
+                {
+                    return RedirectToAction ("Details", new { id = SessionID, Result = new List<int> () });
+                }
+
+                int stat_bonus = StatMod.mod_from_stat_val ((int) Helpers.GetPropValue (Character, Weapon.Attribute));
+                int atk_bonus = (int) Helpers.GetPropValue (Character, nameof (Character.AtkBonus));
+
+                var baseroll = Classes.RollDice.Roll (Weapon.Damage);
+
+                List<int> passer = new List<int> ();
+
+                baseroll.ForEach (e => passer.Add (e));
+                passer.Add (stat_bonus);
+                passer.Add (atk_bonus);
+
+                return RedirectToAction ("Details", new { id = SessionID, Result = passer });
+            }
+
+        }
+
+        public async Task<IActionResult> EditCharacter(int? id, int? SessionID)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var character = await _context.Character.FindAsync(id);
+            if (character == null)
+            {
+                return NotFound();
+            }
+            ViewBag.SessionID = SessionID;
+            return View(character);
+        }
+
+        // POST: Character/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCharacter(int id, [Bind("ID,Name,Faction,Homeworld,CurrentHP,MaxHP,CurrentSystemStrain,MaxSystemStrain,PermanentStrain,CurrentXP,XPTilNextLevel,AC,AtkBonus,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,Credits,Goals,Notes")] Character character, [Bind("SessionID")]int? SessionID)
+        {
+            if (id != character.ID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(character);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CharacterExists(character.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Details", new{id=SessionID});
+            }
+            return View(character);
         }
 
         private bool SessionExists (int id)
         {
             return _context.Session.Any (e => e.ID == id);
+        }
+
+        private bool CharacterExists(int id)
+        {
+            return _context.Character.Any(e => e.ID == id);
         }
     }
 }
