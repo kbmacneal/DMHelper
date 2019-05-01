@@ -30,7 +30,7 @@ namespace DM_helper.Models
         public int Level { get; set; }
         [DisplayName("HP")]
         public int CurrentHP { get; set; }
-        [DisplayName("MaxHP")]
+        [DisplayName("Max HP")]
         public int MaxHP { get; set; }
         [DisplayName("System Strain")]
         public int CurrentSystemStrain { get; set; }
