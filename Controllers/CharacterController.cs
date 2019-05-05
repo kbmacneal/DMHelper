@@ -106,12 +106,6 @@ namespace DM_helper.Controllers
 
             ViewBag.Melee = melees;
 
-            var selectedpsionics = character.Melee.Select(e => e.Archetype.ID);
-
-            var psionics = new MultiSelectList(_context.PsionicSkillArchetypes, "ID", "Name", selectedpsionics);
-
-            ViewBag.SelectedPsionics = selectedpsionics;
-
             return View(characterInterop);
         }
 
@@ -257,28 +251,14 @@ namespace DM_helper.Controllers
             return RedirectToAction("Details", new { ID = charac.ID });
         }
 
-        public async Task<IActionResult> BindPsionics([Bind("ID,SelectedPsionics")] CharacterInterOp character)
+        public async Task<IActionResult> BindPsionics([Bind("ID,PsionicAbilities")] CharacterInterOp character)
         {
             var charac = _context.Character.Include(e => e.PsionicAbilities).ThenInclude(e => e.Archetype).FirstOrDefault(e => e.ID == character.ID);
 
-            if (character.SelectedPsionics != null)
+            foreach (var item in character.PsionicAbilities)
             {
-                foreach (var item in character.SelectedPsionics)
-                {
-                    //apply all the new armor
-                    if (!charac.PsionicAbilities.Select(e => e.Archetype.ID).Contains(item))
-                    {
-                        charac.PsionicAbilities.Add(new PsionicAbility(await _context.PsionicSkillArchetypes.FirstOrDefaultAsync(e => e.ID == item)));
-                    }
-                }
-
-                //remove all the unselected armor
-                charac.PsionicAbilities.Where(e => !character.SelectedPsionics.Contains(Convert.ToInt32(e.Archetype.ID))).ToList().ForEach(e => charac.PsionicAbilities.Remove(e));
+                charac.PsionicAbilities.FirstOrDefault(e => e.ID == item.ID).is_active = item.is_active;
             }
-
-            await _context.SaveChangesAsync();
-
-            await _context.PsionicAbilities.Include(e => e.Character).Where(e => e.Character == null).ForEachAsync(e => _context.PsionicAbilities.Remove(e));
 
             await _context.SaveChangesAsync();
 

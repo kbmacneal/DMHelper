@@ -200,12 +200,16 @@
                                 <input id="Name" type="hidden" asp-for="PsionicAbilities[i].Name">
                                 <input id="ID" type="hidden" asp-for="PsionicAbilities[i].ID">
                                 <div class="container-fluid">
+
                                     <div class="d-flex flex-row">
-                                        <div class="col-4 bold">
+                                        <div class="col-3">
+                                            @Html.CheckBoxFor(e => e.PsionicAbilities[i].is_active)
+                                        </div>
+                                        <div class="col-6 bold">
                                             @Html.Label(Model.PsionicAbilities[i].Name)
                                         </div>
-                                        <div class="col-3 w-50">
-                                            @Html.TextBoxFor(e => e.PsionicAbilities[i].Level, new { Style = "width:20px;" })
+                                        <div class="col-3">
+                                            @Html.Label(Model.PsionicAbilities[i].Name.ToString())
                                         </div>
                                     </div>
                                 </div>

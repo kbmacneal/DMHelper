@@ -14,7 +14,6 @@ namespace DM_helper.InterOp
         public List<int> SelectedEquipment { get; set; }
         public List<int> SelectedWeapon { get; set; }
         public List<int> SelectedMelee { get; set; }
-        public List<int> SelectedPsionics { get; set; }
 
         public CharacterInterOp()
         {
@@ -112,6 +111,8 @@ namespace DM_helper.InterOp
             this.Melee = _context.Melee.Include(e => e.Archetype).Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
             this.Skills = _context.Skills.Include(e => e.Archetype).Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
             this.Weapon = _context.Weapons.Include(e => e.Archetype).Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
+
+            this.PsionicAbilities = _context.PsionicAbilities.Include(e => e.Archetype).Where(e => e.Character.ID == this.ID).OrderBy(e => e.Name).ToList();
         }
     }
 }

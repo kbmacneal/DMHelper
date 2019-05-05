@@ -421,6 +421,8 @@ namespace DM_helper
                 .HasColumnName("name");
                 entity.Property(e => e.Description)
                 .HasColumnName("description");
+                entity.Property(e => e.is_active)
+                .HasColumnName("isactive");
             });
         }
 

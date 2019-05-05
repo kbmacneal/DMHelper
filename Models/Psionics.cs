@@ -18,6 +18,7 @@ namespace DM_helper.Models
         public Character Character { get; set; }
         public int ArchetypeID { get; set; }
         public PsionicSkillArchetype Archetype { get; set; }
+        public Boolean is_active { get; set; }
 
         public PsionicAbility()
         {
