@@ -386,6 +386,31 @@ namespace DM_helper
                     .HasColumnName("ID")
                     .ValueGeneratedOnAdd();
             });
+
+            modelBuilder.Entity<PsionicSchool>(entity =>
+            {
+                entity.HasKey(e => e.ID);
+                entity.Property(e => e.ID)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.Name)
+                    .HasColumnName("name");
+            });
+
+            modelBuilder.Entity<PsionicSkillArchetype>(entity =>
+            {
+                entity.HasKey(e => e.ID);
+                entity.Property(e => e.ID)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.ID)
+                    .HasColumnName("ID");
+                entity.Property(e => e.Level)
+                .HasColumnName("level");
+                entity.Property(e => e.Name)
+                .HasColumnName("name");
+            });
         }
 
         public DbSet<DM_helper.Models.Armor> Armor { get; set; }
@@ -417,5 +442,7 @@ namespace DM_helper
         public DbSet<DM_helper.Models.Encounter> Encounter { get; set; }
         public DbSet<DM_helper.Models.Session> Session { get; set; }
         public DbSet<DM_helper.Models.CharacterEncounter> CharacterEncounter { get; set; }
+        public DbSet<DM_helper.Models.PsionicSchool> PsionicSchools { get; set; }
+        public DbSet<DM_helper.Models.PsionicSkillArchetype> PsionicSkillArchetypes { get; set; }
     }
 }

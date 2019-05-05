@@ -1,9 +1,9 @@
 dotnet aspnet-codegenerator controller -name CharacterEncounterController -m CharacterEncounter -dc Context --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
 
-dotnet ef migrations add fixing_relationships --context Context
+dotnet ef migrations add adding_psi_description --context Context
 
 dotnet ef database update --context Context
 
 dotnet ef migrations remove --context Context
 
-dotnet ef database update addingStats --context Context
+dotnet ef database update fixing_relationships --context Context
