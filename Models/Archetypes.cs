@@ -32,7 +32,6 @@ namespace DM_helper.Archetypes
         public int ID { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
-
     }
 
     public partial class MeleeArchetype
@@ -45,7 +44,6 @@ namespace DM_helper.Archetypes
         public long Cost { get; set; }
         public long Encumbrance { get; set; }
         public long TechLevel { get; set; }
-
     }
 
     public class SkillsArchetype
@@ -68,7 +66,6 @@ namespace DM_helper.Archetypes
         public string Encumbrance { get; set; }
         public string Attribute { get; set; }
         public int TechLevel { get; set; }
-
     }
 
     public class CharacterClassArchetype
@@ -76,15 +73,32 @@ namespace DM_helper.Archetypes
         public int ID { get; set; }
         public string Name { get; set; }
     }
+
     public class BackgroundArchetype
     {
         public int ID { get; set; }
         public string Name { get; set; }
     }
+
     public class GenderArchetype
     {
         public int ID { get; set; }
         public string Name { get; set; }
     }
 
+    public class PsionicSchool
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class PsionicSkillArchetype
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int Level { get; set; } = -1;
+        public int PsionicSchoolID { get; set; }
+        public PsionicSchool PsionicSchool { get; set; }
+    }
 }

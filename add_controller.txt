@@ -1,6 +1,6 @@
 dotnet aspnet-codegenerator controller -name CharacterEncounterController -m CharacterEncounter -dc Context --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
 
-dotnet ef migrations add adding_psi_description --context Context
+dotnet ef migrations add adding_psionics_to_characters --context Context
 
 dotnet ef database update --context Context
 

@@ -33,7 +33,7 @@ namespace DM_helper.Controllers
                 return NotFound();
             }
 
-            var character = await _context.Character.Include(e => e.Equipment).ThenInclude(e => e.Archetype).Include(e => e.Weapon).ThenInclude(e => e.Archetype).Include(e => e.Melee).ThenInclude(e => e.Archetype).Include(e => e.Armor).ThenInclude(e => e.Archetype).Include(e => e.Skills).Include(e => e.Foci)
+            var character = await _context.Character.Include(e => e.Equipment).ThenInclude(e => e.Archetype).Include(e => e.Weapon).ThenInclude(e => e.Archetype).Include(e => e.Melee).ThenInclude(e => e.Archetype).Include(e => e.Armor).ThenInclude(e => e.Archetype).Include(e => e.Skills).Include(e => e.Foci).Include(e => e.PsionicAbilities)
                 .FirstOrDefaultAsync(m => m.ID == id);
 
             if (character == null)
@@ -105,6 +105,12 @@ namespace DM_helper.Controllers
             var melees = new MultiSelectList(_context.MeleeArchetype, "ID", "Name", selectedmelee);
 
             ViewBag.Melee = melees;
+
+            var selectedpsionics = character.Melee.Select(e => e.Archetype.ID);
+
+            var psionics = new MultiSelectList(_context.PsionicSkillArchetypes, "ID", "Name", selectedpsionics);
+
+            ViewBag.SelectedPsionics = selectedpsionics;
 
             return View(characterInterop);
         }
@@ -251,6 +257,34 @@ namespace DM_helper.Controllers
             return RedirectToAction("Details", new { ID = charac.ID });
         }
 
+        public async Task<IActionResult> BindPsionics([Bind("ID,SelectedPsionics")] CharacterInterOp character)
+        {
+            var charac = _context.Character.Include(e => e.PsionicAbilities).ThenInclude(e => e.Archetype).FirstOrDefault(e => e.ID == character.ID);
+
+            if (character.SelectedPsionics != null)
+            {
+                foreach (var item in character.SelectedPsionics)
+                {
+                    //apply all the new armor
+                    if (!charac.PsionicAbilities.Select(e => e.Archetype.ID).Contains(item))
+                    {
+                        charac.PsionicAbilities.Add(new PsionicAbility(await _context.PsionicSkillArchetypes.FirstOrDefaultAsync(e => e.ID == item)));
+                    }
+                }
+
+                //remove all the unselected armor
+                charac.PsionicAbilities.Where(e => !character.SelectedPsionics.Contains(Convert.ToInt32(e.Archetype.ID))).ToList().ForEach(e => charac.PsionicAbilities.Remove(e));
+            }
+
+            await _context.SaveChangesAsync();
+
+            await _context.PsionicAbilities.Include(e => e.Character).Where(e => e.Character == null).ForEachAsync(e => _context.PsionicAbilities.Remove(e));
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { ID = charac.ID });
+        }
+
         // GET: Character/Create
         public IActionResult Create()
         {
@@ -296,6 +330,9 @@ namespace DM_helper.Controllers
 
                 charac.Foci = new List<Foci>();
                 (await _context.FociArchetype.ToListAsync()).ForEach(e => charac.Foci.Add(new Foci(e)));
+
+                charac.PsionicAbilities = new List<PsionicAbility>();
+                (await _context.PsionicSkillArchetypes.Include(e => e.PsionicSchool).ToListAsync()).ForEach(e => charac.PsionicAbilities.Add(new PsionicAbility(e)));
 
                 _context.Add(charac);
 
@@ -386,7 +423,7 @@ namespace DM_helper.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var character = await _context.Character.Include(e => e.Equipment).Include(e => e.Weapon).Include(e => e.Melee).Include(e => e.Armor).Include(e => e.Skills).Include(e => e.Foci).FirstOrDefaultAsync(e => e.ID == id);
+            var character = await _context.Character.Include(e => e.Equipment).Include(e => e.Weapon).Include(e => e.Melee).Include(e => e.Armor).Include(e => e.Skills).Include(e => e.Foci).Include(e => e.PsionicAbilities).FirstOrDefaultAsync(e => e.ID == id);
             // _context.Armor.RemoveRange(_context.Armor.Include(e=>e.Character).Where(e=>e.Character==character).ToArray());
             _context.Character.Remove(character);
             await _context.SaveChangesAsync();
@@ -395,6 +432,7 @@ namespace DM_helper.Controllers
             await _context.Backgrounds.Include(e => e.Character).Where(e => e.Character == null).ForEachAsync(e => _context.Backgrounds.Remove(e));
             await _context.Genders.Include(e => e.Character).Where(e => e.Character == null).ForEachAsync(e => _context.Genders.Remove(e));
             await _context.Foci.Include(e => e.Character).Where(e => e.Character == null).ForEachAsync(e => _context.Foci.Remove(e));
+            await _context.PsionicAbilities.Include(e => e.Character).Where(e => e.Character == null).ForEachAsync(e => _context.PsionicAbilities.Remove(e));
 
             await _context.SaveChangesAsync();
 
