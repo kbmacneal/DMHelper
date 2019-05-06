@@ -30,6 +30,14 @@ ViewData["Title"] = "Details";
         </div>
 
     </div>
+    <div class="d-block mx-auto col-md-6">
+        @using (Html.BeginForm("RollNoCharDice", "Session"))
+        {
+        <input id="SessionID" name="SessionID" value="@Model.ID" hidden />
+        <input id="Roll" name="Roll" />
+        <input type="submit" class="btn btn-primary" value="Roll Dice" />
+        }
+    </div>
 </div>
 <div>
     <div class="container-fluid">

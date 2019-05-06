@@ -11,8 +11,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DM_helper.Controllers
 {
+
     public class SessionController : Controller
     {
+        public class NoCharRoller
+        {
+            public int SessionID { get; set; }
+            public string Roll { get; set; }
+        }
+
         private readonly Context _context;
 
         public SessionController (Context context)
@@ -172,7 +179,7 @@ namespace DM_helper.Controllers
 
             if (Weapon == null)
             {
-                var Melee = await _context.Melee.FindAsync (Convert.ToInt64(WeaponID));
+                var Melee = await _context.Melee.FindAsync (Convert.ToInt64 (WeaponID));
                 if (Melee == null)
                 {
                     return RedirectToAction ("Details", new { id = SessionID, Result = new List<int> () });
@@ -221,20 +228,39 @@ namespace DM_helper.Controllers
 
         }
 
-        public async Task<IActionResult> EditCharacter(int? id, int? SessionID)
+        public async Task<IActionResult> RollNoCharDice ([Bind ("SessionID,Roll")] NoCharRoller roller)
+        {
+            var Session = await _context.Session.FindAsync (roller.SessionID);
+
+            if (roller.Roll == "")
+            {
+                return RedirectToAction ("Details", new { id = roller.SessionID, Result = new List<int> () });
+            }
+
+            var baseroll = Classes.RollDice.Roll (roller.Roll);
+
+            List<int> passer = new List<int> ();
+
+            baseroll.ForEach (e => passer.Add (e));
+
+            return RedirectToAction ("Details", new { id = roller.SessionID, Result = passer });
+
+        }
+
+        public async Task<IActionResult> EditCharacter (int? id, int? SessionID)
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound ();
             }
 
-            var character = await _context.Character.FindAsync(id);
+            var character = await _context.Character.FindAsync (id);
             if (character == null)
             {
-                return NotFound();
+                return NotFound ();
             }
             ViewBag.SessionID = SessionID;
-            return View(character);
+            return View (character);
         }
 
         // POST: Character/Edit/5
@@ -242,34 +268,34 @@ namespace DM_helper.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCharacter(int id, [Bind("ID,Name,Faction,Homeworld,CurrentHP,MaxHP,CurrentSystemStrain,MaxSystemStrain,PermanentStrain,CurrentXP,XPTilNextLevel,AC,AtkBonus,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,Credits,Goals,Notes")] Character character, [Bind("SessionID")]int? SessionID)
+        public async Task<IActionResult> EditCharacter (int id, [Bind ("ID,Name,Faction,Homeworld,CurrentHP,MaxHP,CurrentSystemStrain,MaxSystemStrain,PermanentStrain,CurrentXP,XPTilNextLevel,AC,AtkBonus,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,Credits,Goals,Notes")] Character character, [Bind ("SessionID")] int? SessionID)
         {
             if (id != character.ID)
             {
-                return NotFound();
+                return NotFound ();
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(character);
-                    await _context.SaveChangesAsync();
+                    _context.Update (character);
+                    await _context.SaveChangesAsync ();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CharacterExists(character.ID))
+                    if (!CharacterExists (character.ID))
                     {
-                        return NotFound();
+                        return NotFound ();
                     }
                     else
                     {
                         throw;
                     }
                 }
-                return RedirectToAction("Details", new{id=SessionID});
+                return RedirectToAction ("Details", new { id = SessionID });
             }
-            return View(character);
+            return View (character);
         }
 
         private bool SessionExists (int id)
@@ -277,9 +303,9 @@ namespace DM_helper.Controllers
             return _context.Session.Any (e => e.ID == id);
         }
 
-        private bool CharacterExists(int id)
+        private bool CharacterExists (int id)
         {
-            return _context.Character.Any(e => e.ID == id);
+            return _context.Character.Any (e => e.ID == id);
         }
     }
 }
