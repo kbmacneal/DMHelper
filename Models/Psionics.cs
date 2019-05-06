@@ -31,16 +31,16 @@ namespace DM_helper.Models
             this.Description = arch.Description;
             this.Archetype = arch.Archetype;
             this.PsionicSchool = arch.PsionicSchool;
+            this.is_active = arch.is_active;
         }
 
-        public PsionicAbility(PsionicSkillArchetype arch)
+        public PsionicAbility(PsionicSkillArchetype arch, Context _context)
         {
             this.Name = arch.Name;
             this.Level = arch.Level;
             this.Description = arch.Description;
             this.Archetype = arch;
-            this.PsionicSchool = arch.PsionicSchool;
-            this.PsionicSchoolID = arch.PsionicSchool.ID;
+            this.PsionicSchool = _context.PsionicSchools.Find(arch.PsionicSchoolID);
         }
     }
 }

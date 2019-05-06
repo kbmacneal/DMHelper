@@ -148,7 +148,7 @@ namespace DM_helper.Models
 
         public static async Task CloneCharacterAsync(int ID, Context _context)
         {
-            var character = await _context.Character.AsNoTracking().Include(e => e.Equipment).ThenInclude(e => e.Archetype).Include(e => e.Weapon).ThenInclude(e => e.Archetype).Include(e => e.Melee).ThenInclude(e => e.Archetype).Include(e => e.Armor).ThenInclude(e => e.Archetype).Include(e => e.Skills).ThenInclude(e => e.Archetype).Include(e => e.Foci).ThenInclude(e => e.Archetype).Include(e => e.Class).ThenInclude(e => e.Archetype).Include(e => e.Background).ThenInclude(e => e.Archetype).Include(e => e.Gender).ThenInclude(e => e.Archetype).Include(e => e.PsionicAbilities).ThenInclude(e => e.Archetype)
+            var character = await _context.Character.AsNoTracking().Include(e => e.Equipment).ThenInclude(e => e.Archetype).Include(e => e.Weapon).ThenInclude(e => e.Archetype).Include(e => e.Melee).ThenInclude(e => e.Archetype).Include(e => e.Armor).ThenInclude(e => e.Archetype).Include(e => e.Skills).ThenInclude(e => e.Archetype).Include(e => e.Foci).ThenInclude(e => e.Archetype).Include(e => e.Class).ThenInclude(e => e.Archetype).Include(e => e.Background).ThenInclude(e => e.Archetype).Include(e => e.Gender).ThenInclude(e => e.Archetype).Include(e => e.PsionicAbilities).ThenInclude(e => e.Archetype).Include(e => e.PsionicAbilities).ThenInclude(e => e.PsionicSchool)
                 .FirstOrDefaultAsync(m => m.ID == ID);
 
             var adder = new Character(CharacterInterOp.NoIDClone(character));
@@ -182,7 +182,8 @@ namespace DM_helper.Models
             adder.Foci.ForEach(e => _context.Entry(e).State = EntityState.Added);
 
             adder.PsionicAbilities = new List<PsionicAbility>();
-            character.PsionicAbilities.ForEach(e => adder.PsionicAbilities.Add(new PsionicAbility(e.Archetype)));
+            character.PsionicAbilities.ForEach(e => adder.PsionicAbilities.Add(new PsionicAbility(e.Archetype, _context)));
+            
             adder.PsionicAbilities.ForEach(e => _context.Entry(e).State = EntityState.Added);
 
             await _context.Character.AddAsync(adder);
