@@ -11,275 +11,270 @@
         </div>
     </form>
     <hr>
-
     <div class="container-fluid">
-        <div class="d-flex flex-row flex-wrap">
-            <div class="d-flex flex-column">
-                <div class="d-flex flex-column p-2">
-                    <div class="d-flex flex-column">
-                        <div class="d-flex flex-row ">
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.Name) </b>
-                                @Html.DisplayFor(model => model.Name)
-                            </div>
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.Faction) </b>
-                                @Html.DisplayFor(model => model.Faction)
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row ">
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.Homeworld)</b>
-                                @Html.DisplayFor(model => model.Homeworld)
-                            </div>
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.CurrentHP)</b>
-                                @Html.DisplayFor(model => model.CurrentHP)
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row ">
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.MaxHP)</b>
-                                @Html.DisplayFor(model => model.MaxHP)
-                            </div>
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.CurrentSystemStrain)</b>
-                                @Html.DisplayFor(model => model.CurrentSystemStrain)
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row ">
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.MaxSystemStrain)</b>
-                                @Html.DisplayFor(model => model.MaxSystemStrain)
-                            </div>
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.PermanentStrain)</b>
-                                @Html.DisplayFor(model => model.PermanentStrain)
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row ">
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.CurrentXP)</b>
-                                @Html.DisplayFor(model => model.CurrentXP)
-                            </div>
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.XPTilNextLevel)</b>
-                                @Html.DisplayFor(model => model.XPTilNextLevel)
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row ">
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.BaseAC)</b>
-                                @Html.DisplayFor(model => model.BaseAC)
-                            </div>
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.AtkBonus)</b>
-                                @Html.DisplayFor(model => model.AtkBonus)
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row ">
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.Strength)</b>
-                                @Html.DisplayFor(model => model.Strength)
-                            </div>
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.Dexterity)</b>
-                                @Html.DisplayFor(model => model.Dexterity)
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row ">
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.Constitution)</b>
-                                @Html.DisplayFor(model => model.Constitution)
-                            </div>
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.Intelligence)</b>
-                                @Html.DisplayFor(model => model.Intelligence)
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row ">
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.Wisdom)</b>
-                                @Html.DisplayFor(model => model.Wisdom)
-                            </div>
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.Charisma)</b>
-                                @Html.DisplayFor(model => model.Charisma)
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row ">
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.Credits)</b>
-                                @Html.DisplayFor(model => model.Credits)
-                            </div>
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.Goals)</b>
-                                @Html.DisplayFor(model => model.Goals)
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row ">
-                            <div class="d-flex flex-column col-6">
-                                <b>@Html.DisplayNameFor(model => model.Notes)</b>
-                                @Html.DisplayFor(model => model.Notes)
-                            </div>
-                            <div class="d-flex flex-column col-6"></div>
-                        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="d-flex flex-row ">
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.Name) </b>
+                        @Html.DisplayFor(model => model.Name)
                     </div>
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.Faction) </b>
+                        @Html.DisplayFor(model => model.Faction)
+                    </div>
+                </div>
+                <div class="d-flex flex-row ">
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.Homeworld)</b>
+                        @Html.DisplayFor(model => model.Homeworld)
+                    </div>
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.CurrentHP)</b>
+                        @Html.DisplayFor(model => model.CurrentHP)
+                    </div>
+                </div>
+                <div class="d-flex flex-row ">
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.MaxHP)</b>
+                        @Html.DisplayFor(model => model.MaxHP)
+                    </div>
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.CurrentSystemStrain)</b>
+                        @Html.DisplayFor(model => model.CurrentSystemStrain)
+                    </div>
+                </div>
+                <div class="d-flex flex-row ">
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.MaxSystemStrain)</b>
+                        @Html.DisplayFor(model => model.MaxSystemStrain)
+                    </div>
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.PermanentStrain)</b>
+                        @Html.DisplayFor(model => model.PermanentStrain)
+                    </div>
+                </div>
+                <div class="d-flex flex-row ">
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.CurrentXP)</b>
+                        @Html.DisplayFor(model => model.CurrentXP)
+                    </div>
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.XPTilNextLevel)</b>
+                        @Html.DisplayFor(model => model.XPTilNextLevel)
+                    </div>
+                </div>
+                <div class="d-flex flex-row ">
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.BaseAC)</b>
+                        @Html.DisplayFor(model => model.BaseAC)
+                    </div>
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.AtkBonus)</b>
+                        @Html.DisplayFor(model => model.AtkBonus)
+                    </div>
+                </div>
+                <div class="d-flex flex-row ">
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.Strength)</b>
+                        @Html.DisplayFor(model => model.Strength)
+                    </div>
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.Dexterity)</b>
+                        @Html.DisplayFor(model => model.Dexterity)
+                    </div>
+                </div>
+                <div class="d-flex flex-row ">
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.Constitution)</b>
+                        @Html.DisplayFor(model => model.Constitution)
+                    </div>
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.Intelligence)</b>
+                        @Html.DisplayFor(model => model.Intelligence)
+                    </div>
+                </div>
+                <div class="d-flex flex-row ">
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.Wisdom)</b>
+                        @Html.DisplayFor(model => model.Wisdom)
+                    </div>
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.Charisma)</b>
+                        @Html.DisplayFor(model => model.Charisma)
+                    </div>
+                </div>
+                <div class="d-flex flex-row ">
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.Credits)</b>
+                        @Html.DisplayFor(model => model.Credits)
+                    </div>
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.Goals)</b>
+                        @Html.DisplayFor(model => model.Goals)
+                    </div>
+                </div>
+                <div class="d-flex flex-row ">
+                    <div class="d-flex flex-column col-6">
+                        <b>@Html.DisplayNameFor(model => model.Notes)</b>
+                        @Html.DisplayFor(model => model.Notes)
+                    </div>
+                    <div class="d-flex flex-column col-6"></div>
                 </div>
             </div>
-            <div class="d-flex flex-column">
-                <div class="d-flex flex-row w-100 flex-wrap">
-                    <div class="d-flex flex-column p-2">
-                        <form asp-action="BindSkills">
-                            <input id="ID" type="hidden" asp-for="ID">
+            <div class="col-md-6">
+                <form asp-action="BindSkills">
+                    <input id="ID" type="hidden" asp-for="ID">
+                    <div class="d-flex flex-row">
+                        <div class="col-6 bold text-center">
+                            <u>Name</u>
+                        </div>
+                        <div class="col-3 bold text-center">
+                            <u>Level</u>
+                        </div>
+                        <div class="col-3 bold text-center">
+                            <u>Specialist</u>
+                        </div>
+                    </div>
+                    @for (int i = 0; i < Model.Skills.Count; i++) { <input id="Name" type="hidden"
+                        asp-for="Skills[i].Name">
+                        <input id="ID" type="hidden" asp-for="Skills[i].ID">
+                        <div class="container-fluid">
+
                             <div class="d-flex flex-row">
-                                <div class="col-6 bold text-center">
-                                    <u>Name</u>
+                                <div class="col-6 bold">
+                                    @Html.Label(Model.Skills[i].Name)
                                 </div>
-                                <div class="col-3 bold text-center">
-                                    <u>Level</u>
+                                <div class="col-3">
+                                    @Html.TextBoxFor(e => e.Skills[i].Level, new { Style = "width:20px;" })
                                 </div>
-                                <div class="col-3 bold text-center">
-                                    <u>Specialist</u>
+                                <div class="col-3">
+                                    @Html.TextBoxFor(e => e.Skills[i].Specialist, new { Style = "width:20px;" })
                                 </div>
                             </div>
-                            @for (int i = 0; i < Model.Skills.Count; i++)
-                            {
-                                <input id="Name" type="hidden" asp-for="Skills[i].Name">
-                                <input id="ID" type="hidden" asp-for="Skills[i].ID">
-                                <div class="container-fluid">
-
-                                    <div class="d-flex flex-row">
-                                        <div class="col-6 bold">
-                                            @Html.Label(Model.Skills[i].Name)
-                                        </div>
-                                        <div class="col-3">
-                                            @Html.TextBoxFor(e => e.Skills[i].Level, new { Style = "width:20px;" })
-                                        </div>
-                                        <div class="col-3">
-                                            @Html.TextBoxFor(e => e.Skills[i].Specialist, new { Style = "width:20px;" })
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                            <div class="form-group">
-                                <input type="submit" value="Bind Skills" class="btn btn-primary" />
-                            </div>
-                        </form>
-                    </div>
-                    <div class="d-flex flex-column p-2">
-                        <form asp-action="BindFoci">
-                            <input id="ID" type="hidden" asp-for="ID">
-
-                            @for (int i = 0; i < Model.Foci.Count; i++)
-                            {
-                                <input id="Name" type="hidden" asp-for="Foci[i].Name">
-                                <input id="ID" type="hidden" asp-for="Foci[i].ID">
-                                <div class="container-fluid">
-                                    <div class="d-flex flex-row">
-                                        <div class="col-4 bold">
-                                            @Html.Label(Model.Foci[i].Name)
-                                        </div>
-                                        <div class="col-3 w-50">
-                                            @Html.TextBoxFor(e => e.Foci[i].Level, new { Style = "width:20px;" })
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                            <div class="form-group">
-                                <input type="submit" value="Bind Foci" class="btn btn-primary" />
-                            </div>
-                        </form>
-                    </div>
-                    <div class="d-flex flex-column p-2">
-                        <form asp-action="BindPsionics">
-                            <input id="ID" type="hidden" asp-for="ID">
-
-                            @for (int i = 0; i < Model.PsionicAbilities.Count; i++)
-                            {
-                                <input id="Name" type="hidden" asp-for="PsionicAbilities[i].Name">
-                                <input id="ID" type="hidden" asp-for="PsionicAbilities[i].ID">
-                                <div class="container-fluid">
-
-                                    <div class="d-flex flex-row">
-                                        <div class="col-3">
-                                            @Html.CheckBoxFor(e => e.PsionicAbilities[i].is_active)
-                                        </div>
-                                        <div class="col-6 bold">
-                                            @Html.Label(Model.PsionicAbilities[i].Name)
-                                        </div>
-                                        <div class="col-3">
-                                            @Html.Label(Model.PsionicAbilities[i].Name.ToString())
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                            <div class="form-group">
-                                <input type="submit" value="Bind Psionics" class="btn btn-primary" />
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                        </div>
+                        }
+                        <div class="form-group">
+                            <input type="submit" value="Bind Skills" class="btn btn-primary" />
+                        </div>
+                </form>
             </div>
         </div>
-        <div class="d-flex flex-row flex-wrap">
-            <div class="d-flex flex-column">
-                <div class="d-flex flex-column p-2">
-                    <div class="d-flex flex-row w-100">
-                        <form asp-action="BindArmor">
-                            <input id="ID" type="hidden" asp-for="ID">
-                            <div class="form-group">
-                                <label>Armor</label>
-                                <select id="SelectedArmor" class="form-control" multiple="multiple" asp-items="ViewBag.Armors" asp-for="SelectedArmor"></select>
+        <div class="row">
+            <div class="col-md-3">
+                <form asp-action="BindFoci">
+                    <input id="ID" type="hidden" asp-for="ID">
+
+                    @for (int i = 0; i < Model.Foci.Count; i++) { <input id="Name" type="hidden" asp-for="Foci[i].Name">
+                        <input id="ID" type="hidden" asp-for="Foci[i].ID">
+                        <div class="container-fluid">
+                            <div class="d-flex flex-row">
+                                <div class="col-4 bold">
+                                    @Html.Label(Model.Foci[i].Name)
+                                </div>
+                                <div class="col-3 w-50">
+                                    @Html.TextBoxFor(e => e.Foci[i].Level, new { Style = "width:20px;" })
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="submit" value="Bind Armor" class="btn btn-primary" />
-                            </div>
-                        </form>
-                    </div>
-                    <div class="d-flex flex-row w-100">
-                        <form asp-action="BindEquipment">
-                            <input id="ID" type="hidden" asp-for="ID">
-                            <div class="form-group">
-                                <label>Equipment | Tech Level</label>
-                                <select id="SelectedEquipment" class="form-control" multiple="multiple" asp-items="ViewBag.Equipment" asp-for="SelectedEquipment"></select>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Bind Equipment" class="btn btn-primary" />
-                            </div>
-                        </form>
-                    </div>
-                    <div class="d-flex flex-row w-100">
-                    </div>
-                </div>
+                        </div>
+                        }
+                        <div class="form-group">
+                            <input type="submit" value="Bind Foci" class="btn btn-primary" />
+                        </div>
+                </form>
             </div>
-            <div class="d-flex flex-column">
-                <div class="d-flex flex-column p-2">
-                    <div class="d-flex flex-row w-100">
-                        <form asp-action="BindWeapon">
-                            <input id="ID" type="hidden" asp-for="ID">
-                            <div class="form-group">
-                                <label>Ranged Weapons</label>
-                                <select id="SelectedWeapon" class="form-control" multiple="multiple" asp-items="ViewBag.Weapons" asp-for="SelectedWeapon"></select>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Bind Ranged Weapons" class="btn btn-primary" />
-                            </div>
-                        </form>
+            <div class="col-md-9">
+                <form asp-action="BindPsionics">
+                    <input id="ID" type="hidden" asp-for="ID">
+                    <div class="d-flex flex-row">
+                        <div class="col-3">
+                            <u>Active</u>
+                        </div>
+                        <div class="col-6">
+                            <u>Name</u>
+                        </div>
+                        <div class="col-3">
+                            <u>Level</u>
+                        </div>
                     </div>
-                    <div class="d-flex flex-row w-100">
-                        <form asp-action="BindMelee">
-                            <input id="ID" type="hidden" asp-for="ID">
-                            <div class="form-group">
-                                <label>Melee Weapons</label>
-                                <select id="SelectedMelee" class="form-control" multiple="multiple" asp-items="ViewBag.Melee" asp-for="SelectedMelee"></select>
+                    @for (int i = 0; i < Model.PsionicAbilities.Count; i++) { <input id="Name" type="hidden"
+                        asp-for="PsionicAbilities[i].Name">
+                        <input id="ID" type="hidden" asp-for="PsionicAbilities[i].ID">
+                        <div class="container-fluid">
+
+                            <div class="d-flex flex-row">
+                                <div class="col-3">
+                                    @Html.CheckBoxFor(e => e.PsionicAbilities[i].is_active)
+                                </div>
+                                <div class="col-6 bold">
+                                    @Html.Label(Model.PsionicAbilities[i].Name)
+                                </div>
+                                <div class="col-3">
+                                    @Html.Label(Model.PsionicAbilities[i].Level.ToString())
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="submit" value="Bind Melee Weapons" class="btn btn-primary" />
-                            </div>
-                        </form>
+                        </div>
+                        }
+                        <div class="form-group">
+                            <input type="submit" value="Bind Psionics" class="btn btn-primary" />
+                        </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form asp-action="BindArmor">
+                    <input id="ID" type="hidden" asp-for="ID">
+                    <div class="form-group">
+                        <label>Armor</label>
+                        <select id="SelectedArmor" class="form-control" multiple="multiple" asp-items="ViewBag.Armors"
+                            asp-for="SelectedArmor"></select>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <input type="submit" value="Bind Armor" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form asp-action="BindEquipment">
+                    <input id="ID" type="hidden" asp-for="ID">
+                    <div class="form-group">
+                        <label>Equipment | Tech Level</label>
+                        <select id="SelectedEquipment" class="form-control" multiple="multiple"
+                            asp-items="ViewBag.Equipment" asp-for="SelectedEquipment"></select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Bind Equipment" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form asp-action="BindWeapon">
+                    <input id="ID" type="hidden" asp-for="ID">
+                    <div class="form-group">
+                        <label>Ranged Weapons</label>
+                        <select id="SelectedWeapon" class="form-control" multiple="multiple" asp-items="ViewBag.Weapons"
+                            asp-for="SelectedWeapon"></select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Bind Ranged Weapons" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form asp-action="BindMelee">
+                    <input id="ID" type="hidden" asp-for="ID">
+                    <div class="form-group">
+                        <label>Melee Weapons</label>
+                        <select id="SelectedMelee" class="form-control" multiple="multiple" asp-items="ViewBag.Melee"
+                            asp-for="SelectedMelee"></select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Bind Melee Weapons" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
         </div>
     </div>
