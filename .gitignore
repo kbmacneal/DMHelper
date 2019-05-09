@@ -330,3 +330,4 @@ app.db
 privatechurch.json
 emperor_private.json
 church.db
+/dmhelper.db
