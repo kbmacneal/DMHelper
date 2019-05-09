@@ -7,3 +7,5 @@ dotnet ef database update --context Context
 dotnet ef migrations remove --context Context
 
 dotnet ef database update fixing_relationships --context Context
+
+dotnet publish --self-contained=yes -r ubuntu.18.04-x64 -o publish
