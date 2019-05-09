@@ -4,7 +4,6 @@ using DM_helper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DM_helper.Migrations
 {
@@ -15,9 +14,7 @@ namespace DM_helper.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2l.2.0-rtm-35687")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("ProductVersion", "2l.2.0-rtm-35687");
 
             modelBuilder.Entity("DM_helper.Archetypes.ArmorArchetype", b =>
                 {

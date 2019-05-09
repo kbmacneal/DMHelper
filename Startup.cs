@@ -17,6 +17,11 @@ namespace DM_helper
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            using (var context = new Context())
+            {
+                context.Database.EnsureCreated();
+            }
         }
 
         public IConfiguration Configuration { get; }
@@ -31,10 +36,7 @@ namespace DM_helper
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddEntityFrameworkNpgsql()
-            .AddDbContext<Context>()
-            .BuildServiceProvider();
-
+            services.AddEntityFrameworkSqlite().AddDbContext<Context>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -52,7 +54,7 @@ namespace DM_helper
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
+
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

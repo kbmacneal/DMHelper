@@ -18,7 +18,7 @@ namespace DM_helper
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql(Program.conn);
+                optionsBuilder.UseSqlite("Data Source=dmhelper.db");
             }
 
             //DEBUG: Turn on higher degree of logging
