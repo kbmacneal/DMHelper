@@ -12,18 +12,15 @@ namespace DM_helper
 {
     public class Program
     {
+        public static Random rand { get; set; } = new Random();
 
-        public static Random rand{get;set;} = new Random();
-
-        public static string conn {get;set;} = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string,string>>(File.ReadAllText("dm_helper.json"))["connection_string"];
-        
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder (args).UseUrls("http://localhost:4999")
+            WebHost.CreateDefaultBuilder(args).UseUrls("http://localhost:4999")
                 .UseStartup<Startup>();
     }
 }
