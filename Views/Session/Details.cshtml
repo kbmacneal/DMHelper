@@ -50,8 +50,8 @@ ViewData["Title"] = "Details";
         <div class="d-flex flex-row flex-wrap">
             @foreach (var e in Model.Encounters)
             {
-            <div class="d-block mx-auto col-md-6">
-                <div class="d-block mx-auto card">
+            <div class="row w-100">
+                <div class="d-block mx-auto card w-75">
                     <div class="card-body">
                         <h5 class="card-title">@e.Name</h5>
                         <p class="card-text">@Html.ActionLink("Bind Character", "Create", "CharacterEncounter", new {
@@ -59,6 +59,10 @@ ViewData["Title"] = "Details";
                         <p class="card-text">@Html.ActionLink("Edit", "Edit", "Encounter", new { id = e.ID }, new {
                             Class =
                             "a" })</p>
+                            @Html.ActionLink("Delete", "Delete", "Encounter", new { id = e.ID }, new {
+                                Class =
+                                "a" })
+                                <p><u>Notes</u></p>
                         <p class="card-text">@e.Notes</p>
                     </div>
                 </div>

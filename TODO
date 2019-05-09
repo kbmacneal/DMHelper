@@ -1,6 +1,5 @@
 LIST:
 
-dice 
-goals
-psychic school
-psychic ability
+goals as textarea
+find a less terrible place for session notes
+make the character creation grid flex instead of static
