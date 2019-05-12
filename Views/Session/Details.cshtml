@@ -5,13 +5,13 @@ ViewData["Title"] = "Details";
 }
 
 <div class="container-fluid">
-    <div class="d-flex flex-row">
-        <div class="d-flex flex-column flex-fill">
+    <div class="row w-100">
+        <div class="col-md-6">
             <h1>@Html.DisplayFor(model => model.Name)</h1>
-            <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
+            <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
             <a asp-action="Index">Back to List</a>
         </div>
-        <div class="d-flex flex-column">
+        <div class="col-md-6">
             <p>@Html.DisplayNameFor(model => model.Notes)</p>
             @Html.DisplayFor(model => model.Notes)
         </div>
