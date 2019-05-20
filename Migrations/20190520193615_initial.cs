@@ -441,7 +441,7 @@ namespace DM_helper.Migrations
                     name = table.Column<string>(nullable: true),
                     notes = table.Column<string>(nullable: true),
                     SessionID = table.Column<int>(nullable: false),
-                    Initiative = table.Column<string>(nullable: true)
+                    initiative = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

@@ -365,6 +365,8 @@ namespace DM_helper
                    .HasColumnName("name");
                entity.Property(e => e.Notes)
                    .HasColumnName("notes");
+               entity.Property(e => e.Initiative)
+                   .HasColumnName("initiative");
            });
 
             modelBuilder.Entity<Session>(entity =>

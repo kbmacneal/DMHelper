@@ -35,14 +35,14 @@ INSERT INTO `WeaponArchetype` (ID,name,damage,range,cost,magazine,encumbrance,at
  (23,'Shear Rifle','2d8','100/300','600','10','2','Dexterity',5),
  (24,'Thunder Gun','2d10','100/300','1,000','6','2','Dexterity',5),
  (25,'Distortion Cannon','2d12','100/300','1,250','6','2','Dexterity',5),
- (26,'Heavy Machine Gun','3d6','500/2,000','5,000','10','3',NULL,3),
- (27,'Rocket Launcher','3d10','2,000/4,000','4,000','1','2',NULL,3),
- (28,'Demo Charge','3d10','20/40','250','None','1',NULL,3),
- (29,'Railgun','3d8','4,000/8,000','8,000','20','10000',NULL,4),
- (30,'Anti-Vehicle Laser','3d10','2,000/4,000','10,000','15','10000',NULL,4),
- (31,'Hydra Array','3d6','4,000/8,000','20,000','10','10000',NULL,4),
- (32,'Wheatcutter Belt','2d12','10/20','10,000','5','10000',NULL,4),
- (33,'Vortex Cannon','5d12','1,000/2,000','75,000','5','10000',NULL,5);
+ (26,'Heavy Machine Gun','3d6','500/2,000','5,000','10','3','Strength',3),
+ (27,'Rocket Launcher','3d10','2,000/4,000','4,000','1','2','Strength',3),
+ (28,'Demo Charge','3d10','20/40','250','None','1','Strength',3),
+ (29,'Railgun','3d8','4,000/8,000','8,000','20','10000','Strength',4),
+ (30,'Anti-Vehicle Laser','3d10','2,000/4,000','10,000','15','10000','Strength',4),
+ (31,'Hydra Array','3d6','4,000/8,000','20,000','10','10000','Strength',4),
+ (32,'Wheatcutter Belt','2d12','10/20','10,000','5','10000','Strength',4),
+ (33,'Vortex Cannon','5d12','1,000/2,000','75,000','5','10000','Strength',5);
 CREATE TABLE IF NOT EXISTS `SkillsArchetype` (
 	`ID`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`name`	TEXT,

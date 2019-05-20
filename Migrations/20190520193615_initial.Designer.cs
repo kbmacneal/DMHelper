@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DM_helper.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190520182755_initial")]
+    [Migration("20190520193615_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -455,7 +455,8 @@ namespace DM_helper.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID");
 
-                    b.Property<string>("Initiative");
+                    b.Property<string>("Initiative")
+                        .HasColumnName("initiative");
 
                     b.Property<string>("Name")
                         .HasColumnName("name");

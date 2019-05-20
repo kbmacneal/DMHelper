@@ -5,9 +5,9 @@
     <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!-- <ItemGroup>
     <None Include="dmhelper.db" CopyToOutputDirectory="Always" />
-  </ItemGroup>
+  </ItemGroup> -->
 
 
   <ItemGroup>

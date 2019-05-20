@@ -453,7 +453,8 @@ namespace DM_helper.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID");
 
-                    b.Property<string>("Initiative");
+                    b.Property<string>("Initiative")
+                        .HasColumnName("initiative");
 
                     b.Property<string>("Name")
                         .HasColumnName("name");
