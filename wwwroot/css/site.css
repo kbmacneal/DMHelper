@@ -58,3 +58,7 @@ body {
 .bold {
   font-weight: bold;
 }
+
+.form-group {
+  margin: 1rem;
+}
