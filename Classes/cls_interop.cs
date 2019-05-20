@@ -22,6 +22,7 @@ namespace DM_helper.InterOp
         public static CharacterInterOp NoIDClone(Character character)
         {
             var interop = new CharacterInterOp();
+            interop.Level = character.Level;
             interop.Name = character.Name;
             interop.Faction = character.Faction;
             interop.Homeworld = character.Homeworld;
@@ -50,6 +51,7 @@ namespace DM_helper.InterOp
         public CharacterInterOp(Character character)
         {
             this.ID = character.ID;
+            this.Level = character.Level;
             this.Name = character.Name;
             this.Faction = character.Faction;
             this.Homeworld = character.Homeworld;
@@ -76,6 +78,7 @@ namespace DM_helper.InterOp
         public CharacterInterOp(Character character, Context _context)
         {
             this.ID = character.ID;
+            this.Level = character.Level;
             this.Name = character.Name;
             this.Faction = character.Faction;
             this.Homeworld = character.Homeworld;

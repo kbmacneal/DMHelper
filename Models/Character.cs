@@ -124,6 +124,7 @@ namespace DM_helper.Models
         public Character(CharacterInterOp character)
         {
             this.Name = character.Name;
+            this.Level = character.Level;
             this.Faction = character.Faction;
             this.Homeworld = character.Homeworld;
             this.CurrentHP = character.CurrentHP;
