@@ -91,7 +91,7 @@ namespace DM_helper.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Notes,SessionID")] Encounter encounter)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Initiative,Notes,SessionID")] Encounter encounter)
         {
             if (id != encounter.ID)
             {
