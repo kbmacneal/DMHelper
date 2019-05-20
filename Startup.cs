@@ -17,11 +17,6 @@ namespace DM_helper
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
-            using (var context = new Context())
-            {
-                context.Database.EnsureCreated();
-            }
         }
 
         public IConfiguration Configuration { get; }
