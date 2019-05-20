@@ -1,0 +1,34 @@
+ID,name,damage,range,cost,magazine,encumbrance,attribute,techlevel
+1,Primitive Bow,1d6,50/75,15,1,2,Dexterity,1
+2,Advanced Bow,1d6,100/150,50,1,2,Dexterity,3
+3,Conversion Bow,1d8,150/300,500,1,2,Dexterity,4
+4,Grenade,2d6,10/30,25,0,1,Dexterity,3
+5,Crude Pistol,1d6,5/15,20,1,1,Dexterity,2
+6,Musket,1d12,25/50,30,1,2,Dexterity,2
+7,Revolver,1d8,30/100,50,6,1,Dexterity,2
+8,Rifle,1d10+2,200/400,75,6,2,Dexterity,2
+9,Shotgun,3d4,10/30,50,2,2,Dexterity,2
+10,Semi-Auto Pistol,1d6+1,30/100,75,12,1,Dexterity,3
+11,Submachine Gun,1d8,30/100,200,20,1,Dexterity,3
+12,Combat Rifle,1d12,100/300,300,30,2,Dexterity,3
+13,Combat Shotgun,3d4,10/30,300,12,2,Dexterity,3
+14,Sniper Rifle,2d8,"1,000/2,000",400,1,2,Dexterity,3
+15,Void Carbine,2d6,100/300,400,10,2,Dexterity,4
+16,Mag Pistol,2d6+2,100/300,400,6,1,Dexterity,4
+17,Mag Rifle,2d8+2,300/600,500,10,2,Dexterity,4
+18,Spike Thrower,3d8,20/40,600,15,2,Dexterity,4
+19,Laser Pistol,1d6,100/300,200,10,1,Dexterity,4
+20,Laser Rifle,1d10,300/500,300,20,2,Dexterity,4
+21,Thermal Pistol,2d6,25/50,300,5,1,Dexterity,4
+22,Plasma Projector,2d8,50/100,400,6,2,Dexterity,4
+23,Shear Rifle,2d8,100/300,600,10,2,Dexterity,5
+24,Thunder Gun,2d10,100/300,"1,000",6,2,Dexterity,5
+25,Distortion Cannon,2d12,100/300,"1,250",6,2,Dexterity,5
+26,Heavy Machine Gun,3d6,"500/2,000","5,000",10,3,,3
+27,Rocket Launcher,3d10,"2,000/4,000","4,000",1,2,,3
+28,Demo Charge,3d10,20/40,250,None,1,,3
+29,Railgun,3d8,"4,000/8,000","8,000",20,10000,,4
+30,Anti-Vehicle Laser,3d10,"2,000/4,000","10,000",15,10000,,4
+31,Hydra Array,3d6,"4,000/8,000","20,000",10,10000,,4
+32,Wheatcutter Belt,2d12,10/20,"10,000",5,10000,,4
+33,Vortex Cannon,5d12,"1,000/2,000","75,000",5,10000,,5

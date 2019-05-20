@@ -1,0 +1,12 @@
+name,seq
+ArmorArchetype,18
+BackgroundArchetype,20
+CharacterClassArchetype,4
+EquipmentArchetype,64
+FociArchetype,25
+GenderArchetype,3
+MeleeArchetype,9
+PsionicSkillArchetypes,139
+SkillsArchetype,18
+WeaponArchetype,33
+PsionicSchools,6

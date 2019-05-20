@@ -23,6 +23,7 @@ namespace DM_helper.Models
        public string Notes {get;set;}
        public int SessionID {get;set;}
        public Session Session {get;set;}
+       public string Initiative {get;set;}
 
     }
 

@@ -440,7 +440,8 @@ namespace DM_helper.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     name = table.Column<string>(nullable: true),
                     notes = table.Column<string>(nullable: true),
-                    SessionID = table.Column<int>(nullable: false)
+                    SessionID = table.Column<int>(nullable: false),
+                    Initiative = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
