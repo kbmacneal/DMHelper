@@ -157,6 +157,7 @@ namespace DM_helper.Models
             adder.Class = new CharacterClass(character.Class);
             adder.Background = new Background(character.Background);
             adder.Gender = new Gender(character.Gender);
+            adder.BaseAC = character.BaseAC;
 
             adder.Armor = new List<Armor>();
             character.Armor.ForEach(e => adder.Armor.Add(new Armor(e.Archetype)));

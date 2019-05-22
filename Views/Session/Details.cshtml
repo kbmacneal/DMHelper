@@ -1,5 +1,5 @@
 @model DM_helper.Models.Session
-
+@using System.Linq
 @{
 ViewData["Title"] = "Details";
 }
@@ -82,6 +82,23 @@ ViewData["Title"] = "Details";
                             <div class="card-body">
                                 <h5 class="card-title">@encounter.Character.Name</h5>
                                 <p class="card-text">@encounter.Character.CurrentHP HP</p>
+                                <p class="card-text">
+                                @if(encounter.Character.Armor.Count() > 0)
+                                {
+                                    @if(encounter.Character.Armor.Select(x=>x.AC).Max() > encounter.Character.BaseAC)
+                                    {
+                                        <p>@encounter.Character.Armor.Select(x=>x.AC).Max().ToString() AC</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@encounter.Character.BaseAC.ToString() AC</p>
+                                    } 
+                                }
+                                else
+                                {
+                                    <p>@encounter.Character.BaseAC.ToString() AC</p>
+                                }
+                                </p>
                                 <p class="card-text">@Html.ActionLink("Edit", "EditCharacter", "Session", new { id =
                                     encounter.Character.ID, SessionID = Model.ID }, new { Class = "a" })</p>
                                 <p class="card-text">@Html.ActionLink("Unbind", "Delete", "CharacterEncounter", new {

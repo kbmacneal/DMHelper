@@ -43,9 +43,17 @@ namespace DM_helper.Controllers
 
             var session = await _context.Session
                 .Include (e => e.Encounters)
-                .ThenInclude (e => e.CharacterEncounter).ThenInclude (e => e.Character).ThenInclude (e => e.Weapon)
+                    .ThenInclude (e => e.CharacterEncounter)
+                        .ThenInclude (e => e.Character)
+                        .ThenInclude (e => e.Weapon)
                 .Include (e => e.Encounters)
-                .ThenInclude (e => e.CharacterEncounter).ThenInclude (e => e.Character).ThenInclude (e => e.Melee)
+                    .ThenInclude (e => e.CharacterEncounter)
+                        .ThenInclude (e => e.Character)
+                        .ThenInclude (e => e.Melee)
+                .Include (e => e.Encounters)
+                    .ThenInclude (e => e.CharacterEncounter)
+                        .ThenInclude (e => e.Character)
+                        .ThenInclude (e => e.Armor)
                 //.ThenInclude(e => e.Character)
                 //.ThenInclude(e => e.Weapon)
                 .FirstOrDefaultAsync (m => m.ID == id);
