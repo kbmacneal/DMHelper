@@ -238,16 +238,18 @@ namespace DM_helper.Controllers
 
         public async Task<IActionResult> RollNoCharDice ([Bind ("SessionID,Roll")] NoCharRoller roller)
         {
+            List<int> passer = new List<int> ();
+
             var Session = await _context.Session.FindAsync (roller.SessionID);
 
-            if (roller.Roll == "")
+            if (roller.Roll == "" ||  roller.Roll == null)
             {
                 return RedirectToAction ("Details", new { id = roller.SessionID, Result = new List<int> () });
             }
 
             var baseroll = Classes.RollDice.Roll (roller.Roll);
 
-            List<int> passer = new List<int> ();
+            
 
             baseroll.ForEach (e => passer.Add (e));
 
