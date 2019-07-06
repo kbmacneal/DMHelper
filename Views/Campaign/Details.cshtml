@@ -33,11 +33,11 @@
                 {
                     <div class="card">
                         <div class="card-header">
-                            @item.Timestamp
+                            @item.Timestamp |
+                            <a asp-action="Edit" asp-controller="Notes" asp-route-id="@item.ID">Edit</a>
                         </div>
                         <div class="card-body">
-                            @item.NoteText
-                            <a asp-action="Edit" asp-controller="Notes" asp-route-id="@item.ID">Edit</a>
+                            @Html.Raw(item.NoteText.Replace(Environment.NewLine, "<br />"))
                         </div>
                     </div>
                     <div style="height:1rem;"></div>
