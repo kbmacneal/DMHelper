@@ -120,8 +120,8 @@ namespace DM_helper.Controllers
                 return NotFound();
             }
 
-            var campaign = await _context.Campaigns
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var campaign = await _context.Campaigns.Include(e => e.Notes).Include(e => e.Sessions).FirstOrDefaultAsync(e => e.ID == id);
+
             if (campaign == null)
             {
                 return NotFound();
@@ -135,7 +135,17 @@ namespace DM_helper.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var campaign = await _context.Campaigns.FindAsync(id);
+            var campaign = await _context.Campaigns.Include(e => e.Notes).Include(e => e.Sessions).FirstOrDefaultAsync(e => e.ID == id);
+
+            campaign.Notes.ForEach(e => _context.CampaignNotes.Remove(e));
+
+            await _context.Session.Include(e => e.Encounters).ThenInclude(e => e.CharacterEncounter).Where(e => e.ID == id).ForEachAsync(e =>
+              {
+                  e.Encounters.Select(f => f.CharacterEncounter).ToList().ForEach(f => f.ForEach(g => _context.CharacterEncounter.Remove(g)));
+                  e.Encounters.ForEach(f => _context.Encounter.Remove(f));
+                  _context.Session.Remove(e);
+              });
+
             _context.Campaigns.Remove(campaign);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
