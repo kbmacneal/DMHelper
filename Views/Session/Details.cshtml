@@ -12,7 +12,14 @@
         </div>
         <div class="col-md-6">
             <h2>@Html.DisplayNameFor(model => model.Notes)</h2>
-            @Html.Raw(Model.Notes.Replace(Environment.NewLine, "<br />"))
+            @if (Model.Notes != "" && Model.Notes != null)
+            {
+                @Html.Raw(Model.Notes.Replace(Environment.NewLine, "<br />"))
+            }
+            else
+            {
+                @Model.Notes
+            }
         </div>
     </div>
 </div>
