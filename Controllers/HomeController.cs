@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DM_helper.Models;
 using Microsoft.AspNetCore.Mvc;
-using DM_helper.Models;
+using System.Diagnostics;
 
 namespace DM_helper.Controllers
 {

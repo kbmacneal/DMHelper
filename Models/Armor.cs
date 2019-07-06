@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Globalization;
 using DM_helper.Archetypes;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace DM_helper.Models
 {

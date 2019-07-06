@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DM_helper.Migrations
 {
@@ -34,6 +35,19 @@ namespace DM_helper.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BackgroundArchetype", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Campaigns",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Campaigns", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -159,20 +173,6 @@ namespace DM_helper.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Session",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    name = table.Column<string>(nullable: true),
-                    notes = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Session", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SkillsArchetype",
                 columns: table => new
                 {
@@ -205,6 +205,48 @@ namespace DM_helper.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WeaponArchetype", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CampaignNotes",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    NoteText = table.Column<string>(nullable: true),
+                    Timestamp = table.Column<DateTime>(nullable: false),
+                    CampaignID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CampaignNotes", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_CampaignNotes_Campaigns_CampaignID",
+                        column: x => x.CampaignID,
+                        principalTable: "Campaigns",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Session",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    name = table.Column<string>(nullable: true),
+                    notes = table.Column<string>(nullable: true),
+                    CampaignID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Session", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Session_Campaigns_CampaignID",
+                        column: x => x.CampaignID,
+                        principalTable: "Campaigns",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -433,28 +475,6 @@ namespace DM_helper.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Encounter",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    name = table.Column<string>(nullable: true),
-                    notes = table.Column<string>(nullable: true),
-                    SessionID = table.Column<int>(nullable: false),
-                    initiative = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Encounter", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Encounter_Session_SessionID",
-                        column: x => x.SessionID,
-                        principalTable: "Session",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Skills",
                 columns: table => new
                 {
@@ -515,6 +535,28 @@ namespace DM_helper.Migrations
                         principalTable: "Character",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Encounter",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    name = table.Column<string>(nullable: true),
+                    notes = table.Column<string>(nullable: true),
+                    SessionID = table.Column<int>(nullable: false),
+                    initiative = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Encounter", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Encounter_Session_SessionID",
+                        column: x => x.SessionID,
+                        principalTable: "Session",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -600,6 +642,11 @@ namespace DM_helper.Migrations
                 table: "Backgrounds",
                 column: "CharacterID",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CampaignNotes_CampaignID",
+                table: "CampaignNotes",
+                column: "CampaignID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CharacterClasses_ArchetypeID",
@@ -689,6 +736,11 @@ namespace DM_helper.Migrations
                 column: "PsionicSchoolID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Session_CampaignID",
+                table: "Session",
+                column: "CampaignID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Skills_ArchetypeID",
                 table: "Skills",
                 column: "ArchetypeID");
@@ -716,6 +768,9 @@ namespace DM_helper.Migrations
 
             migrationBuilder.DropTable(
                 name: "Backgrounds");
+
+            migrationBuilder.DropTable(
+                name: "CampaignNotes");
 
             migrationBuilder.DropTable(
                 name: "CharacterClassArchetype");
@@ -785,6 +840,9 @@ namespace DM_helper.Migrations
 
             migrationBuilder.DropTable(
                 name: "PsionicSchools");
+
+            migrationBuilder.DropTable(
+                name: "Campaigns");
         }
     }
 }

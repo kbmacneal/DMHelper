@@ -1,18 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using DM_helper.Controllers;
 using DM_helper.InterOp;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace DM_helper.Models
 {
@@ -185,7 +175,7 @@ namespace DM_helper.Models
 
             adder.PsionicAbilities = new List<PsionicAbility>();
             character.PsionicAbilities.ForEach(e => adder.PsionicAbilities.Add(new PsionicAbility(e.Archetype, _context)));
-            
+
             adder.PsionicAbilities.ForEach(e => _context.Entry(e).State = EntityState.Added);
 
             await _context.Character.AddAsync(adder);

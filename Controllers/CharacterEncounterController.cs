@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using DM_helper.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DM_helper;
-using DM_helper.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DM_helper.Controllers
 {
@@ -80,7 +77,7 @@ namespace DM_helper.Controllers
                 var ce = new CharacterEncounter()
                 {
                     Character = await _context.Character.FindAsync(characterEncounter.CharacterID),
-                    Encounter = await _context.Encounter.Include(e=>e.Session).FirstOrDefaultAsync(e=>e.ID == characterEncounter.EncounterID)
+                    Encounter = await _context.Encounter.Include(e => e.Session).FirstOrDefaultAsync(e => e.ID == characterEncounter.EncounterID)
                 };
 
                 ID = ce.Encounter.Session.ID;
@@ -95,8 +92,6 @@ namespace DM_helper.Controllers
                 ID = 0;
                 return NotFound();
             }
-
-            
         }
 
         // GET: CharacterEncounter/Edit/5

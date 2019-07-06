@@ -27,10 +27,8 @@
 
     @using (Html.BeginForm("Delete", "CharacterEncounter"))
     {
-        <input id="CharacterEncounterID" name="CharacterEncounterID" value="@Model.ID" hidden />
-        <input id="SessionID" name="SessionID" value="@ViewBag.SessionID" hidden />
-        <input type="submit" class="btn btn-primary" value="Delete" />
+    <input id="CharacterEncounterID" name="CharacterEncounterID" value="@Model.ID" hidden />
+    <input id="SessionID" name="SessionID" value="@ViewBag.SessionID" hidden />
+    <input type="submit" class="btn btn-primary" value="Delete" />
     }
-
-
 </div>

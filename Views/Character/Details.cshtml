@@ -138,26 +138,26 @@
                         </div>
                     </div>
                     @for (int i = 0; i < Model.Skills.Count; i++) { <input id="Name" type="hidden"
-                        asp-for="Skills[i].Name">
-                        <input id="ID" type="hidden" asp-for="Skills[i].ID">
-                        <div class="container-fluid">
+                                                                           asp-for="Skills[i].Name">
+                    <input id="ID" type="hidden" asp-for="Skills[i].ID">
+                    <div class="container-fluid">
 
-                            <div class="d-flex flex-row">
-                                <div class="col-6 bold">
-                                    @Html.Label(Model.Skills[i].Name)
-                                </div>
-                                <div class="col-3">
-                                    @Html.TextBoxFor(e => e.Skills[i].Level, new { Style = "width:20px;" })
-                                </div>
-                                <div class="col-3">
-                                    @Html.TextBoxFor(e => e.Skills[i].Specialist, new { Style = "width:20px;" })
-                                </div>
+                        <div class="d-flex flex-row">
+                            <div class="col-6 bold">
+                                @Html.Label(Model.Skills[i].Name)
+                            </div>
+                            <div class="col-3">
+                                @Html.TextBoxFor(e => e.Skills[i].Level, new { Style = "width:20px;" })
+                            </div>
+                            <div class="col-3">
+                                @Html.TextBoxFor(e => e.Skills[i].Specialist, new { Style = "width:20px;" })
                             </div>
                         </div>
+                    </div>
                         }
-                        <div class="form-group">
-                            <input type="submit" value="Bind Skills" class="btn btn-primary" />
-                        </div>
+                    <div class="form-group">
+                        <input type="submit" value="Bind Skills" class="btn btn-primary" />
+                    </div>
                 </form>
             </div>
         </div>
@@ -168,28 +168,28 @@
                     <input id="ID" type="hidden" asp-for="ID">
 
                     @for (int i = 0; i < Model.Foci.Count; i++) { <input id="Name" type="hidden" asp-for="Foci[i].Name">
-                        <input id="ID" type="hidden" asp-for="Foci[i].ID">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-6 bold">
-                                    @Html.Label(Model.Foci[i].Name)
-                                </div>
-                                <div class="col-6">
-                                    @Html.TextBoxFor(e => e.Foci[i].Level, new { Style = "width:20px;" })
-                                </div>
+                    <input id="ID" type="hidden" asp-for="Foci[i].ID">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-6 bold">
+                                @Html.Label(Model.Foci[i].Name)
+                            </div>
+                            <div class="col-6">
+                                @Html.TextBoxFor(e => e.Foci[i].Level, new { Style = "width:20px;" })
                             </div>
                         </div>
+                    </div>
                         }
-                        <div class="form-group">
-                            <input type="submit" value="Bind Foci" class="btn btn-primary" />
-                        </div>
+                    <div class="form-group">
+                        <input type="submit" value="Bind Foci" class="btn btn-primary" />
+                    </div>
                 </form>
                 <h3>Armor</h3>
                 <form asp-action="BindArmor">
                     <input id="ID" type="hidden" asp-for="ID">
                     <div class="form-group">
                         <select id="SelectedArmor" class="form-control" multiple="multiple" asp-items="ViewBag.Armors"
-                            asp-for="SelectedArmor"></select>
+                                asp-for="SelectedArmor"></select>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Bind Armor" class="btn btn-primary" />
@@ -200,7 +200,7 @@
                     <input id="ID" type="hidden" asp-for="ID">
                     <div class="form-group">
                         <select id="SelectedEquipment" class="form-control" multiple="multiple"
-                            asp-items="ViewBag.Equipment" asp-for="SelectedEquipment"></select>
+                                asp-items="ViewBag.Equipment" asp-for="SelectedEquipment"></select>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Bind Equipment" class="btn btn-primary" />
@@ -211,7 +211,7 @@
                     <input id="ID" type="hidden" asp-for="ID">
                     <div class="form-group">
                         <select id="SelectedWeapon" class="form-control" multiple="multiple" asp-items="ViewBag.Weapons"
-                            asp-for="SelectedWeapon"></select>
+                                asp-for="SelectedWeapon"></select>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Bind Ranged Weapons" class="btn btn-primary" />
@@ -222,7 +222,7 @@
                     <input id="ID" type="hidden" asp-for="ID">
                     <div class="form-group">
                         <select id="SelectedMelee" class="form-control" multiple="multiple" asp-items="ViewBag.Melee"
-                            asp-for="SelectedMelee"></select>
+                                asp-for="SelectedMelee"></select>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Bind Melee Weapons" class="btn btn-primary" />
@@ -235,21 +235,25 @@
                     <input id="ID" type="hidden" asp-for="ID">
                     <div class="card-columns">
                         @for (int i = 0; i < Model.PsionicAbilities.Count; i++) { <input id="Name" type="hidden"
-                            asp-for="PsionicAbilities[i].Name">
-                            <input id="ID" type="hidden" asp-for="PsionicAbilities[i].ID">
+                                                                                         asp-for="PsionicAbilities[i].Name">
+                        <input id="ID" type="hidden" asp-for="PsionicAbilities[i].ID">
 
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">@Html.Label(Model.PsionicAbilities[i].Name)</h5>
-                                    <p class="card-text">School:
-                                        @Html.Label(Model.PsionicAbilities[i].PsionicSchool.Name.ToString())
-                                    </p>
-                                    <p class="card-text">Level: @Html.Label(Model.PsionicAbilities[i].Level.ToString())
-                                    </p>
-                                    <p class="card-text">Active?: @Html.CheckBoxFor(e =>
-                                        e.PsionicAbilities[i].is_active)</p>
-                                </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">@Html.Label(Model.PsionicAbilities[i].Name)</h5>
+                                <p class="card-text">
+                                    School:
+                                    @Html.Label(Model.PsionicAbilities[i].PsionicSchool.Name.ToString())
+                                </p>
+                                <p class="card-text">
+                                    Level: @Html.Label(Model.PsionicAbilities[i].Level.ToString())
+                                </p>
+                                <p class="card-text">
+                                    Active?: @Html.CheckBoxFor(e =>
+ e.PsionicAbilities[i].is_active)
+                                </p>
                             </div>
+                        </div>
 
                             }
                     </div>

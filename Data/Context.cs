@@ -460,5 +460,7 @@ namespace DM_helper
         public DbSet<Archetypes.PsionicSchool> PsionicSchools { get; set; }
         public DbSet<Archetypes.PsionicSkillArchetype> PsionicSkillArchetypes { get; set; }
         public DbSet<Models.PsionicAbility> PsionicAbilities { get; set; }
+        public DbSet<Models.Campaign> Campaigns { get; set; }
+        public DbSet<Models.CampaignNote> CampaignNotes { get; set; }
     }
 }

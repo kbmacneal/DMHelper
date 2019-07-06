@@ -8,8 +8,7 @@ ViewData["Title"] = "Details";
     <div class="row w-100">
         <div class="col-md-6">
             <h1>@Html.DisplayFor(model => model.Name)</h1>
-            <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-            <a asp-action="Index">Back to List</a>
+            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
         </div>
         <div class="col-md-6">
             <p>@Html.DisplayNameFor(model => model.Notes)</p>
@@ -17,7 +16,6 @@ ViewData["Title"] = "Details";
         </div>
     </div>
 </div>
-
 
 <div class="container-fluid m-3">
     <div class="d-block mx-auto col-md-6">
@@ -28,7 +26,6 @@ ViewData["Title"] = "Details";
                 <p class="card-text text-center">@ViewBag.ResultDetail</p>
             </div>
         </div>
-
     </div>
     <div class="d-block mx-auto col-md-6">
         @using (Html.BeginForm("RollNoCharDice", "Session"))
@@ -43,8 +40,10 @@ ViewData["Title"] = "Details";
     <div class="container-fluid">
         <div class="d-flex flex-column">
             <h2>Encounters</h2>
-            <a class="btn btn-outline-primary m-2" asp-action="Create" asp-controller="Encounter">Create
-                Encounter</a>
+            <a class="btn btn-outline-primary m-2" asp-action="Create" asp-controller="Encounter">
+                Create
+                Encounter
+            </a>
             <hr />
         </div>
         <div class="d-flex flex-row flex-wrap">
@@ -54,11 +53,15 @@ ViewData["Title"] = "Details";
                 <div class="d-block mx-auto card w-75">
                     <div class="card-body">
                         <h5 class="card-title">@e.Name</h5>
-                        <p class="card-text">@Html.ActionLink("Bind Character", "Create", "CharacterEncounter", new {
-                            EncounterID = e.ID, SessionID=Model.ID }, new { Class = "a" })</p>
-                        <p class="card-text">@Html.ActionLink("Edit", "Edit", "Encounter", new { id = e.ID }, new {
-                            Class =
-                            "a" })</p>
+                        <p class="card-text">
+                            @Html.ActionLink("Bind Character", "Create", "CharacterEncounter", new {
+       EncounterID = e.ID, SessionID=Model.ID }, new { Class = "a" })
+                        </p>
+                        <p class="card-text">
+                            @Html.ActionLink("Edit", "Edit", "Encounter", new { id = e.ID }, new {
+       Class =
+       "a" })
+                        </p>
                         @Html.ActionLink("Delete", "Delete", "Encounter", new { id = e.ID }, new {
                         Class =
                         "a" })
@@ -83,57 +86,58 @@ ViewData["Title"] = "Details";
                                 <h5 class="card-title">@encounter.Character.Name</h5>
                                 <p class="card-text">@encounter.Character.CurrentHP HP</p>
                                 <p class="card-text">
-                                @if(encounter.Character.Armor.Count() > 0)
+                                    @if(encounter.Character.Armor.Count() > 0)
                                 {
                                     @if(encounter.Character.Armor.Select(x=>x.AC).Max() > encounter.Character.BaseAC)
                                     {
-                                        <p>@encounter.Character.Armor.Select(x=>x.AC).Max().ToString() AC</p>
+                                <p>@encounter.Character.Armor.Select(x=>x.AC).Max().ToString() AC</p>
                                     }
                                     else
                                     {
-                                        <p>@encounter.Character.BaseAC.ToString() AC</p>
-                                    } 
+                                <p>@encounter.Character.BaseAC.ToString() AC</p>
+                                    }
                                 }
                                 else
                                 {
                                     <p>@encounter.Character.BaseAC.ToString() AC</p>
                                 }
-                                </p>
-                                <p class="card-text">@Html.ActionLink("Edit", "EditCharacter", "Session", new { id =
-                                    encounter.Character.ID, SessionID = Model.ID }, new { Class = "a" })</p>
-                                <p class="card-text">@Html.ActionLink("Unbind", "Delete", "CharacterEncounter", new {
-                                    SessionID = Model.ID, EncounterID = encounter.Encounter.ID, CharacterID =
-                                    encounter.Character.ID }, new { Class = "a" })</p>
+                                    </p>
+                                    <p class="card-text">
+                                        @Html.ActionLink("Edit", "EditCharacter", "Session", new { id =
+                   encounter.Character.ID, SessionID = Model.ID }, new { Class = "a" })
+                                    </p>
+                                    <p class="card-text">
+                                        @Html.ActionLink("Unbind", "Delete", "CharacterEncounter", new {
+                   SessionID = Model.ID, EncounterID = encounter.Encounter.ID, CharacterID =
+                   encounter.Character.ID }, new { Class = "a" })
+                                    </p>
 
-                                @foreach (var w in encounter.Character.Weapon)
+                                    @foreach (var w in encounter.Character.Weapon)
                                 {
-                                <p class="card-text">
-                                    @w.Name |
-                                    @w.Damage |
-                                    @w.Range |
-                                    @Html.ActionLink("Roll", "RollDice", "Session", new { SessionID = Model.ID,
-                                    CharacterID
-                                    = w.Character.ID, WeaponID = w.ID }, new { Class = "btn btn-link" })
-                                </p>
+                                    <p class="card-text">
+                                        @w.Name |
+                                        @w.Damage |
+                                        @w.Range |
+                                        @Html.ActionLink("Roll", "RollDice", "Session", new { SessionID = Model.ID,
+                                        CharacterID
+                                        = w.Character.ID, WeaponID = w.ID }, new { Class = "btn btn-link" })
+                                    </p>
                                 }
-                                @foreach (var w in encounter.Character.Melee)
+                                    @foreach (var w in encounter.Character.Melee)
                                 {
-                                <p class="card-text">
-                                    @w.Name |
-                                    @w.Damage
-                                    @Html.ActionLink("Roll", "RollDice", "Session", new { SessionID = Model.ID,
-                                    CharacterID
-                                    = w.Character.ID, WeaponID = w.ID }, new { Class = "btn btn-link" })
-                                </p>
+                                    <p class="card-text">
+                                        @w.Name |
+                                        @w.Damage
+                                        @Html.ActionLink("Roll", "RollDice", "Session", new { SessionID = Model.ID,
+                                        CharacterID
+                                        = w.Character.ID, WeaponID = w.ID }, new { Class = "btn btn-link" })
+                                    </p>
                                 }
+                                </div>
                             </div>
-
-                        </div>
                         }
                     </div>
                 </div>
-
-
             </div>
             }
         </div>

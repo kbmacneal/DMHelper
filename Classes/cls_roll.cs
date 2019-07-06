@@ -1,6 +1,6 @@
+using DM_helper.Classes.Utilities;
 using System;
 using System.Collections.Generic;
-using DM_helper.Classes.Utilities;
 
 namespace DM_helper.Classes
 {
@@ -11,7 +11,7 @@ namespace DM_helper.Classes
             List<int> dice_results = new List<int>();
 
             DiceBag db = new DiceBag();
-            char[] dice_splits = {'d','D'};
+            char[] dice_splits = { 'd', 'D' };
             if (roll.Contains('-') || roll.Contains('+'))
             {
                 char[] splits = new char[] { '+', '-' };
@@ -64,11 +64,9 @@ namespace DM_helper.Classes
                 DiceBag.Dice dice = (DiceBag.Dice)System.Enum.Parse(typeof(DiceBag.Dice), dice_sides.ToString());
 
                 dice_results = db.RollQuantity(dice, num_dice);
-
             }
 
             return dice_results;
-
         }
     }
 }

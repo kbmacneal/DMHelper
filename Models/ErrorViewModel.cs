@@ -1,5 +1,3 @@
-using System;
-
 namespace DM_helper.Models
 {
     public class ErrorViewModel

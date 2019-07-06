@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DM_helper.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190520193615_initial")]
+    [Migration("20190706193942_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -353,6 +353,36 @@ namespace DM_helper.Migrations
                     b.ToTable("Armor");
                 });
 
+            modelBuilder.Entity("DM_helper.Models.Campaign", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Campaigns");
+                });
+
+            modelBuilder.Entity("DM_helper.Models.CampaignNote", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("CampaignID");
+
+                    b.Property<string>("NoteText");
+
+                    b.Property<DateTime>("Timestamp");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CampaignID");
+
+                    b.ToTable("CampaignNotes");
+                });
+
             modelBuilder.Entity("DM_helper.Models.Character", b =>
                 {
                     b.Property<int>("ID")
@@ -610,6 +640,8 @@ namespace DM_helper.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID");
 
+                    b.Property<int?>("CampaignID");
+
                     b.Property<string>("Name")
                         .HasColumnName("name");
 
@@ -617,6 +649,8 @@ namespace DM_helper.Migrations
                         .HasColumnName("notes");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("CampaignID");
 
                     b.ToTable("Session");
                 });
@@ -747,6 +781,13 @@ namespace DM_helper.Migrations
                         .HasForeignKey("CharacterID");
                 });
 
+            modelBuilder.Entity("DM_helper.Models.CampaignNote", b =>
+                {
+                    b.HasOne("DM_helper.Models.Campaign", "Campaign")
+                        .WithMany("Notes")
+                        .HasForeignKey("CampaignID");
+                });
+
             modelBuilder.Entity("DM_helper.Models.CharacterEncounter", b =>
                 {
                     b.HasOne("DM_helper.Models.Character", "Character")
@@ -817,6 +858,13 @@ namespace DM_helper.Migrations
                         .WithMany()
                         .HasForeignKey("PsionicSchoolID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DM_helper.Models.Session", b =>
+                {
+                    b.HasOne("DM_helper.Models.Campaign", "Campaign")
+                        .WithMany("Sessions")
+                        .HasForeignKey("CampaignID");
                 });
 
             modelBuilder.Entity("DM_helper.Models.Skills", b =>
