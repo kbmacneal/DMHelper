@@ -160,7 +160,7 @@ namespace DM_helper.Controllers
             var campaignNote = await _context.CampaignNotes.FindAsync(id);
             _context.CampaignNotes.Remove(campaignNote);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Campaign");
         }
 
         private bool CampaignNoteExists(int id)
