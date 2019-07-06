@@ -157,7 +157,8 @@ namespace DM_helper.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction("Details", "Session", new { id = session.ID });
             }
             return View(session);
         }
@@ -188,7 +189,8 @@ namespace DM_helper.Controllers
             var session = await _context.Session.FindAsync(id);
             _context.Session.Remove(session);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            return RedirectToAction("Index", "Campaign");
         }
 
         public async Task<IActionResult> RollDice(int SessionID, int CharacterID, int WeaponID)
