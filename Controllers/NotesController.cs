@@ -112,6 +112,7 @@ namespace DM_helper.Controllers
             {
                 try
                 {
+                    campaignNote.Timestamp = DateTime.Now;
                     _context.Update(campaignNote);
                     await _context.SaveChangesAsync();
                 }
