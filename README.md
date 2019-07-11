@@ -6,9 +6,7 @@ To use the project, either get a binary version by running ```dotnet publish --s
 
 In either case, you will need to download and install the SDK, as it is required to scaffold out the database tables.
 
-For Weapons/Equipment/Classes etc., essentially anything based on the book and classified as an "Archetype", run the sql files inside the "raw" folder against the psql db and these generics will load.
-
-Before using the application for the first time, copy dmhelper.initial.db to dmhelper.db. This initial db file contains all the data from the book you need to get started.
+For Weapons/Equipment/Classes etc., essentially anything based on the book and classified as an "Archetype", simply copy the dmhelper.initial.db to a dmhelper.db file in the same directory. This db should contain all the data necessary to start the game. If it doesnt, file an issue and I will correct.
 
 ```
 This project is still very much a work in progress. Data migrations may completely or partially delete data from any instance running locally. If in doubt, use your DBMS's backup feature and restore from there.
