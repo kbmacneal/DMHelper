@@ -1,176 +1,189 @@
 @model DM_helper.Models.Session
 @using System.Linq
 @{
-    ViewData["Title"] = "Details";
+ViewData["Title"] = "Details";
 }
 
 <div class="container-fluid">
-    <div class="row w-100">
-        <div class="col-md-6">
-            <h1>@Html.DisplayFor(model => model.Name)</h1>
-            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
-            <a class="btn btn-primary" asp-action="Details" asp-controller="Campaign" asp-route-id="@ViewBag.CampaignID">Back</a>
-        </div>
-        <div class="col-md-6">
-            <h2>@Html.DisplayNameFor(model => model.Notes)</h2>
-            @if (Model.Notes != "" && Model.Notes != null)
-            {
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <h1>@Html.DisplayFor(model => model.Name)</h1>
+            </div>
+            <div class="row"><a class="btn btn-primary mr-1" asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
+                <a class="btn btn-primary" asp-action="Details" asp-controller="Campaign"
+                    asp-route-id="@ViewBag.CampaignID">Back</a></div>
+            <div class="row">
+                <h2>@Html.DisplayNameFor(model => model.Notes)</h2>
+            </div>
+            <div class="row">@if (Model.Notes != "" && Model.Notes != null)
+                {
                 @Html.Raw(Model.Notes.Replace(Environment.NewLine, "<br />"))
-            }
-            else
-            {
+                }
+                else
+                {
                 @Model.Notes
-            }
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid m-3">
-    <div class="d-block mx-auto col-md-6">
-        <h3 class="text-center">Roll Results</h3>
-        <div class="d-block mx-auto card border-primary">
-            <div class="card-body">
-                <p class="card-text h3 text-center">@ViewBag.Result</p>
-                <p class="card-text text-center">@ViewBag.ResultDetail</p>
+                }
             </div>
         </div>
-    </div>
-    <div class="d-block mx-auto col-md-6">
-        @using (Html.BeginForm("RollNoCharDice", "Session"))
-        {
-            <input id="SessionID" name="SessionID" value="@Model.ID" hidden />
-            <input id="Roll" name="Roll" />
-            <input type="submit" class="btn btn-primary" value="Roll Dice" />
-        }
-    </div>
-</div>
-<div>
-    <div class="container-fluid">
-        <div class="d-flex flex-column">
-            <h2>Encounters</h2>
-            <a class="btn btn-outline-primary m-2" asp-action="Create" asp-controller="Encounter">
-                Create
-                Encounter
-            </a>
-            <hr />
-        </div>
-        <div class="d-flex flex-row flex-wrap">
-            @foreach (var e in Model.Encounters)
-            {
-                <div class="row w-100">
-                    <div class="d-block mx-auto card w-75">
+        <div class="col-md-8 pl-5">
+            <div class="container-fluid m-3">
+                <div class="d-block mx-auto col-md-6">
+                    <h3 class="text-center">Roll Results</h3>
+                    <div class="d-block mx-auto card border-primary">
                         <div class="card-body">
-                            <h5 class="card-title">@e.Name</h5>
-                            <p class="card-text">
-                                @Html.ActionLink("Bind Character", "Create", "CharacterEncounter", new
-                                {
-           EncounterID = e.ID,
-                                    SessionID = Model.ID
-                                }, new { Class = "a" })
-                            </p>
-                            <p class="card-text">
-                                @Html.ActionLink("Edit", "Edit", "Encounter", new { id = e.ID }, new
-                                {
-           Class =
-           "a"
-                                })
-                            </p>
-                            @Html.ActionLink("Delete", "Delete", "Encounter", new { id = e.ID }, new
-                            {
-                                Class =
-                            "a"
-                            })
-                            <p><u>Notes</u></p>
-                            <p class="card-text">Initiative</p>
-                            @Html.Raw(e.Initiative.Replace(Environment.NewLine, "<br />"))
-                            <p class="card-text">Notes</p>
-                            <p class="card-text">@e.Notes</p>
+                            <p class="card-text h3 text-center">@ViewBag.Result</p>
+                            <p class="card-text text-center">@ViewBag.ResultDetail</p>
                         </div>
                     </div>
                 </div>
-                <div class="d-block row">
-                    <div class="row">
-                        <h3>Characters</h3>
+                <div class="d-block mx-auto col-md-6">
+                    @using (Html.BeginForm("RollNoCharDice", "Session"))
+                    {
+                    <input id="SessionID" name="SessionID" value="@Model.ID" hidden />
+                    <input id="Roll" name="Roll" />
+                    <input type="submit" class="btn btn-primary" value="Roll Dice" />
+                    }
+                </div>
+            </div>
+            <div>
+                <div class="container-fluid">
+                    <div class="d-flex flex-column">
+                        <h2>Encounters</h2>
+                        <a class="btn btn-outline-primary m-2" asp-action="Create" asp-controller="Encounter">
+                            Create
+                            Encounter
+                        </a>
+                        <hr />
                     </div>
                     <div class="d-flex flex-row flex-wrap">
-                        <div class="card-columns">
-                            @foreach (var encounter in e.CharacterEncounter)
-                            {
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">@encounter.Character.Name</h5>
-                                        <p class="card-text">@encounter.Character.CurrentHP HP</p>
-                                        <p class="card-text">
-                                            @if (encounter.Character.Armor.Count() > 0)
-                                            {
-                                                @if (encounter.Character.Armor.Select(x => x.AC).Max() > encounter.Character.BaseAC)
+                        @foreach (var e in Model.Encounters)
+                        {
+                        <div class="row w-100">
+                            <div class="d-block mx-auto card w-75">
+                                <div class="card-body">
+                                    <h5 class="card-title">@e.Name</h5>
+                                    <p class="card-text">
+                                        @Html.ActionLink("Bind Character", "Create", "CharacterEncounter", new
+                                        {
+                                        EncounterID = e.ID,
+                                        SessionID = Model.ID
+                                        }, new { Class = "a" })
+                                    </p>
+                                    <p class="card-text">
+                                        @Html.ActionLink("Edit", "Edit", "Encounter", new { id = e.ID }, new
+                                        {
+                                        Class =
+                                        "a"
+                                        })
+                                    </p>
+                                    @Html.ActionLink("Delete", "Delete", "Encounter", new { id = e.ID }, new
+                                    {
+                                    Class =
+                                    "a"
+                                    })
+                                    <p><u>Notes</u></p>
+                                    <p class="card-text">Initiative</p>
+                                    @if (e.Initiative != "" && e.Initiative != null)
+                                    {
+                                    @Html.Raw(e.Initiative.Replace(Environment.NewLine, "<br />"))
+                                    }
+                                    else
+                                    {
+                                    @e.Initiative
+                                    }
+                                    <p class="card-text">Notes</p>
+                                    <p class="card-text">@e.Notes</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-block row">
+                            <div class="row">
+                                <h3>Characters</h3>
+                            </div>
+                            <div class="d-flex flex-row flex-wrap">
+                                <div class="card-columns">
+                                    @foreach (var encounter in e.CharacterEncounter)
+                                    {
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@encounter.Character.Name</h5>
+                                            <p class="card-text">@encounter.Character.CurrentHP HP</p>
+                                            <p class="card-text">
+                                                @if (encounter.Character.Armor.Count() > 0)
+                                                {
+                                                @if (encounter.Character.Armor.Select(x => x.AC).Max() >
+                                                encounter.Character.BaseAC)
                                                 {
                                                 <p>@encounter.Character.Armor.Select(x => x.AC).Max().ToString() AC</p>
-                                            }
-                                            else
-                                            {
+                                                }
+                                                else
+                                                {
                                                 <p>@encounter.Character.BaseAC.ToString() AC</p>
-                                            }
-                                            }
-                                            else
-                                            {
+                                                }
+                                                }
+                                                else
+                                                {
                                                 <p>@encounter.Character.BaseAC.ToString() AC</p>
-                                            }
+                                                }
                                             </p>
                                             <p class="card-text">
                                                 @Html.ActionLink("Edit", "EditCharacter", "Session", new
                                                 {
-                                                    id =
-                           encounter.Character.ID,
-                                                    SessionID = Model.ID
+                                                id =
+                                                encounter.Character.ID,
+                                                SessionID = Model.ID
                                                 }, new { Class = "a" })
                                             </p>
                                             <p class="card-text">
                                                 @Html.ActionLink("Unbind", "Delete", "CharacterEncounter", new
                                                 {
-                           SessionID = Model.ID,
-                                                    EncounterID = encounter.Encounter.ID,
-                                                    CharacterID =
-                           encounter.Character.ID
+                                                SessionID = Model.ID,
+                                                EncounterID = encounter.Encounter.ID,
+                                                CharacterID =
+                                                encounter.Character.ID
                                                 }, new { Class = "a" })
                                             </p>
 
                                             @foreach (var w in encounter.Character.Weapon)
                                             {
-                                                <p class="card-text">
-                                                    @w.Name |
-                                                    @w.Damage |
-                                                    @w.Range |
-                                                    @Html.ActionLink("Roll", "RollDice", "Session", new
-                                                    {
-                                                        SessionID = Model.ID,
-                                                    CharacterID
-                                                    = w.Character.ID,
-                                                        WeaponID = w.ID
-                                                    }, new { Class = "btn btn-link" })
-                                                </p>
+                                            <p class="card-text">
+                                                @w.Name |
+                                                @w.Damage |
+                                                @w.Range |
+                                                @Html.ActionLink("Roll", "RollDice", "Session", new
+                                                {
+                                                SessionID = Model.ID,
+                                                CharacterID
+                                                = w.Character.ID,
+                                                WeaponID = w.ID
+                                                }, new { Class = "btn btn-link" })
+                                            </p>
                                             }
                                             @foreach (var w in encounter.Character.Melee)
                                             {
-                                                <p class="card-text">
-                                                    @w.Name |
-                                                    @w.Damage
-                                                    @Html.ActionLink("Roll", "RollDice", "Session", new
-                                                    {
-                                                        SessionID = Model.ID,
-                                                    CharacterID
-                                                    = w.Character.ID,
-                                                        WeaponID = w.ID
-                                                    }, new { Class = "btn btn-link" })
-                                                </p>
+                                            <p class="card-text">
+                                                @w.Name |
+                                                @w.Damage
+                                                @Html.ActionLink("Roll", "RollDice", "Session", new
+                                                {
+                                                SessionID = Model.ID,
+                                                CharacterID
+                                                = w.Character.ID,
+                                                WeaponID = w.ID
+                                                }, new { Class = "btn btn-link" })
+                                            </p>
                                             }
                                         </div>
                                     </div>
-                                }
+                                    }
+                                </div>
+                            </div>
                         </div>
+                        }
                     </div>
                 </div>
-            }
+            </div>
         </div>
     </div>
 </div>
