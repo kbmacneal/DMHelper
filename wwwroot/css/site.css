@@ -7,8 +7,10 @@ a.navbar-brand {
     word-break: break-all;
 }
 
+
 /* Sticky footer styles
 -------------------------------------------------- */
+
 html {
     font-size: 14px;
 }
@@ -36,8 +38,10 @@ button.accept-policy {
     line-height: inherit;
 }
 
+
 /* Sticky footer styles
 -------------------------------------------------- */
+
 html {
     position: relative;
     min-height: 100%;
@@ -55,7 +59,8 @@ body {
     white-space: nowrap;
     /* Set the fixed height of the footer here */
     height: 60px;
-    line-height: 60px; /* Vertically center the text there */
+    line-height: 60px;
+    /* Vertically center the text there */
 }
 
 .bold {
@@ -64,4 +69,34 @@ body {
 
 .form-group {
     margin: 1rem;
+}
+
+.img-scaled {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    overflow: hidden;
+}
+
+blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+
+blockquote p {
+    display: inline;
 }
