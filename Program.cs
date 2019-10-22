@@ -8,13 +8,17 @@ namespace DM_helper
     {
         public static Random rand { get; set; } = new Random();
 
-        public static void Main(string[] args)
-        {
-            CreateWebHostBuilder(args).Build().Run();
+       public static void Main (string[] args) {
+            BuildWebHost (args).Run ();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args).UseUrls("http://localhost:4999")
-                .UseStartup<Startup>();
+        public static IWebHost BuildWebHost (string[] args) =>
+            WebHost.CreateDefaultBuilder (args)
+            .ConfigureKestrel (kestrel => {
+                kestrel.ListenLocalhost (4999);
+            })
+            .UseStartup<Startup> ()
+            .UseKestrel()
+            .Build ();
     }
 }
