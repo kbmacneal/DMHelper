@@ -37,12 +37,12 @@ ViewData["Title"] = "Details";
                         </div>
                     </div>
                 </div>
-                <div class="d-block mx-auto col-md-6">
+                <div class="d-block mx-auto mt-2 col-md-6">
                     @using (Html.BeginForm("RollNoCharDice", "Session"))
                     {
                     <input id="SessionID" name="SessionID" value="@Model.ID" hidden />
-                    <input id="Roll" name="Roll" />
-                    <input type="submit" class="btn btn-primary" value="Roll Dice" />
+                    <input class="mt-2" id="Roll" name="Roll" />
+                    <input class="mt-2" type="submit" class="btn btn-primary" value="Roll Dice" />
                     }
                 </div>
             </div>
